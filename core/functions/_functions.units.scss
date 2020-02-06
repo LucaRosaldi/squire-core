@@ -1,0 +1,60 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: UNITS
+///-----------------------------------------------------------------------------
+///
+///  Functions for manipulating CSS units.
+///
+
+///
+/// Strip unit from value.
+///
+/// @param  {string}   $value  Value to strip unit from.
+/// @return {integer}          Unitless value.
+///
+@function strip-unit( $value ) {
+  @return $value / ( $value * 0 + 1 );
+}
+
+///
+/// Get em value.
+///
+/// @param  {string} $val  Value to convert
+/// @param  {int}    $root Font size of root element
+/// @return {string}
+///
+@function em( $val, $root: 16 ) {
+  @if ( unit( $val ) == 'em' )  { @return $val; }
+  @if ( unit( $val ) == 'rem' ) { @return strip-unit( $val ) * 1em; }
+
+  @if not unitless( $val )  { $val: strip-unit( $val ); }
+  @return ( $val / $root ) * 1em;
+}
+
+///
+/// Get rem value.
+///
+/// @param  {string} $val  Value to convert
+/// @param  {int}    $root Font size of root element
+/// @return {string}
+///
+@function rem( $val, $root: 16 ) {
+  @if ( unit( $val ) == 'rem' ) { @return $val; }
+  @if ( unit( $val ) == 'em' )  { @return strip-unit( $val ) * 1rem; }
+
+  @if not unitless( $val )  { $val: strip-unit( $val ); }
+  @return ( $val / $root ) * 1rem;
+}
+
+///
+/// Get pixel value from a em or rem value.
+///
+/// @param  {string} $val  Value to convert
+/// @param  {int}    $root Font size of root element
+/// @return {string}
+///
+@function px( $val, $root: 16 ) {
+  @if ( unit( $val ) == 'px' ) { @return $val; }
+
+  @if not unitless( $val )  { $val: strip-unit( $val ); }
+  @return ( $val * $root ) * 1px;
+}

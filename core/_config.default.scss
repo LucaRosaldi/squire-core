@@ -1,0 +1,235 @@
+///-----------------------------------------------------------------------------
+/// CONFIG
+///-----------------------------------------------------------------------------
+///
+///  Global configuration settings for the UI.
+///
+///  These settings are used throughout the app by various elements.
+///  Apart from these, each element has its own settings.
+///
+
+$config: (
+
+  ///
+  /// Website Layout
+  ///
+  "layout": (
+    "header": (
+      "position":   relative,
+      "height":     null,
+    ),
+    "nav": (
+      "breakpoint": 780px,
+      "offcanvas":  false,  // false | true | "top" | "bottom" | "left" | "right"
+    ),
+    "sidebar": (
+      "width":      20rem,
+    ),
+  ),
+
+  ///
+  /// Breakpoints
+  ///
+  "breakpoint": (
+    "handheld": (
+      "value":    479px,
+      "feature":  "max-width",
+    ),
+    "small": (
+      "value":    480px,
+      "feature":  "min-width",
+      "suffix":   "s",
+    ),
+    "medium": (
+      "value":    780px,
+      "feature":  "min-width",
+      "suffix":   "m",
+    ),
+    "large": (
+      "value":    980px,
+      "feature":  "min-width",
+      "suffix":   "l",
+    ),
+    "wide": (
+      "value":    1300px,
+      "feature":  "min-width",
+      "suffix":   "w",
+    ),
+  ),
+
+  ///
+  /// Colors
+  ///
+  "color": (
+    "default": #4d4d4d,
+    "primary": #2196f3,
+
+    "light":   #f5f5f5,
+    "dark":    #212121,
+  ),
+
+  ///
+  /// Spacing units
+  ///
+  "spacing": (
+    "default": 1.5rem,
+
+    "xxs":     0.25rem,
+    "xs":      0.5rem,
+    "s":       1rem,
+    "l":       2rem,
+    "xl":      4rem,
+    "xxl":     6rem,
+  ),
+
+  ///
+  /// Font Families
+  ///
+  "font-family": (
+    "sans": #{-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"},
+    "serif": #{"Georgia", "Cambria", "Times New Roman", "Times", serif},
+    "display": null,
+    "mono": #{"Inconsolata", "Consolas", "Menlo", "Roboto Mono", "Ubuntu Monospace", "Oxygen Mono", "Liberation Mono", monospace},
+  ),
+
+  ///
+  /// Font Sizes
+  /// Accepts either a single value or a map of fluid (min and max) values.
+  ///
+  "font-size": (
+    "default": 14px 18px,
+
+    "h1":  28px 42px,
+    "h2":  24px 36px,
+    "h3":  20px 28px,
+    "h4":  18px 22px,
+    "h5":  1em,
+    "h6":  1em,
+  ),
+
+  ///
+  /// Inputs
+  ///
+  "input": (
+    padding:       0.5em 0.75em,
+
+    font-size:     null,
+    font-family:   null,
+    font-weight:   null,
+    font-style:    null,
+
+    border-radius: 0,
+
+    "default": (
+      border:      0,
+      background:  #ffffff,
+      color:       #4d4d4d,
+      box-shadow:  inset 0 0 0 1px rgba( #000, 0.2 ),
+    ),
+    "hover": (
+      border:      null,
+      background:  null,
+      color:       null,
+      box-shadow:  inset 0 0 0 1px rgba( #000, 0.3 ),
+    ),
+    "focus": (
+      border:      null,
+      background:  null,
+      color:       null,
+      box-shadow:  inset 0 0 0 1px #2196f3,
+    ),
+    "filled": (
+      border:      null,
+      background:  null,
+      color:       null,
+      box-shadow:  inset 0 0 0 1px rgba( #000, 0.3 ),
+    ),
+
+  ),
+
+  ///
+  /// Enabled elements
+  ///
+  "load": (
+
+    "generic": (
+      "reset":                 true,
+      "font-families":         true,
+      "transitions":           true,
+
+      "animations":            true,
+      "input-placeholder":     true,
+      "focus":                 true,
+      "text-selection":        true,
+    ),
+
+    "tag": (
+      "html":                  true,
+      "hr":                    true,
+
+      "blockquote":            true,
+      "code":                  true,
+      "figure":                true,
+    ),
+
+    "layout": (
+      "container":             true,
+      "flex":                  true,
+      "grid":                  true,
+      "rhythm":                true,
+    ),
+
+    "objects": (
+      "button":                true,
+      "fill-parent":           true,
+      "fluid-pad":             true,
+      "heading":               true,
+      "icon":                  true,
+      "link":                  true,
+      "list":                  true,
+      "proportional":          true,
+      "shadow":                true,
+      "upperspaced":           true,
+
+      "badge":                 true,
+      "table":                 true,
+      "text-separator":        true,
+    ),
+
+    "components": (
+      "callout":               true,
+      "card":                  true,
+      "input-control":         true,
+      "input-file":            true,
+      "input-select":          true,
+      "input-submit":          true,
+      "input-text":            true,
+      "menu":                  true,
+      "text":                  true,
+
+      "breadcrumbs":           true,
+      "circlet":               true,
+      "pagination":            true,
+      "popup":                 true,
+      "tabs":                  true,
+    ),
+
+    "partials": (
+      "form":                  true,
+      "section":               true,
+      "site":                  true,
+
+      "card-flipper":          true,
+      "loader":                true,
+    ),
+
+    "modules": (
+      "carousel":              true,
+      "headroom":              true,
+      "password-mask":         true,
+      "scrollstep":            true,
+    ),
+
+  ),
+
+) !default;

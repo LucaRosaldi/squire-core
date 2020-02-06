@@ -1,0 +1,324 @@
+///-----------------------------------------------------------------------------
+///  PARTIAL: SITE
+///-----------------------------------------------------------------------------
+///
+///  The site wrapper.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$p-site: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+/// [1] breakpoint for horizontal navigation
+/// [2] whether to use a mobile (offcanvas) nav with a toggle button
+/// [3] direction from which the offcanvas nav enters (top|bottom|left|right)
+///
+$_config: map-extend( (
+
+  "header": (
+    "position": relative,
+  ),
+
+  "nav": (
+    "breakpoint-horizontal": ui-breakpoint( "medium" ),   /// [1] ///
+    "offcanvas-menu":        true,                        /// [2] ///
+    "offcanvas-direction":   false                        /// [3] ///
+  ),
+
+  "sidebar": (
+    "width": 20rem,
+  ),
+
+), $p-site );
+
+
+@if ( ui-load( "partials", "site" ) == true ) {
+/*---------------------------------------------------------------------------*
+ *  PARTIAL: SITE
+ *---------------------------------------------------------------------------*
+ *
+ *  The site wrapper.
+ *
+ */
+
+$_header_position: map-get-deep( $_config, "header", "position" );
+$_nav_hr_bp:       map-get-deep( $_config, "nav", "breakpoint-horizontal" );
+$_nav_oc_menu:     map-get-deep( $_config, "nav", "offcanvas-menu" );
+$_nav_oc_dir:      map-get-deep( $_config, "nav", "offcanvas-direction" );
+$_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
+
+///
+/// @block        Site
+/// @description  Default site block.
+///
+/// [1] hide the scrollbar when something overflows the main viewport
+/// [2] fill the viewport height
+///
+%p-site {
+  @extend %l-row, %l-row--wrap, %l-row--stretch !optional;
+
+  position: relative;
+  scroll-behavior: smooth;
+
+  /// [2] ///
+  min-height: 100vh;
+}
+
+  ///
+  /// @element      Site Header
+  /// @description  Header section of the webpage.
+  ///
+  %p-site__header {
+    @extend %l-row, %l-row--wrap, %l-row--center, %l-row--middle !optional;
+
+    align-self: flex-start;
+    order: -9999;
+
+    position: $_header_position;
+    z-index: 3000;
+
+    width: 100%;
+  }
+
+  ///
+  /// @element      Site Main
+  /// @description  Main section of the webpage.
+  ///
+  /// [1] compensate for the header height
+  ///
+  %p-site__main {
+    @extend %l-column, %l-column--stretch !optional;
+
+    flex-grow: 999;
+    flex-basis: 0;
+
+    position: relative;
+    min-width: 50%;
+  }
+
+  ///
+  /// @element      Site Sidebar
+  /// @description  Sidebar of the webpage.
+  ///
+  %p-site__sidebar {
+    @extend %l-column, %l-column--stretch !optional;
+
+    flex-basis: $_sidebar_width;
+    flex-grow: 1;
+
+    position: relative;
+  }
+
+  ///
+  /// @modifier     Site Sidebar Sticky
+  /// @description  Sticky sidebar.
+  ///
+  %p-site__sidebar--sticky {
+    :first-child {
+      position: sticky;
+      top: 0;
+    }
+  }
+
+  ///
+  /// @element      Site Footer
+  /// @description  Footer section of the webpage.
+  ///
+  %p-site__footer {
+    @extend %l-column, %l-column--stretch !optional;
+
+    align-self: flex-end;
+    order: -9999;
+
+    position: relative;
+    width: 100%;
+  }
+
+  ///
+  /// @element      Site Logo
+  /// @description  The main logo.
+  ///
+  %p-site__logo {
+    position: relative;
+    z-index: 3000;
+    white-space: nowrap;
+
+    a {
+      display: block;
+    }
+  }
+
+  ///
+  /// @element      Site Nav
+  /// @description  The main navigation.
+  ///
+  %p-site__nav {
+    @extend %l-column, %l-column--center, %l-column--middle !optional;
+
+    position: relative;
+    z-index: 2000;
+    width: 100%;
+
+    @if ( $_nav_hr_bp ) { @include bp( $_nav_hr_bp ) {
+      position: relative;
+      width: auto;
+    }}
+
+    @if ( $_nav_oc_menu ) {
+      @extend %transition--exit !optional;
+
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+
+      background: ui-color( "dark" );
+      color: ui-color( "light" );
+
+      @if ( $_nav_oc_dir == false )    { opacity: 0; visibility: hidden; }
+      @if ( $_nav_oc_dir == "top" )    { transform: translate( 0, -100% ); }
+      @if ( $_nav_oc_dir == "bottom" ) { transform: translate( 0,  100% ); }
+      @if ( $_nav_oc_dir == "left" )   { transform: translate( -100%, 0 ); }
+      @if ( $_nav_oc_dir == "right" )  { transform: translate(  100%, 0 ); }
+
+      @if ( $_nav_hr_bp ) { @include bp( $_nav_hr_bp ) {
+        top: auto; left: auto;
+        height: auto;
+
+        background: inherit;
+        color: inherit;
+
+        opacity: 1;
+        visibility: visible;
+        transform: translate( 0, 0 );
+      }}
+    }
+  }
+
+  ///
+  /// @modifier     Site Nav Open
+  /// @description  The main navigation when it is opened.
+  ///
+  %p-site__nav--open { @if ( $_nav_oc_menu ) {
+    @extend %transition--enter !optional;
+
+    @if ( $_nav_oc_menu == true ) {
+      opacity: 1;
+      visibility: visible;
+    } @else {
+      transform: translate( 0, 0 );
+    }
+  }}
+
+    ///
+    /// @element      Site Nav Menu
+    /// @description  Menu inside the main navigation.
+    ///
+    %p-site__nav__menu {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      @if ( $_nav_oc_menu ) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      @if ( $_nav_hr_bp ) { @include bp( $_nav_hr_bp ) {
+        flex-direction: row;
+        align-items: center;
+      }}
+
+      a {
+        position: relative;
+        display: flex;
+      }
+    }
+
+  ///
+  /// @element      Site Nav Toggle
+  /// @description  Button with a hamburger icon which morphs to a cross when
+  ///               the site navigation is visible.
+  ///
+  ///  @markup
+  ///  <button type="button" aria-pressed="true|false">
+  ///    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 28 28">
+  ///      <line x1="0" y1="6" x2="28" y2="6"></line>
+  ///      <line x1="0" y1="14" x2="28" y2="14"></line>
+  ///      <line x1="0" y1="22" x2="28" y2="22"></line>
+  ///    </svg>
+  ///    <span>Menu</span>
+  ///  </button>
+  ///
+  %p-site__nav-toggle {
+    @if ( $_nav_oc_menu ) {
+      position: relative;
+      z-index: 3000;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin-left: auto;
+      padding: 0.5em;
+      font-size: 0.875em;
+
+      @if ( $_nav_hr_bp ) { @include bp( $_nav_hr_bp ) {
+        display: none;
+      }}
+
+      svg {
+        width: 1.5em;
+        height: 1.5em;
+        overflow: visible;
+
+        fill: none;
+        stroke: currentColor;
+
+        line { transition: transform 0.5s ease; }
+        line:nth-child(1) { transform-origin: right; }
+        line:nth-child(2) { transform-origin: center; }
+        line:nth-child(3) { transform-origin: right; }
+      }
+
+      &[aria-pressed="true"] svg {
+        line:nth-child(1) { transform: translateY( -15% ) rotate( -45deg ); }
+        line:nth-child(2) { transform: scale( 0.01 ); }
+        line:nth-child(3) { transform: translateY( 15% ) rotate( 45deg ); }
+      }
+    }
+
+    @else {
+      display: none;
+    }
+  }
+
+  ///
+  /// @element      Site Skip Link
+  /// @description  Hidden link which skips to main content (for accessibility).
+  ///
+  %p-site__skip-link {
+    @extend %o-button;
+    @extend %transition !optional;
+
+    position: fixed;
+    z-index: 6000;
+    top: 0; left: 50%;
+    transform: translate( -50%, 0% );
+
+    font-size: 14px;
+
+    color: ui-color( "default" );
+    background: ui-color( "light" );
+
+    &:not(:focus) {
+      transform: translate( -50%, -100% );
+    }
+  }
+
+} // enabled

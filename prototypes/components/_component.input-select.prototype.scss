@@ -1,0 +1,182 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: INPUT SELECT
+///-----------------------------------------------------------------------------
+///
+///  Customized select input.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-input-select: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  "indicator-size": 0.25em,
+  "placeholder-color": rgba( map-get-deep( ui-input( "default" ), "color" ), 0.5 ),
+
+), $c-input-select );
+
+
+@if ( ui-load( "components", "input-select" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: INPUT SELECT
+ *-----------------------------------------------------------------------------*
+ *
+ *  Customized select input.
+ *
+ */
+
+///
+/// @var    {Number} The input side padding.
+/// @access private
+///
+$pad_side: if( type-of( ui-input( "padding" ) ) == "list", nth( ui-input( "padding" ), 2 ), ui-input( "padding" ) );
+
+///
+/// @var    {Number} The input right padding, including the indicator.
+/// @access private
+///
+$_pad_right: em( ( $pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" ) );
+
+///
+/// @block        Input Select
+/// @description  Default input select.
+///
+/// [1] placeholder text
+/// [2] browser-specific fixes for hiding dropdown indicator
+/// [3] dropdown indicator
+///
+%c-input-select {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+
+  select {
+    @extend %transition !optional;
+
+    appearance: none;
+    display: block;
+
+    width: 100%;
+    padding: ui-input( "padding" );
+    padding-right: $_pad_right;
+
+    font-family: map-get( ui-input( "default" ), "font-family" );
+    font-weight: map-get( ui-input( "default" ), "font-weight" );
+    font-style: map-get( ui-input( "default" ), "font-style" );
+
+    border: map-get( ui-input( "default" ), "border" );
+    background: map-get( ui-input( "default" ), "background" );
+    color: map-get( ui-input( "default" ), "color" );
+    box-shadow: map-get( ui-input( "default" ), "box-shadow" );
+
+    &:hover {
+      border: map-get( ui-input( "hover" ), "border" );
+      background: map-get( ui-input( "hover" ), "background" );
+      color: map-get( ui-input( "hover" ), "color" );
+      box-shadow: map-get( ui-input( "hover" ), "box-shadow" );
+    }
+
+    &:focus {
+      border: map-get( ui-input( "focus" ), "border" );
+      background: map-get( ui-input( "focus" ), "background" );
+      color: map-get( ui-input( "focus" ), "color" );
+      box-shadow: map-get( ui-input( "focus" ), "box-shadow" );
+    }
+
+    /// [1] ///
+    &:invalid {
+      color: map-get( $_config, "placeholder-color" );
+    }
+
+    border-radius: ui-input( "border-radius" );
+    outline: none;
+
+    /// [2] ///
+    &:focus:-moz-focusring {
+      color: transparent !important;
+      text-shadow: 0 0 0 $black !important;
+    }
+    &::-ms-expand {
+      display: none !important;
+    }
+    @-moz-document url-prefix() {
+      text-indent: 0.01px !important;
+      text-overflow: '' !important;
+      padding-right: $_pad_right !important;
+    }
+  }
+
+  /// [3] ///
+  &::before, &::after {
+    @extend %transition !optional;
+
+    content: "";
+    display: inline-block;
+    pointer-events: none;
+
+    position: absolute;
+    right: $pad_side;
+
+    width: 0;
+    height: 0;
+
+    border: map-get( $_config, "indicator-size" ) solid transparent;
+
+    opacity: 0.75;
+  }
+  &::before {
+    top: 50%;
+    margin-top: 0.075em;
+    border-top-color: currentColor;
+  }
+  &::after {
+    bottom: 50%;
+    margin-bottom: 0.075em;
+    border-bottom-color: currentColor;
+  }
+}
+
+///
+/// @modifier     Input Select Multiple
+/// @description  Select with multiple choices.
+///
+/// [1] hide the replaced dropdown indicator
+/// [2] hide the option used as a placeholder
+///
+%c-input-select--multiple {
+
+  /// [1] ///
+  &::before, &::after {
+    display: none;
+  }
+
+  select[multiple] {
+    height: auto;
+    padding: 0;
+  }
+
+  select[multiple] > option {
+    margin-top: 0;
+    padding: ui-input( "padding" );
+
+    &:not(:first-child) {
+      border-top: map-get( ui-input( "default" ), "border" );
+    }
+
+    /// [2] ///
+    &[value=""]:first-child {
+      display: none;
+    }
+
+  }
+
+}
+
+} // enabled

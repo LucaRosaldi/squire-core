@@ -1,0 +1,387 @@
+///-----------------------------------------------------------------------------
+///  MODULE: CAROUSEL
+///-----------------------------------------------------------------------------
+///
+///  A flexible carousel slider.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$m-carousel: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  "controls": (
+
+    "default": (
+
+      "size": 2.5em,
+      margin: null,
+
+      background: null,
+      color: null,
+      border: null,
+      border-radius: null,
+      box-shadow: null,
+      opacity: 0.5,
+    ),
+
+    "hover": (
+      background: null,
+      color: null,
+      border: null,
+      box-shadow: null,
+      opacity: null,
+    ),
+
+    "disabled": (
+      background: null,
+      color: null,
+      border: null,
+      box-shadow: null,
+      opacity: 0,
+    ),
+
+  ),
+
+  "nav": (
+
+    margin: null,
+    padding: 1em,
+
+    font-family: null,
+    font-size: null,
+    font-weight: null,
+    font-style: null,
+
+    "default": (
+
+      "size": 0.5em,
+      margin: 0.25em,
+
+      background: ui-color( "default" ),
+      color: ui-color( "default" ),
+      border: null,
+      border-radius: 50%,
+      box-shadow: null,
+      opacity: 0.5,
+    ),
+
+    "selected": (
+      background: ui-color( "primary" ),
+      color: null,
+      border: null,
+      box-shadow: null,
+      opacity: 1,
+    ),
+
+  ),
+
+), $m-carousel );
+
+
+@if ( ui-load( "modules", "carousel" ) == true ) {
+/*---------------------------------------------------------------------------*
+ *  MODULE: CAROUSEL
+ *---------------------------------------------------------------------------*
+ *
+ *  A flexible carousel slider.
+ *
+ */
+
+///
+/// @block        Carousel
+/// @description  Default Carousel block.
+///
+/// [1] activate the slider with the ::after pseudo element
+///
+%m-carousel {
+  display: flex;
+  overflow: auto;
+  list-style: none;
+
+  .js & {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  /// [1] ///
+  &::after {
+    content: "flickity";
+    display: none;
+  }
+}
+
+  ///
+  /// @element      Item
+  /// @description  Item in the carousel.
+  ///
+  .js %m-carousel__item {
+    position: relative;
+  }
+
+  ///
+  /// @modifier     Carousel Item Selected
+  /// @description  Item in the carousel in selected state.
+  ///
+  %m-carousel_item--selected {
+    z-index: 2;
+  }
+
+  ///
+  /// @element      Carousel Controls
+  /// @description  The directional(next/prev) navigation.
+  ///
+  %m-carousel__controls {
+    position: absolute;
+    top: 0; left: 0;
+  }
+
+    ///
+    /// @element      Carousel Controls Item
+    /// @description  Button for directional (next/prev) navigation.
+    ///
+    /// 1. arrow icon
+    ///
+    %m-carousel__controls__item {
+      @extend %transition !optional;
+
+      position: absolute;
+      z-index: 3;
+      top: 50%;
+      transform: translateY( -50% );
+
+      cursor: pointer;
+
+      width: map-get-deep( $_config, "controls", "default", "size" );
+      height: map-get-deep( $_config, "controls", "default", "size" );
+
+      border: map-get-deep( $_config, "controls", "default", "border" );
+      background: map-get-deep( $_config, "controls", "default", "background" );
+      color: map-get-deep( $_config, "controls", "default", "color" );
+
+      box-shadow: map-get-deep( $_config, "controls", "default", "box-shadow" );
+      opacity: map-get-deep( $_config, "controls", "default", "opacity" );
+
+      border-radius: map-get-deep( $_config, "controls", "default", "border-radius" );
+
+      /// [3] ///
+      svg {
+        @extend %transition !optional;
+
+        position: absolute;
+        left: 20%; top: 20%;
+        width: 60%; height: 60%;
+
+        fill: currentColor;
+      }
+
+      &:hover, &:focus {
+        border: map-get-deep( $_config, "controls", "hover", "border" );
+        background: map-get-deep( $_config, "controls", "hover", "background" );
+        color: map-get-deep( $_config, "controls", "hover", "color" );
+        box-shadow: map-get-deep( $_config, "controls", "hover", "box-shadow" );
+        opacity: map-get-deep( $_config, "controls", "hover", "opacity" );
+      }
+
+      &:disabled {
+        border: map-get-deep( $_config, "controls", "disabled", "border" );
+        background: map-get-deep( $_config, "controls", "disabled", "background" );
+        color: map-get-deep( $_config, "controls", "disabled", "color" );
+        box-shadow: map-get-deep( $_config, "controls", "disabled", "box-shadow" );
+        opacity: map-get-deep( $_config, "controls", "disabled", "opacity" );
+      }
+
+    }
+
+    ///
+    /// @modifier     Carousel Control Prev
+    /// @description  Button for going back to the previous item.
+    ///
+    %m-carousel__controls__item--prev {
+      left: 0;
+      [dir="rtl"] & { left: auto; right: 0; }
+    }
+
+    ///
+    /// @modifier     Carousel Control Next
+    /// @description  Button for advancing to the next item.
+    ///
+    %m-carousel__controls__item--next {
+      right: 0;
+      [dir="rtl"] & { right: auto; left: 0; }
+    }
+
+  ///
+  /// @element      Carousel Dots
+  /// @description  Carousel dot navigation.
+  ///
+  /// 1. each dot inside the nav
+  ///
+  %m-carousel__nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    bottom: 0; left: 0;
+    z-index: 3;
+
+    width: 100%;
+    margin: map-get-deep( $_config, "nav", "margin" );
+    padding: map-get-deep( $_config, "nav", "padding" );
+
+    font-family: map-get-deep( $_config, "nav", "font-family" );
+    font-size: map-get-deep( $_config, "nav", "font-size" );
+    font-weight: map-get-deep( $_config, "nav", "font-weight" );
+    font-style: map-get-deep( $_config, "nav", "font-style" );
+
+    text-align: center;
+  }
+
+  ///
+  /// @element      Carousel Nav
+  /// @description  The carousel navigation.
+  ///
+  %m-carousel__nav__item {
+    @extend %transition !optional;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: map-get-deep( $_config, "nav", "default", "size" );
+    min-height: map-get-deep( $_config, "nav", "default", "size" );
+    margin: map-get-deep( $_config, "nav", "default", "margin" );
+
+    border: map-get-deep( $_config, "nav", "default", "border" );
+    background: map-get-deep( $_config, "nav", "default", "background" );
+    color: map-get-deep( $_config, "nav", "default", "color" );
+
+    box-shadow: map-get-deep( $_config, "nav", "default", "box-shadow" );
+    opacity: map-get-deep( $_config, "nav", "default", "opacity" );
+
+    &, img {
+      border-radius: map-get-deep( $_config, "nav", "default", "border-radius" );
+    }
+
+    cursor: pointer;
+  }
+
+  ///
+  /// @element      Carousel Dots Item Active
+  /// @description  The selected item in the carousel navigation.
+  ///
+  %m-carousel__nav__item--selected {
+    border: map-get-deep( $_config, "nav", "selected", "border" );
+    background: map-get-deep( $_config, "nav", "selected", "background" );
+    color: map-get-deep( $_config, "nav", "selected", "color" );
+
+    box-shadow: map-get-deep( $_config, "nav", "selected", "box-shadow" );
+    opacity: map-get-deep( $_config, "nav", "selected", "opacity" );
+  }
+
+  /*-----------------------------------------------------------------------------*
+   *  FLICKITY.JS
+   *-----------------------------------------------------------------------------*
+   *
+   *  https://flickity.metafizzy.co
+   *
+   */
+
+  .flickity-enabled {
+    position: relative;
+    width: 100%;
+  }
+  .flickity-enabled:focus {
+    outline: none;
+  }
+  .flickity-viewport {
+    overflow: visible;
+    position: relative;
+    height: 100%;
+  }
+  .flickity-slider {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  /// fade ///
+  .flickity-enabled.is-fade .flickity-slider > * {
+    pointer-events: none;
+    z-index: 0;
+  }
+  .flickity-enabled.is-fade .flickity-slider > .is-selected {
+    pointer-events: auto;
+    z-index: 1;
+  }
+  @media ( prefers-reduced-motion: reduce ) {
+    .flickity-enabled.is-fade .flickity-slider > * { opacity: 0 !important; }
+    .flickity-enabled.is-fade .flickity-slider > .is-selected { opacity: 1 !important; }
+  }
+
+  /// draggable ///
+  .flickity-enabled.is-draggable {
+    -webkit-tap-highlight-color: transparent;
+            tap-highlight-color: transparent;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+  }
+  .flickity-enabled.is-draggable .flickity-viewport {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: grab;
+  }
+  .flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
+
+  ///- previous/next buttons ///
+  .flickity-prev-next-button {
+    @extend %m-carousel__controls__item;
+
+    &.previous {
+      @extend %m-carousel__controls__item--prev;
+    }
+    &.next {
+      @extend %m-carousel__controls__item--next;
+    }
+
+    .flickity-rtl &.previous {
+      left: auto; right: 0;
+    }
+    .flickity-rtl &.next {
+      left: 0; right: auto;
+    }
+  }
+
+  /// page dots ///
+  .flickity-page-dots {
+    @extend %m-carousel__nav;
+  }
+
+  .flickity-rtl .flickity-page-dots {
+    flex-direction: row-reverse;
+  }
+
+  .flickity-page-dots .dot {
+    @extend %m-carousel__nav__item;
+  }
+
+  .flickity-page-dots .dot.is-selected {
+    @extend %m-carousel__nav__item--selected;
+  }
+
+} // enabled

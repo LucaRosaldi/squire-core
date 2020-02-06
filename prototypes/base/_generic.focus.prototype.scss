@@ -1,0 +1,40 @@
+///-----------------------------------------------------------------------------
+///  GENERIC: FOCUS
+///-----------------------------------------------------------------------------
+///
+///  Prettify the default focus outline, and remove it when possible.
+///
+
+
+@if ( ui-load( "generic", "focus" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  GENERIC: FOCUS
+ *-----------------------------------------------------------------------------*
+ *
+ *  Prettify the default focus outline, and remove it when possible.
+ *
+ */
+
+///
+/// Focus state for all elements
+///
+*:focus {
+  outline-width: 0.15em;
+}
+
+///
+/// Focus state for links
+///
+a:focus {
+  outline-color: currentColor;
+  outline-offset: 0.15em;
+}
+
+///
+/// Remove focus states if user is not using tabs
+///
+html:not(.no-js):not(.user-is-tabbing) *:focus {
+  outline: none;
+}
+
+} // enabled

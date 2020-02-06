@@ -1,0 +1,143 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: CARD
+///-----------------------------------------------------------------------------
+///
+///  A boxed container which normally displays an image ( header ), some text
+///  ( content ) and actions ( footer ). Uses flexbox display, so we can make
+///  cards of equal height when required.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-card: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  padding: ui-spacing(),
+
+  background: $white,
+  color: null,
+
+  border-radius: null,
+
+), $c-card );
+
+
+@if ( ui-load( "components", "card" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: CARD
+ *-----------------------------------------------------------------------------*
+ *
+ *  A boxed container which normally displays an image ( header ), some text
+ *  ( content ) and actions ( footer ). Uses flexbox display, so we can make
+ *  cards of equal height when required.
+ *
+ */
+
+$_pad: map-get( $_config, "padding" );
+$_bg:  map-get( $_config, "background" );
+$_col: map-get( $_config, "color" );
+$_bdr: map-get( $_config, "border-radius" );
+
+///
+/// @block        Card
+/// @description  Default card.
+///
+%c-card {
+  @extend %transition !optional;
+  @extend %l-column, %l-column--stretch !optional;
+
+  flex-grow: 1;
+
+  position: relative;
+  width: 100%;
+
+  color: $_col;
+  background: $_bg;
+
+  border-radius: $_bdr;
+
+  > * {
+    @extend %l-column !optional;
+
+    position: relative;
+  }
+  > :first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+  }
+  > :last-child {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+  }
+}
+
+  ///
+  /// @element      Card Expand
+  /// @description  Element which expands its height on equal-height columns.
+  ///
+  %c-card__expand {
+    flex-grow: 1;
+  }
+
+  ///
+  /// @element      Card Main
+  /// @description  The main content of the card.
+  ///
+  /// 1. adapt height on card grids.
+  ///
+  %c-card__main {
+    padding: $_pad;
+  }
+
+  ///
+  /// @element      Card Header
+  /// @description  The card header.
+  ///
+  %c-card__header {
+    @extend %c-card__main;
+
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  ///
+  /// @element      Card Footer
+  /// @description  The card footer.
+  ///
+  %c-card__footer {
+    @extend %c-card__header !optional;
+  }
+
+  ///
+  /// @element      Card Thumb
+  /// @description  The card thumbnail image.
+  ///
+  %c-card__thumb {
+    img {
+      width: 100%;
+    }
+  }
+
+  ///
+  /// @modifier     Card Thumb Cover
+  /// @description  The card thumbnail image covers the whole height.
+  ///
+  %c-card__thumb--cover { @supports ( object-fit: cover ) {
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      max-width: none;
+      object-fit: cover;
+    }
+  }}
+
+} // enabled

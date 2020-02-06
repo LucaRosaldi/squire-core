@@ -1,0 +1,131 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: LIST
+///-----------------------------------------------------------------------------
+///
+///  Ordered and unordered lists.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-list: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+/// [1] The bullet indicator for unordered lists
+/// [2] The separator character after numbers for ordered lists
+///
+$_config: map-merge( (
+
+  "ul": (
+    "bullet": "\25CF",      /// [1] ///
+    "margin": 0.5rem,
+    "font-family": null,
+    "font-size": 0.5em,
+    "font-weight": null,
+    "vertical-align": null,
+  ),
+
+  "ol": (
+    "separator": ".",       /// [2] ///
+    "margin": 0.5rem,
+    "font-family": null,
+    "font-weight": null,
+  ),
+
+), $o-list );
+
+
+@if ( ui-load( "objects", "list" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: LIST
+ *-----------------------------------------------------------------------------*
+ *
+ *  Ordered and unordered lists.
+ *
+ */
+
+///
+/// @block        List
+/// @description  Default list block.
+///
+%o-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+///
+/// @modifier     List Disc
+/// @description  Unordered list with default indicator replaced with pseudo element.
+///
+%o-list--disc {
+  @extend %o-list;
+
+  li::before {
+    content: map-get-deep( $_config, "ul", "bullet" );
+    display: inline-block;
+    position: relative;
+    top: ( ( 1em - em( map-get-deep( $_config, "ul", "font-size" ) ) ) * -1 ) / 2;
+    margin-right: map-get-deep( $_config, "ul", "margin" );
+    font-family: map-get-deep( $_config, "ul", "font-family" );
+    font-size: map-get-deep( $_config, "ul", "font-size" );
+    font-weight: map-get-deep( $_config, "ul", "font-weight" );
+    vertical-align: map-get-deep( $_config, "ul", "vertical-align" );
+  }
+}
+
+///
+/// @modifier     List Decimal
+/// @description  Ordered list with default indicator replaced with pseudo element.
+///
+%o-list--decimal {
+  @extend %o-list;
+
+  counter-reset: ol;
+
+  li::before {
+    counter-increment: ol;
+    content: counter(ol) map-get-deep( $_config, "ol", "separator" );
+    display: inline-block;
+    margin-right: map-get-deep( $_config, "ol", "margin" );
+    font-family: map-get-deep( $_config, "ol", "font-family" );
+    font-size: map-get-deep( $_config, "ol", "font-size" );
+    font-weight: map-get-deep( $_config, "ol", "font-weight" );
+  }
+}
+
+///
+/// @modifier     List Primary
+/// @description  List with colored indicator.
+///
+%o-list--primary {
+  li::before {
+    color: ui-color( "primary" );
+  }
+}
+
+///
+/// @modifier     List Default
+/// @description  List with default style.
+///
+%o-list--default {
+  padding-left: 1em;
+  padding-block-start: 1em;
+  padding-block-end: 0;
+
+  li::before {
+    display: none;
+  }
+}
+ul%o-list--default {
+  list-style: disc;
+}
+ol%o-list--default {
+  list-style: decimal;
+}
+
+
+} // enabled

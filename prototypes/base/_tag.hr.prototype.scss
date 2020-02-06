@@ -1,0 +1,60 @@
+///-----------------------------------------------------------------------------
+///  TAG: HR
+///-----------------------------------------------------------------------------
+///
+///  A horizontal divider.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$t-hr: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  max-width: null,
+  margin: ui-spacing(),
+
+  border: 1px solid,
+
+  border-radius: null,
+  opacity: 0.25,
+
+), $t-hr );
+
+
+@if ( ui-load( "tag", "hr" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  TAG: HR
+ *-----------------------------------------------------------------------------*
+ *
+ *  A horizontal divider.
+ *
+ */
+
+///
+/// @block        Horizontal Ruler
+/// @description  Default horizontal ruler.
+///
+%t-hr {
+  display: block;
+  width: 100%;
+
+  max-width: map-get( $_config, "max-width" );
+  margin: map-get( $_config, "margin" );
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 0;
+  border-bottom: map-get( $_config, "border" );
+
+  border-radius: map-get( $_config, "border-radius" );
+  opacity: map-get( $_config, "opacity" );
+}
+
+} // enabled

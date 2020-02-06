@@ -1,0 +1,70 @@
+///-----------------------------------------------------------------------------
+///  MIXINS: BREAKPOINT
+///-----------------------------------------------------------------------------
+///
+///  Mixins for media queries.
+///
+
+///
+/// @mixin        Mq (Media Query)
+/// @description  Wrap content in a media query.
+///
+/// @param {String|Map} $feature Media feature(s)
+/// @param {String}     $type    Media type
+////
+@mixin mq( $features, $type: "all" ) {
+  $list: "";
+  @if is-map( $features ) {
+    @each $name, $value in $features {
+      $list: "#{$list} and ( #{$name}: #{$value} )";
+    }
+  }
+  @media #{$type}#{$list} {
+    @content;
+  }
+}
+
+///
+/// @mixin        Bp (breakpoint)
+/// @description  Media query for a defined breakpoint.
+///
+/// @param {String}     $breakpoint Breakpoint value or global key
+/// @param {String|Map} $feature    Media feature(s)
+/// @param {String}     $type       Media type
+///
+@mixin bp( $value, $feature: "min-width", $type: "all" ) {
+
+  // retrieve the value if a key for global breakpoint was passed
+  @if ( map-has-key( ui-config( "breakpoint" ), $value ) ) {
+    $breakpoint: map-get( ui-config( "breakpoint" ), $value );
+    $value: map-get( $breakpoint, "value" );
+
+    @if ( map-has-key( $breakpoint, "feature" ) ) {
+      $feature: map-get( $breakpoint, "feature" );
+    }
+
+    @if ( map-has-key( $breakpoint, "type" ) ) {
+      $type: map-get( $breakpoint, "type" );
+    }
+  }
+
+  @include mq( ( $feature: $value ), $type ) {
+    @content;
+  }
+}
+
+///
+/// @mixin        Retina Screen
+/// @description  Media query for retina screens.
+///
+@mixin retina-screen {
+  @media
+  only screen and ( -webkit-min-device-pixel-ratio: 2 ),
+  only screen and ( min--moz-device-pixel-ratio: 2 ),
+  only screen and ( -o-min-device-pixel-ratio: 2/1 ),
+  only screen and ( min-device-pixel-ratio: 2 ),
+  only screen and ( min-resolution: 192dpi ),
+  only screen and ( min-resolution: 2dppx ) {
+    @content;
+  }
+}

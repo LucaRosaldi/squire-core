@@ -1,0 +1,121 @@
+////
+///-----------------------------------------------------------------------------
+///  MIXINS: FLUID
+///-----------------------------------------------------------------------------
+///
+///  Progressively increase a property from a minimum value to a maximum value
+///  between two breakpoints.
+///
+////
+
+///
+/// @mixin        Fluid Property
+/// @description  Progressively increase a property from a minimum value to a
+///               maximum value between two breakpoints.
+///
+/// @link         https://css-tricks.com/between-the-lines/
+/// @demo         https://codepen.io/dbj/pen/XMGgjz
+///
+/// @usage
+/// .article {
+///   @include fluid( "font-size", 14px, 18px, "small", "wide" );
+/// }
+///
+/// In this case, the font size at the smallest size will be 14px. When the
+/// "small" breakpoint is passed, the property will increase proportionally to
+/// the viewport width until it reaches 18px at the "wide" breakpoint, the point
+/// where it will stop increasing.
+///
+/// Works also for "margin" and "padding" properties, even with multiple values.
+///
+/// @param {String}        $property
+/// @param {Number}        $from-value
+/// @param {Number}        $to-value
+/// @param {String|Number} [$increase-from]
+/// @param {String|Number} [$increase-until]
+///
+@mixin fluid(
+  $property,
+  $from-value,
+  $to-value,
+  $increase-from: "small",
+  $increase-until: "wide"
+) {
+
+  $from-values: ();
+  $between-values: ();
+  $to-values: ();
+
+  // if breakpoint key was passed instead of Number, retrieve the actual value
+  @if ( map-has-key( ui-config( "breakpoint" ), $increase-from ) ) {
+    $increase-from: ui-breakpoint( $increase-from );
+  }
+  @if ( map-has-key( ui-config( "breakpoint" ), $increase-until ) ) {
+    $increase-until: ui-breakpoint( $increase-until );
+  }
+
+  // manage multiple properties
+  @for $i from 1 through length( $from-value ) {
+    $fv: nth( $from-value, $i );
+    $tv: nth( $to-value, $i );
+
+    $bv: $fv;
+    $bvf: false;
+    $bvt: false;
+
+    // values must be in pixel, em or rems unit, or the responsive function will not run
+    @if ( type-of( $fv ) == "number" and not unitless( $fv ) and unit( $fv ) != "%" ) {
+      $fv: if( unit( $fv ) != "px", ( $fv / ( $fv * 0 + 1 ) * 16 ) * 1px, $fv );
+      $bvf: $fv;
+    }
+    @if ( type-of( $tv ) == "number" and not unitless( $tv ) and unit( $tv ) != "%" ) {
+      $tv: if( unit( $tv ) != "px", ( $tv / ( $tv * 0 + 1 ) * 16 ) * 1px, $tv );
+      $bvt: $tv;
+    }
+    @if ( $bvf != false and $bvt != false ) {
+      $bv: fluid-value( ( $bvf ), ( $bvt ), $increase-from, $increase-until );
+    }
+
+    $from-values: append( $from-values, $fv );
+    $between-values: append( $between-values, $bv );
+    $to-values: append( $to-values, $tv );
+  }
+
+  #{$property}: $from-values;
+  @media screen and (min-width: #{$increase-from}) {
+    #{$property}: $between-values;
+  }
+  @media screen and (min-width: #{$increase-until}) {
+    #{$property}: $to-values;
+  }
+
+}
+
+///
+/// @mixin        Fixed or Fluid Property
+/// @description  Output a single property if the 'values' argument is singular,
+///               or a fluid property if it is a list of two min / max values.
+///
+/// @param {String}        $property
+/// @param {Number}        $values
+/// @param {String|Number} [$increase-from]
+/// @param {String|Number} [$increase-until]
+///
+@mixin maybe-fluid(
+  $property,
+  $values,
+  $increase-from: "small",
+  $increase-until: "wide"
+) {
+
+  @if ( type-of( $values ) != "list" ) {
+    #{$property}: $values;
+  }
+  @else if ( nth( $values, 1 ) == nth( $values, 2 ) ) {
+    #{$property}: nth( $values, 1 );
+  }
+  @else {
+    @include fluid( $property, nth( $values, 1 ), nth( $values, 2 ), $increase-from, $increase-until );
+  }
+
+}

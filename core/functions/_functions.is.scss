@@ -1,0 +1,79 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: IS-TYPE
+///-----------------------------------------------------------------------------
+///
+///  Functions for checking variable types.
+///
+
+///
+/// Check if value is a string.
+/// Note that CSS units (i.e. 100px) are treated as numbers, not strings.
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-string( $var ) {
+  @return type-of( $var ) == "string";
+}
+
+///
+/// Check if value is a number.
+/// Note that CSS units (i.e. 100px) are treated as numbers, not strings.
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-number( $var ) {
+  @return type-of( $var ) == "number";
+}
+
+///
+/// Check if value is a boolean.
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-bool( $var ) {
+  @return type-of( $var ) == "bool";
+}
+
+///
+/// Check if value is a color.
+/// Color values include HEX, RGB, RGBA, HSL and HSLA.
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-color( $var ) {
+  @return type-of( $var ) == "color";
+}
+
+///
+/// Check if value is a list.
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-list( $var ) {
+  @return type-of( $var ) == "list";
+}
+
+///
+/// Check if value is a map.
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-map( $var ) {
+  @return type-of( $var ) == "map";
+}
+
+///
+/// Check if value is a iterable object (list or map).
+///
+/// @param  {Base} $var
+/// @return {Bool}
+///
+@function is-iterable( $var ) {
+  @return is-map( $var ) or is-list( $var );
+}

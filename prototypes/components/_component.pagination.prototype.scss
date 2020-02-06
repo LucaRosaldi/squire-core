@@ -1,0 +1,150 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: PAGINATION
+///-----------------------------------------------------------------------------
+///
+///  Navigation made of page links.
+///
+
+///
+/// @var    {Map}   Object settings.
+/// @access public
+///
+$c-pagination: () !default;
+
+///
+/// @var    {Map}   Object configuration.
+/// @access private
+///
+$_config: map-extend( (
+
+  font-family:      null,
+  font-size:        null,
+  font-weight:      null,
+  font-style:       null,
+  text-transform:   null,
+
+  "item": (
+    margin:         0.25em,
+    padding:        0.5em 1em,
+    border:         null,
+    background:     ui-color( "light" ),
+    color:          null,
+    box-shadow:     none,
+    border-radius:  null,
+  ),
+  "item-hover": (
+    border:         null,
+    background:     ui-color( "light" ),
+    color:          null,
+    box-shadow:     0 0 0 1px darken( ui-color( "light" ), 15 ),
+  ),
+  "item-current": (
+    border:         null,
+    background:     transparent,
+    color:          null,
+    box-shadow:     none,
+  ),
+
+), $c-pagination );
+
+
+@if ( ui-load( "components", "pagination" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: PAGINATION
+ *-----------------------------------------------------------------------------*
+ *
+ *  Navigation made of page links.
+ *
+ */
+
+///
+/// @block        Pagination
+/// @description  Default pagination wrapper.
+///
+%c-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  margin: -( map-get-deep( $_config, "item", "margin" ) );
+
+  font-family: map-get( $_config, "font-family" );
+  font-size: map-get( $_config, "font-size" );
+  font-weight: map-get( $_config, "font-weight" );
+  font-style: map-get( $_config, "font-style" );
+  text-transform: map-get( $_config, "text-transform" );
+}
+
+  ///
+  /// @element      Pagination Menu
+  /// @description  Menu inside the pagination.
+  ///
+  %c-pagination__menu {
+    margin: 0;
+  }
+
+  ///
+  /// @element      Pagination Menu Item
+  /// @description  Menu item inside the pagination.
+  ///
+  %c-pagination__item {
+  }
+
+  ///
+  /// @element      Pagination Link
+  /// @description  Link inside the pagination menu.
+  ///
+  %c-pagination__link {
+    display: block;
+
+    margin: map-get-deep( $_config, "item", "margin" );
+    padding: map-get-deep( $_config, "item", "padding" );
+
+    border: map-get-deep( $_config, "item", "border" );
+    background: map-get-deep( $_config, "item", "background" );
+    color: map-get-deep( $_config, "item", "color" );
+
+    box-shadow: map-get-deep( $_config, "item", "box-shadow" );
+    border-radius: map-get-deep( $_config, "item", "border-radius" );
+
+    &:hover {
+      border: map-get-deep( $_config, "item-hover", "border" );
+      background: map-get-deep( $_config, "item-hover", "background" );
+
+      color: map-get-deep( $_config, "item-hover", "color" );
+
+      box-shadow: map-get-deep( $_config, "item-hover", "box-shadow" );
+    }
+  }
+
+  ///
+  /// @modifier     Pagination Link Active
+  /// @description  The active pagination link.
+  ///
+  %c-pagination__link--active {
+    &, &:hover {
+      border: map-get-deep( $_config, "item-current", "border" );
+      background: map-get-deep( $_config, "item-current", "background" );
+      color: map-get-deep( $_config, "item-current", "color" );
+
+      box-shadow: map-get-deep( $_config, "item-current", "box-shadow" );
+
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+
+  ///
+  /// @modifier     Pagination Link Disabled
+  /// @description  The active pagination link.
+  ///
+  %c-pagination__link--disabled {
+    &, &:hover {
+      pointer-events: none;
+      cursor: default;
+      opacity: 0.75;
+    }
+  }
+
+} // enabled

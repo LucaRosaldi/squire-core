@@ -1,0 +1,49 @@
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: DISPLAY
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for displaying and ordering elements.
+ *
+ */
+
+///
+/// Hide element visually without affecting accessibility.
+///
+.u-sr-only {
+  position: absolute !important;
+  z-index: -1 !important;
+  overflow: hidden !important;
+  width: 0.1px !important;
+  height: 0.1px !important;
+  opacity: 0 !important;
+}
+
+.u-d-b         { display: block !important; }
+.u-d-ib        { display: inline-block !important; }
+.u-d-f         { display: flex !important; }
+.u-d-if        { display: inline-flex !important; }
+.u-d-t         { display: table !important; }
+.u-d-tr        { display: table-row !important; }
+.u-d-tc        { display: table-cell !important; }
+.u-d-n         { display: none !important; }
+
+
+///-----------------------------------------------------------------------------
+///  BREAKPOINT VARIANTS
+///-----------------------------------------------------------------------------
+@each $name, $bp in ui-config( "breakpoint" ) { @if ( map-has-key( $bp, "suffix" ) ) {
+  $suffix:  map-get( $bp, "suffix" );
+  $value:   map-get( $bp, "value" );
+  $feature: if( map-has-key( $bp, "feature" ), map-get( $bp, "feature" ), "min-width" );
+  $type:    if( map-has-key( $bp, "type" ), map-get( $bp, "type" ), "all" );
+
+  @media #{$type} and ( #{$feature}: #{$value} ) {
+
+    .u-d-b\@#{$suffix}         { display: block !important; }
+    .u-d-ib\@#{$suffix}        { display: inline-block !important; }
+    .u-d-f\@#{$suffix}         { display: flex !important; }
+    .u-d-if\@#{$suffix}        { display: inline-flex !important; }
+    .u-d-n\@#{$suffix}         { display: none !important; }
+
+  }
+}}

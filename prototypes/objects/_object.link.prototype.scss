@@ -1,0 +1,64 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: LINK
+///-----------------------------------------------------------------------------
+///
+///  Simple textual link.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-link: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  text-decoration: underline,
+  border: 0,
+  color: null,
+
+  "hover": (
+    text-decoration: null,
+    border-color: null,
+    color: ui-color( "primary" ),
+  ),
+
+), $o-link );
+
+
+@if ( ui-load( "objects", "link" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: LINK
+ *-----------------------------------------------------------------------------*
+ *
+ *  Simple textual link.
+ *
+ */
+
+///
+/// @block        Link
+/// @description  Default link.
+///
+%o-link {
+  @extend %transition !optional;
+
+  text-decoration: map-get-deep( $_config, "text-decoration" );
+  text-decoration-skip-ink: auto;
+
+  border-bottom: map-get-deep( $_config, "border" );
+  color: map-get-deep( $_config, "color" );
+
+  appearance: none;
+
+  &:hover {
+    text-decoration: map-get-deep( $_config, "hover", "text-decoration" );
+    border-color: map-get-deep( $_config, "hover", "border-color" );
+    color: map-get-deep( $_config, "hover", "color" );
+  }
+}
+
+} // enabled

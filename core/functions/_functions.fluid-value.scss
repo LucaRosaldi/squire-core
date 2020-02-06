@@ -1,0 +1,37 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: FLUID VALUE
+///-----------------------------------------------------------------------------
+///
+///  Outputs a CSS value which uses calc() to scale a pixel value from A to B,
+///  across viewport-width A and viewport-width B. Requires a media query to cap
+///  the value at B.
+///
+///  @link https://css-tricks.com/between-the-lines/
+///  @demo https://codepen.io/dbj/pen/XMGgjz
+///
+
+///
+/// Fluid Value
+///
+/// @usage
+/// .article {
+///   font-size: 12px;
+///   @media screen and ( min-width: 640px ) {
+///     font-size: fluid-value( 12px, 16px, 640px, 1280px );
+///   }
+///   @media screen and ( min-width: 1280px ) {
+///     font-size: 16px;
+///   }
+/// }
+///
+/// @param {Number} $from      Minimum size in pixels
+/// @param {Number} $to        Maximum size in pixels
+/// @param {Number} $fromWidth Minimum viewport width in pixels
+/// @param {Number} $toWidth   Maximum viewport width in pixels
+///
+@function fluid-value( $fromValue, $toValue, $fromWidth, $toWidth ) {
+  $slope: ( $toValue - $fromValue ) / ( $toWidth - $fromWidth );
+  $base: $fromValue - $slope * $fromWidth;
+
+  @return calc(#{$base} + #{100vw * $slope});
+}

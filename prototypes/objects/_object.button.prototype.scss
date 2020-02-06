@@ -1,0 +1,177 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: BUTTON
+///-----------------------------------------------------------------------------
+///
+///  Clickable call-to-action elements.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-button: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  padding: 0.6em 1.4em,
+
+  font-family: null,
+  font-size: null,
+  font-weight: null,
+  line-height: null,
+  letter-spacing: null,
+  text-transform: null,
+
+  border: 0,
+  background: null,
+  color: null,
+
+  box-shadow: null,
+  text-shadow: null,
+  border-radius: 4px,
+
+  "colors": (
+
+    "primary": (
+      color: $white,
+      background-color: ui-color( "primary" ),
+      border-color: null,
+    ),
+    "primary--hover": (
+      color: $white,
+      background-color: lighten( ui-color( "primary" ), 10 ),
+      border-color: null,
+    ),
+
+  ),
+
+), $o-button );
+
+
+@if ( ui-load( "objects", "button" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: BUTTON
+ *-----------------------------------------------------------------------------*
+ *
+ *  Clickable call-to-action elements.
+ *
+ */
+
+$_pad: map-get( $_config, "padding" );
+
+///
+/// @block        Button
+/// @description  Basic call to action.
+///
+/// [1] reset transition to avoid delay on nested buttons
+/// [2] disable click on child elements to avoid js conflicts
+///
+%o-button {
+  @extend %transition !optional;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  padding: map-get( $_config, "padding" );
+
+  font-family: map-get( $_config, "font-family" );
+  font-size: map-get( $_config, "font-size" );
+  font-weight: map-get( $_config, "font-weight" );
+  line-height: map-get( $_config, "line-height" );
+  letter-spacing: map-get( $_config, "letter-spacing" );
+  text-transform: map-get( $_config, "text-transform" );
+  text-align: center;
+
+  border: map-get( $_config, "border" );
+  background: map-get( $_config, "background" );
+  color: map-get( $_config, "color" );
+
+  box-shadow: map-get( $_config, "box-shadow" );
+  text-shadow: map-get( $_config, "text-shadow" );
+  border-radius: map-get( $_config, "border-radius" );
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .75;
+  }
+
+  * {
+    transition: auto;     /// [1] ///
+    pointer-events: none; /// [2] ///
+  }
+}
+
+///
+/// @modifier     Button Hard
+/// @description  Button with hard edges.
+///
+%o-button--hard {
+  border-radius: 0;
+}
+
+///
+/// @modifier     Button Pill
+/// @description  Button with rounded corners.
+///
+%o-button--pill {
+  border-radius: 9999px;
+}
+
+///
+/// @modifier     Button Label
+/// @description  Pill-shaped button which is normally used for labeling things.
+///
+%o-button--label {
+  display: inline-flex;
+
+  padding: 0 0.75ch;
+
+  line-height: 1.5em;
+  white-space: nowrap;
+
+  border-radius: 1.5em;
+}
+
+///
+/// @modifier     Button Badge
+/// @description  Circle-shaped button.
+///
+%o-button--badge {
+  display: inline-flex;
+
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+
+  border-radius: 100%;
+}
+
+
+///
+/// @modifier     Button [color]
+/// @description  Button variant for [color].
+///
+@each $_name, $_props in map-get( $_config, "colors" ) {
+
+  %o-button--#{$_name} {
+    background-color: map-get( $_props, "background-color" );
+    color: map-get( $_props, "color" );
+    border-color: map-get( $_props, "border-color" );
+    box-shadow: map-get( $_props, "box-shadow" );
+    outline-color: map-get( $_props, "background-color" );
+  }
+
+}
+
+} // enabled

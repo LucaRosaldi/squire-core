@@ -1,0 +1,129 @@
+///-----------------------------------------------------------------------------
+///  TAG: BLOCKQUOTE
+///-----------------------------------------------------------------------------
+///
+///  The <blockquote> tag.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$t-blockquote: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  padding: null,
+
+  color: null,
+  background: null,
+
+  border: null,
+  border-top: null,
+  border-right: null,
+  border-bottom: null,
+  border-left: null,
+
+  "text": (
+
+    "before": open-quote,
+    "after": close-quote,
+
+    font-size: ui-font-size( "h4" ),
+    font-weight: null,
+    font-style: italic,
+
+    color: null,
+
+  ),
+
+  "author": (
+
+    "before": "—",
+
+    margin-top: 0.25em,
+
+    font-size: null,
+    font-weight: null,
+    font-style: null,
+
+    color: null,
+
+  ),
+
+), $t-blockquote );
+
+
+@if ( ui-load( "tag", "blockquote" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  TAG: BLOCKQUOTE
+ *-----------------------------------------------------------------------------*
+ *
+ *  The <blockquote> tag.
+ *
+ */
+
+///
+/// @block        <blockquote>
+/// @description  The blockquote tag.
+///
+/// 1. opening and closing quotes
+/// 2. quote author
+///
+%t-blockquote {
+  padding: map-get( $_config, "padding" );
+
+  color: map-get( $_config, "color" );
+  background: map-get( $_config, "background" );
+
+  border: map-get( $_config, "border" );
+  border-top: map-get( $_config, "border-top" );
+  border-right: map-get( $_config, "border-right" );
+  border-bottom: map-get( $_config, "border-bottom" );
+  border-left: map-get( $_config, "border-left" );
+}
+
+  ///
+  /// @element      Blockquote Text
+  /// @description  The quoted text.
+  ///
+  %t-blockquote__text {
+    @include maybe-fluid( "font-size", map-get-deep( $_config, "text", "font-size" ) );
+    font-weight: map-get-deep( $_config, "text", "font-weight" );
+    font-style: map-get-deep( $_config, "text", "font-style" );
+
+    color: map-get-deep( $_config, "text", "color" );
+
+    &::before {
+      content: map-get-deep( $_config, "text", "before" );
+    }
+    &::after {
+      content: map-get-deep( $_config, "text", "after" );
+    }
+  }
+
+  ///
+  /// @element      Blockquote Author
+  /// @description  The author of the quoted text.
+  ///
+  %t-blockquote__author {
+    display: block;
+
+    margin-top: map-get-deep( $_config, "author", "margin-top" );
+
+    @include maybe-fluid( "font-size", map-get-deep( $_config, "author", "font-size" ) );
+    font-weight: map-get-deep( $_config, "author", "font-weight" );
+    font-style: map-get-deep( $_config, "author", "font-style" );
+
+    color: map-get-deep( $_config, "author", "color" );
+
+    &::before {
+      content: map-get-deep( $_config, "author", "before" );
+    }
+  }
+
+} // enabled

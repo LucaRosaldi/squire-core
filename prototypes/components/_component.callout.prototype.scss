@@ -1,0 +1,197 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: CALLOUT
+///-----------------------------------------------------------------------------
+///
+///  Element used for displaying important messages.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-callout: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  padding: ui-spacing(),
+
+  line-height: 1.1,
+
+  border: null,
+  background: null,
+  color: null,
+
+  border-radius: null,
+  box-shadow: null,
+
+  "auto-dismiss-delay": 8s,
+
+  "colors": (
+
+    "success": (
+      color: #357b38,
+      background-color: #dbefdc,
+      border: null,
+    ),
+    "warning": (
+      color: #b36a00,
+      background-color: #fff0d9,
+      border: null,
+    ),
+    "error": (
+      color: #9e2323,
+      background-color: #fae6e6,
+      border: null,
+    ),
+
+  ),
+
+), $c-callout );
+
+
+@if ( ui-load( "components", "callout" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: CALLOUT
+ *-----------------------------------------------------------------------------*
+ *
+ *  Element used for displaying important messages.
+ *
+ */
+
+///
+/// @block        Callout
+/// @description  Default callout (white).
+///
+%c-callout {
+  @extend %transition !optional;
+
+  position: relative;
+
+  padding: map-get( $_config, "padding" );
+
+  line-height: map-get( $_config, "line-height" );
+
+  border: map-get( $_config, "border" );
+  background: map-get( $_config, "background" );
+  color: map-get( $_config, "color" );
+
+  border-radius: map-get( $_config, "border-radius" );
+  box-shadow: map-get( $_config, "box-shadow" );
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+  ///
+  /// @element      Callout Close
+  /// @description  Close button inside the callout.
+  ///
+  %c-callout__close {
+    @extend %o-shape, %o-shape--cross !optional;
+    position: absolute;
+    top: 0; right: 0;
+    z-index: 2;
+
+    margin: 0.5em;
+    font-size: 1em;
+    text-align: center;
+
+    cursor: pointer;
+
+    opacity: 0.35;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+///
+/// @modifier     Callout Closable
+/// @description  Callout containing a button to dismiss it.
+///
+/// [1] make space on the right for the close button
+///
+%c-callout--closable {
+  padding-right: 3em;  /// [1] ///
+}
+
+///
+/// @modifier     Callout Fixed
+/// @description  Fixed full-width callout.
+///
+%c-callout--fixed {
+  position: fixed;
+  z-index: 6000;
+  width: 100%;
+  top: 0; left: 0;
+  margin: 0;
+
+  animation-duration: ui-transition( "exit", "duration" );
+  animation-timing-function: ui-transition( "exit", "easing" );
+  animation-delay: map-get-deep( $_config, "auto-dismiss-delay" );
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+
+  &[aria-hidden="true"] {
+    display: block;
+  }
+}
+
+///
+/// @modifier     Callout Top
+/// @description  Fixed full-width callout on top of the page.
+///
+%c-callout--top {
+  @extend %c-callout--fixed;
+  animation-name: slideOutUp;
+  body:not(.dom-ready) &:not([aria-hidden="true"]),
+  &[aria-hidden="true"] {
+    transform: translate( 0, -100% );
+  }
+}
+
+///
+/// @modifier     Callout Bottom
+/// @description  Fixed full-width callout on bottom of the page.
+///
+%c-callout--bottom {
+  @extend %c-callout--fixed;
+
+  top: auto; bottom: 0;
+  animation-name: slideOutDown;
+
+  .js body.dom-loading &:not([aria-hidden="true"]),
+  &[aria-hidden="true"] {
+    transform: translate( 0, 100% );
+  }
+}
+
+///
+/// @modifier     Callout Auto Dismiss
+/// @description  Fixed  full-width callout which disappears after a timeout.
+///
+%c-callout--auto-dismiss {
+  body.dom-ready &:not([aria-hidden="true"]) {
+    animation-play-state: running;
+  }
+}
+
+///
+/// @modifier     Callout [color]
+/// @description  Callout variant for [color].
+///
+@each $_name, $_props in map-get( $_config, "colors" ) {
+
+  %c-callout--#{$_name} {
+    background-color: map-get( $_props, "background-color" );
+    color: map-get( $_props, "color" );
+    border: map-get( $_props, "border" );
+  }
+
+}
+
+} // enabled

@@ -1,0 +1,71 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: HEADING
+///-----------------------------------------------------------------------------
+///
+///  Heading elements.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-heading: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  font-weight: 700,
+  font-style: null,
+  line-height: 1.1,
+  text-transform: null,
+  letter-spacing: null,
+
+  color: null,
+
+), $o-heading );
+
+
+@if ( ui-load( "objects", "heading" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: HEADING
+ *-----------------------------------------------------------------------------*
+ *
+ *  Styles for heading elements.
+ *
+ */
+
+///
+/// @block        Heading
+/// @description  Default heading.
+///
+%o-heading {
+  @extend %ff-display !optional;
+
+  $_mb: if( map-get( $_config, 'line-height' ), #{ 1 - strip-unit( map-get( $_config, 'line-height' ) ) }em, null );
+  margin-bottom: $_mb;
+
+  font-family: map-get( $_config, 'font-family' );
+  font-weight: map-get( $_config, 'font-weight' );
+  line-height: map-get( $_config, 'line-height' );
+  text-transform: map-get( $_config, 'text-transform' );
+  letter-spacing: map-get( $_config, 'letter-spacing' );
+
+  color: map-get( $_config, 'color' );
+}
+
+///
+/// @block        Heading H[1-6]
+/// @description  Heading with priority [1-6].
+///
+/// 1.
+///
+@for $i from 1 through 6 {
+  %o-heading--h#{$i} {
+    @include maybe-fluid( "font-size", ui-font-size( "h#{$i}" ) );
+  }
+}
+
+} // enabled

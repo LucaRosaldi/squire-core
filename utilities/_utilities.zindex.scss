@@ -1,0 +1,12 @@
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: Z-INDEX
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for z-index property.
+ *
+ */
+
+.u-zi-auto  { z-index: auto !important; }
+.u-zi-0     { z-index: 0 !important; }
+.u-zi-above { z-index: 5 !important; }
+.u-zi-below { z-index: -1 !important; }

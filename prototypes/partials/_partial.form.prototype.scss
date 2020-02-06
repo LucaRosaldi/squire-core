@@ -1,0 +1,237 @@
+///-----------------------------------------------------------------------------
+///  PARTIAL: FORM
+///-----------------------------------------------------------------------------
+///
+///  Elemenents which are contained in a web form.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$p-form: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  "label": (
+    margin:         ui-spacing( "xs" ) 0,
+    font-size:      0.875em,
+    font-family:    null,
+    font-weight:    700,
+    font-style:     null,
+    line-height:    1,
+    text-transform: null,
+    letter-spacing: null,
+    color:          null,
+    background:     null,
+    opacity:        null,
+  ),
+  "floating-label": (
+    font-size:      1em,
+    color:          null,
+    "color-active": null,
+  ),
+  "legend": (
+    margin:         ui-spacing( "xs" ) 0,
+    font-size:      0.75em,
+    font-family:    null,
+    font-weight:    null,
+    font-style:     null,
+    line-height:    null,
+    text-transform: uppercase,
+    letter-spacing: null,
+    background:     null,
+    color:          null,
+    opacity:        0.35,
+  ),
+  "hint": (
+    margin:         ui-spacing( "xs" ) 0,
+    font-size:      0.75em,
+    font-family:    null,
+    font-weight:    null,
+    font-style:     null,
+    line-height:    1.25,
+    text-transform: null,
+    letter-spacing: null,
+    color:          null,
+    opacity:        0.75,
+  ),
+
+), $p-form );
+
+
+@if ( ui-load( "partials", "form" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  PARTIAL: FORM
+ *-----------------------------------------------------------------------------*
+ *
+ *  Elemenents which are contained in a web form.
+ *
+ */
+
+///
+/// @placeholder  Form Row
+/// @description  Row of fields inside the form.
+///
+%p-form-row {
+  @extend %l-row !optional;
+
+  flex: 1 1 auto;
+  justify-content: stretch;
+
+  margin-left: -( ui-spacing() / 2 );
+  margin-right: -( ui-spacing() / 2 );
+
+  > * {
+    padding-left: ui-spacing() / 2;
+    padding-right: ui-spacing() / 2;
+  }
+}
+
+///
+/// @block        Form
+/// @description  Default form block.
+///
+%p-form {
+  @extend %p-form-row;
+}
+
+  ///
+  /// @element      Form Fieldset
+  /// @description  Group of fields.
+  ///
+  %p-form__fieldset {
+    @extend %p-form-row;
+  }
+
+  ///
+  /// @element      Form Field
+  /// @description  Wrapper for a single field inside a form.
+  ///
+  /// [1] always put the label before
+  ///
+  %p-form__field {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    %p-form__label {
+      order: -1;
+      flex-grow: 0;
+    }
+  }
+
+  ///
+  /// @element      Form Legend
+  /// @description  Label for a group of fields.
+  ///
+  %p-form__legend {
+    font-size: map-get-deep( $_config, "legend", "font-size" );
+    font-family: map-get-deep( $_config, "legend", "font-family" );
+    font-weight: map-get-deep( $_config, "legend", "font-weight" );
+    font-style: map-get-deep( $_config, "legend", "font-style" );
+    line-height: map-get-deep( $_config, "legend", "line-height" );
+    text-transform: map-get-deep( $_config, "legend", "text-transform" );
+    letter-spacing: map-get-deep( $_config, "legend", "letter-spacing" );
+
+    background: map-get-deep( $_config, "legend", "background" );
+    color: map-get-deep( $_config, "legend", "color" );
+
+    opacity: map-get-deep( $_config, "legend", "opacity" );
+  }
+
+  ///
+  /// @element      Form Label
+  /// @description  Label for a input in a form.
+  ///
+  %p-form__label {
+    margin: map-get-deep( $_config, "label", "margin" );
+    &:first-child { margin-top: 0; }
+
+    font-size: map-get-deep( $_config, "label", "font-size" );
+    font-family: map-get-deep( $_config, "label", "font-family" );
+    font-weight: map-get-deep( $_config, "label", "font-weight" );
+    font-style: map-get-deep( $_config, "label", "font-style" );
+    line-height: map-get-deep( $_config, "label", "line-height" );
+    text-transform: map-get-deep( $_config, "label", "text-transform" );
+    letter-spacing: map-get-deep( $_config, "label", "letter-spacing" );
+
+    background: map-get-deep( $_config, "label", "background" );
+    color: map-get-deep( $_config, "label", "color" );
+
+    opacity: map-get-deep( $_config, "label", "opacity" );
+  }
+
+  ///
+  /// @element      Form Hint
+  /// @description  Hint for a form field.
+  ///
+  %p-form__hint {
+    display: block;
+    position: relative;
+
+    margin: map-get-deep( $_config, "hint", "margin" );
+    &:last-child { margin-bottom: 0; }
+
+    font-size: map-get-deep( $_config, "hint", "font-size" );
+    font-family: map-get-deep( $_config, "hint", "font-family" );
+    font-weight: map-get-deep( $_config, "hint", "font-weight" );
+    font-style: map-get-deep( $_config, "hint", "font-style" );
+    line-height: map-get-deep( $_config, "hint", "line-height" );
+    text-transform: map-get-deep( $_config, "hint", "text-transform" );
+    letter-spacing: map-get-deep( $_config, "hint", "letter-spacing" );
+
+    color: map-get-deep( $_config, "hint", "color" );
+
+    opacity: map-get-deep( $_config, "hint", "opacity" );
+  }
+
+  ///
+  /// @modifier     Form Field Floating Label
+  /// @description  Form field with floating label.
+  ///
+  %p-form__field--floating-label {
+    $_pad_left: list-direction( ui-input( "padding" ), "left" );
+    $_pad_top: list-direction( ui-input( "padding" ), "top" );
+
+    $_fz: map-get-deep( $_config, "floating-label", "font-size" );
+
+    %c-input-text {
+      padding-top: calc(#{$_pad_top} + #{$_fz});
+    }
+
+    %p-form__label {
+      @extend %transition !optional;
+
+      position: absolute;
+      top: calc(#{$_pad_top} + #{$_fz});
+      left: calc(#{ui-spacing() / 2} + #{$_pad_left});
+
+      width: auto;
+      margin: 0;
+
+      color: map-get-deep( $_config, "floating-label", "color" );
+
+      will-change: transform, opacity;
+      transform-origin: bottom left;
+    }
+
+    %c-input-text:placeholder-shown + %p-form__label {
+      transform: translateY( 0 );
+    }
+
+    %c-input-text:focus + %p-form__label,
+    %c-input-text:not(:placeholder-shown) + %p-form__label {
+      transform: translateY( -1em ) scale( 0.75 );
+      color: map-get-deep( $_config, "floating-label", "color-active" );
+    }
+  }
+
+} // enabled

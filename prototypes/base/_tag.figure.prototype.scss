@@ -1,0 +1,91 @@
+///-----------------------------------------------------------------------------
+///  TAG: FIGURE
+///-----------------------------------------------------------------------------
+///
+///  The <figure> and <figcaption> tags.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$t-figure: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  padding: null,
+
+  background: null,
+  border: null,
+
+  "caption": (
+
+    padding: 0.75em 1em,
+
+    font-size: 0.875em,
+    font-weight: null,
+    font-style: null,
+
+    text-align: center,
+
+    background: ui-color( "light" ),
+    color: rgba( ui-color( "default" ), 0.75 ),
+
+  ),
+
+), $t-figure );
+
+
+@if ( ui-load( "tag", "figure" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  TAG: FIGURE
+ *-----------------------------------------------------------------------------*
+ *
+ *  The <figure> and <figcaption> tags.
+ *
+ */
+
+///
+/// @block        Figure
+/// @description  Element container.
+///
+%t-figure {
+  display: inline-block;
+
+  padding: map-get( $_config, "padding" );
+
+  background: map-get( $_config, "background" );
+  border: map-get( $_config, "border" );
+}
+
+  ///
+  /// @element      Figure Image
+  /// @description  Image inside the figure element.
+  ///
+  %t-figure__image {
+  }
+
+  ///
+  /// @element      Figure Caption
+  /// @description  Caption for the image inside the figure element.
+  ///
+  %t-figure__caption {
+    width: 100%;
+
+    margin-top: 0;
+    padding: map-get-deep( $_config, "caption", "padding" );
+
+    font-size: map-get-deep( $_config, "caption", "font-size" );
+    font-weight: map-get-deep( $_config, "caption", "font-weight" );
+    font-style: map-get-deep( $_config, "caption", "font-style" );
+    text-align: map-get-deep( $_config, "caption", "text-align" );
+
+    background: map-get-deep( $_config, "caption", "background" );
+    color: map-get-deep( $_config, "caption", "color" );
+  }
+
+} // enabled

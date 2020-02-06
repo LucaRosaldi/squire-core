@@ -1,0 +1,126 @@
+///-----------------------------------------------------------------------------
+///  LAYOUT: RHYTHM
+///-----------------------------------------------------------------------------
+///
+///  Set vertical rhythm between child elements.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$l-rhythm: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  "multiplier": 1.0,
+
+), $l-rhythm );
+
+
+@if ( ui-load( "layout", "rhythm" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  LAYOUT: RHYTHM
+ *-----------------------------------------------------------------------------*
+ *
+ *  Set vertical rhythm between child elements.
+ *
+ */
+
+///
+/// @block        Rhythm Tallest
+/// @description  Container with vertical rhythm (extra large unit).
+///
+%l-rhythm--xtall {
+  > * + * { margin-top: ui-spacing( "xl" ) * map-get( $_config, "multiplier" ); }
+  > p + p { margin-top: ui-spacing( "l" ) * map-get( $_config, "multiplier" ); }
+}
+
+///
+/// @block        Rhythm Tall
+/// @description  Container with vertical rhythm (large unit).
+///
+%l-rhythm--tall {
+  > * + * { margin-top: ui-spacing( "l" ) * map-get( $_config, "multiplier" ); }
+  > p + p { margin-top: ui-spacing() * map-get( $_config, "multiplier" ); }
+}
+
+///
+/// @block        Rhythm Default
+/// @description  Container with vertical rhythm (default spacing unit).
+///
+%l-rhythm, %l-rhythm--default {
+  > * + * { margin-top: ui-spacing() * map-get( $_config, "multiplier" ); }
+  > p + p { margin-top: ui-spacing( "s" ) * map-get( $_config, "multiplier" ); }
+}
+
+///
+/// @block        Rhythm Short
+/// @description  Container with vertical rhythm (small unit).
+///
+%l-rhythm--short {
+  > * + * { margin-top: ui-spacing( "s" ) * map-get( $_config, "multiplier" ); }
+  > p + p { margin-top: ui-spacing( "xs" ) * map-get( $_config, "multiplier" ); }
+}
+
+///
+/// @block        Rhythm Shortest
+/// @description  Container with vertical rhythm (extra small unit).
+///
+%l-rhythm--xshort {
+  > * + * { margin-top: ui-spacing( "xs" ) * map-get( $_config, "multiplier" ); }
+  > p + p { margin-top: ( ui-spacing( "xs" ) / 1.5 ) * map-get( $_config, "multiplier" ); }
+}
+
+///
+/// @block        Rhythm Unset
+/// @description  Unset the vertical rhythm.
+///
+%l-rhythm--unset {
+  > * + *,
+  > p + p { margin-top: 0; }
+}
+
+///
+/// @block        Rhythm [Variant] [Breakpoint]
+/// @description  Duplicate object variants for each defined breakpoint.
+///
+@each $name, $bp in ui-config( "breakpoint" ) { @if ( map-has-key( $bp, "suffix" ) ) {
+  $suffix: map-get( $bp, "suffix" );
+
+  @include bp( $name ) {
+
+    %l-rhythm--xtall--#{$suffix} {
+      > * + * { margin-top: ui-spacing( "xl" ) * map-get( $_config, "multiplier" ); }
+      > p + p { margin-top: ui-spacing( "l" ) * map-get( $_config, "multiplier" ); }
+    }
+    %l-rhythm--tall--#{$suffix} {
+      > * + * { margin-top: ui-spacing( "l" ) * map-get( $_config, "multiplier" ); }
+      > p + p { margin-top: ui-spacing() * map-get( $_config, "multiplier" ); }
+    }
+    %l-rhythm--default--#{$suffix} {
+      > * + * { margin-top: ui-spacing() * map-get( $_config, "multiplier" ); }
+      > p + p { margin-top: ui-spacing( "s" ) * map-get( $_config, "multiplier" ); }
+    }
+    %l-rhythm--short--#{$suffix} {
+      > * + * { margin-top: ui-spacing( "s" ) * map-get( $_config, "multiplier" ); }
+      > p + p { margin-top: ui-spacing( "xs" ) * map-get( $_config, "multiplier" ); }
+    }
+    %l-rhythm--xshort--#{$suffix} {
+      > * + * { margin-top: ui-spacing( "xs" ) * map-get( $_config, "multiplier" ); }
+      > p + p { margin-top: ( ui-spacing( "xs" ) / 1.5 ) * map-get( $_config, "multiplier" ); }
+    }
+    %l-rhythm--unset--#{$suffix} {
+      > * + *,
+      > p + p { margin-top: 0; }
+    }
+
+  }
+
+}}
+
+} // enabled

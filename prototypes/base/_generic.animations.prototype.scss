@@ -1,0 +1,131 @@
+///-----------------------------------------------------------------------------
+///  GENERIC: ANIMATIONS
+///-----------------------------------------------------------------------------
+///
+///  Library of basic CSS animations.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$g-animations: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+/// [1] amount of spacing for elements which have a directional fade in effect
+///
+$_config: map-merge( (
+
+  /// [1] ///
+  "fade-offset": ui-spacing()
+
+), $g-animations );
+
+
+@if ( ui-load( "generic", "animations" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  GENERIC: ANIMATIONS
+ *-----------------------------------------------------------------------------*
+ *
+ *  Library of basic CSS animations.
+ *
+ */
+
+$_fade_offset: map-get( $_config, "fade-offset" );
+
+///
+/// Fade animations.
+///
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+@keyframes fade-in-left {
+  from { opacity: 0; transform: translateX( $_fade_offset ); }
+}
+@keyframes fade-in-right {
+  from { opacity: 0; transform: translateX( -$_fade_offset ); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY( $_fade_offset ); }
+}
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY( -$_fade_offset ); }
+}
+@keyframes fade-out {
+  to { opacity: 0; }
+}
+@keyframes fade-out-left {
+  to { opacity: 0; transform: translateX( $_fade_offset ); }
+}
+@keyframes fade-out-right {
+  to { opacity: 0; transform: translateX( -$_fade_offset ); }
+}
+@keyframes fade-out-up {
+  to { opacity: 0; transform: translateY( $_fade_offset ); }
+}
+@keyframes fade-out-down {
+  to { opacity: 0; transform: translateY( -$_fade_offset ); }
+}
+
+///
+/// Slide animations.
+///
+@keyframes slide-in-left {
+  from { transform: translateX( calc(100vw - 100%) ); }
+}
+@keyframes slide-in-right {
+  from { transform: translateX( calc(-100vw + 100%) ); }
+}
+@keyframes slide-in-up {
+  from { transform: translateY( calc(100vh - 100%) ); }
+}
+@keyframes slide-in-down {
+  from { transform: translateY( calc(-100vh + 100%) ); }
+}
+@keyframes slide-out-left {
+  to { transform: translateX( -100% ); }
+}
+@keyframes slide-out-right {
+  to { transform: translateX( 100% ); }
+}
+@keyframes slide-out-up {
+  to { transform: translateY( -100% ); }
+}
+@keyframes slide-out-down {
+  to { transform: translateY( 100% ); }
+}
+
+///
+/// Scale animations.
+///
+@keyframes scale-in {
+  from { transform: scale( 0 ); }
+}
+@keyframes scale-in-fade {
+  from { opacity: 0; transform: scale( 0 ); }
+}
+@keyframes scale-in-bounce {
+  from { transform: scale( 0 ); opacity: 0; }
+  90% { transform: scale( 1.15 ); }
+}
+@keyframes scale-out {
+  to { transform: scale( 0 ); }
+}
+@keyframes scale-out-fade {
+  to { opacity: 0; transform: scale( 0 ); }
+}
+
+///
+/// Spin animations.
+///
+@keyframes spin {
+  from { transform: rotate( -360deg ); }
+}
+@keyframes revolve {
+  from { transform: rotateY( -360deg ); }
+}
+
+} // enabled

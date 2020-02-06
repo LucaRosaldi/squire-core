@@ -1,0 +1,126 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: INPUT TEXT
+///-----------------------------------------------------------------------------
+///
+///  Customized input which contains text.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$p-input-text: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  padding: ui-input( "padding" ),
+
+  font-family: map-get( ui-input( "default" ), "font-family" ),
+  font-weight: map-get( ui-input( "default" ), "font-weight" ),
+  font-style: map-get( ui-input( "default" ), "font-style" ),
+
+  border-radius: ui-input( "border-radius" ),
+
+  "placeholder-color": rgba( map-get( ui-input( "default" ), "color" ), 0.45 ),
+  "caret-color": map-get( ui-input( "focus" ), "color" ),
+
+  "default": (
+    border: map-get( ui-input( "default" ), "border" ),
+    background: map-get( ui-input( "default" ), "background" ),
+    color: map-get( ui-input( "default" ), "color" ),
+    box-shadow: map-get( ui-input( "default" ), "box-shadow" ),
+  ),
+  "hover": (
+    border: map-get( ui-input( "hover" ), "border" ),
+    background: map-get( ui-input( "hover" ), "background" ),
+    color: map-get( ui-input( "hover" ), "color" ),
+    box-shadow: map-get( ui-input( "hover" ), "box-shadow" ),
+  ),
+  "focus": (
+    border: map-get( ui-input( "focus" ), "border" ),
+    background: map-get( ui-input( "focus" ), "background" ),
+    color: map-get( ui-input( "focus" ), "color" ),
+    box-shadow: map-get( ui-input( "focus" ), "box-shadow" ),
+  ),
+  "filled": (
+    border: map-get( ui-input( "filled" ), "border" ),
+    background: map-get( ui-input( "filled" ), "background" ),
+    color: map-get( ui-input( "filled" ), "color" ),
+    box-shadow: map-get( ui-input( "filled" ), "box-shadow" ),
+  ),
+
+), $p-input-text );
+
+
+@if ( ui-load( "components", "input-text" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: INPUT TEXT
+ *-----------------------------------------------------------------------------*
+ *
+ *  Customized input which contains text.
+ *
+ */
+
+///
+/// @block        Input Text
+/// @description  Default text input.
+///
+/// [1] style for when input is filled, requires the placeholder attribute
+///
+%c-input-text {
+  @extend %transition !optional;
+
+  background-clip: padding-box;
+  appearance: none;
+
+  width: 100%;
+  padding: map-get( $_config, "padding" );
+
+  font-family: map-get( $_config, "font-family" );
+  font-weight: map-get( $_config, "font-weight" );
+  font-style: map-get( $_config, "font-style" );
+
+  border-radius: map-get( $_config, "border-radius" );
+  outline: none;
+
+  border: map-get-deep( $_config, "default", "border" );
+  background: map-get-deep( $_config, "default", "background" );
+  color: map-get-deep( $_config, "default", "color" );
+  box-shadow: map-get-deep( $_config, "default", "box-shadow" );
+
+  &:hover {
+    border: map-get-deep( $_config, "hover", "border" );
+    background: map-get-deep( $_config, "hover", "background" );
+    color: map-get-deep( $_config, "hover", "color" );
+    box-shadow: map-get-deep( $_config, "hover", "box-shadow" );
+  }
+
+  &:focus {
+    border: map-get-deep( $_config, "focus", "border" );
+    background: map-get-deep( $_config, "focus", "background" );
+    color: map-get-deep( $_config, "focus", "color" );
+    box-shadow: map-get-deep( $_config, "focus", "box-shadow" );
+    caret-color: map-get( $_config, "caret-color" );
+  }
+
+  /// [1] ///
+  &[placeholder]:not(:placeholder-shown) {
+    border: map-get-deep( $_config, "filled", "border" );
+    background: map-get-deep( $_config, "filled", "background" );
+    color: map-get-deep( $_config, "filled", "color" );
+    box-shadow: map-get-deep( $_config, "filled", "box-shadow" );
+  }
+
+  &::placeholder {
+    color: map-get( $_config, "placeholder-color" );
+  }
+  &[disabled], &[disabled]:hover {
+    opacity: 0.65;
+  }
+}
+
+} // enabled

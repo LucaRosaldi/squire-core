@@ -1,0 +1,71 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: LISTS
+///-----------------------------------------------------------------------------
+///
+///  Functions for manipulating lists.
+///
+
+
+///
+/// @function     List Direction
+/// @description  Get a directional value from a list property values.
+///
+/// @param  {List}   $list
+/// @param  {String} $direction Direction of value (top - bottom - left - right)
+/// @param  {Number} $fallback  Value to return if direction was not found
+/// @return {Number}
+///
+@function list-direction( $list, $direction, $fallback: null ) {
+  @if ( type-of( ui-input( "padding" ) ) != "list" or length( $list ) == 1 ) {
+    $list: if( $fallback, $fallback, $list );
+  }
+  @elseif ( $direction == "top" or $direction == "bottom" ) {
+    $list: if( length( $list ) < 3, nth( $list, 1 ), nth( $list, 3 ) );
+  }
+  @elseif ( $direction == "left" or $direction == "right" ) {
+    $list: if( length( $list ) < 4, nth( $list, 2 ), nth( $list, 4 ) );
+  }
+
+  @return $list;
+}
+
+///
+/// @function     List Prepend
+/// @description  Add a new item to the beginning of a list.
+///
+/// @param  {List}   $list
+/// @param  {Number} $value
+/// @return {List}   A list with $value at the beginning, followed by the other items
+///
+@function list-prepend( $list, $value ) {
+    $result: append( (), $value, list-separator( $list ) );
+
+    @if length( $list ) > 0 {
+        @for $i from 1 through length( $list ) {
+            $result: append( $result, nth( $list, $i ), list-separator( $list ) );
+        }
+    }
+
+    @return $result;
+}
+
+///
+/// @function     List Slice
+/// @description  Extract a subset from the given list.
+///
+/// @param  {List}   $list
+/// @param  {Number} $start [1]             - Indices before this value will be discarded
+/// @param  {Number} $end   [length($list)] - Indices starting after this value will be discarded
+/// @return {List}   A slice of the list
+///
+@function list-slice( $list, $start: 1, $end: length( $list ) ) {
+    $result: ();
+
+    @for $i from $start through $end {
+      @if $i != 0 {
+        $result: append( $result, nth( $list, $i ), list-separator( $list ) );
+      }
+    }
+
+    @return $result;
+}

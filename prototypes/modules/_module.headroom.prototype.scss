@@ -1,0 +1,93 @@
+///-----------------------------------------------------------------------------
+///  MODULE: HEADROOM
+///-----------------------------------------------------------------------------
+///
+///  Sticky header which slides out of the viewport when scrolling down and
+///  slides back in when scrolling up.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$m-headroom: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  "default": (
+    padding: null,
+    background: ui-color( "default" ),
+    color: null,
+  ),
+
+  "scrolled": (
+    padding: null,
+    background: null,
+    color: null,
+  ),
+
+  "hidden": (
+    padding: null,
+    background: null,
+    color: null,
+  ),
+
+), $m-headroom );
+
+
+@if ( ui-load( "modules", "headroom" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  MODULE: HEADROOM
+ *-----------------------------------------------------------------------------*
+ *
+ *  Sticky header which slides out of the viewport when scrolling down and
+ *  slides back in when scrolling up.
+ *
+ */
+
+///
+/// @block        Headroom
+/// @description  Default Headroom block.
+///
+%m-headroom {
+  @extend %transition--enter !optional;
+
+  position: fixed;
+  top: 0; left: 0;
+
+  padding: map-get-deep( $_config, "default", "padding" );
+  background: map-get-deep( $_config, "default", "background" );
+  color: map-get-deep( $_config, "default", "color" );
+
+  will-change: transform;
+}
+
+///
+/// @block        Headroom Scrolled
+/// @description  Headroom when page has scrolled down.
+///
+%m-headroom--scrolled {
+  padding: map-get-deep( $_config, "scrolled", "padding" );
+  background: map-get-deep( $_config, "scrolled", "background" );
+  color: map-get-deep( $_config, "scrolled", "color" );
+}
+
+///
+/// @block        Headroom Hidden
+/// @description  Headroom in hidden state.
+///
+%m-headroom--hidden {
+  @extend %transition--exit !optional;
+
+  padding: map-get-deep( $_config, "hidden", "padding" );
+  background: map-get-deep( $_config, "hidden", "background" );
+  color: map-get-deep( $_config, "hidden", "color" );
+
+  transform: translateY( -100% );
+}
+
+} // enabled

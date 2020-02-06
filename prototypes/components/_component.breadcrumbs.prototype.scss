@@ -1,0 +1,55 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: BREADCRUMBS
+///-----------------------------------------------------------------------------
+///
+///  List of links which show the path from the home page.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-breadcrumbs: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  "separator": "\002F",
+
+), $c-breadcrumbs );
+
+
+@if ( ui-load( "components", "breadcrumbs" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: BREADCRUMBS
+ *-----------------------------------------------------------------------------*
+ *
+ *  List of links which show the path from the home page.
+ *
+ */
+
+///
+/// @block        Breadcrumbs
+/// @description  Default breadcrumbs.
+///
+%c-breadcrumbs {
+  position: relative;
+
+  li {
+    display: inline-block;
+  }
+
+  li a {
+    @extend %o-link !optional;
+  }
+
+  li:not(:last-child)::after {
+    content: map-get( $_config, "separator" );
+    padding: 0 0.5em;
+  }
+}
+
+} // enabled

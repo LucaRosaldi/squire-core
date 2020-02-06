@@ -1,0 +1,98 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: TEXT
+///-----------------------------------------------------------------------------
+///
+///  Container for textual content.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-text: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  max-width: 70ch,
+
+  "include_headings": true,
+  "include_tables":   true,
+
+), $c-text );
+
+
+@if ( ui-load( "components", "text" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: TEXT
+ *-----------------------------------------------------------------------------*
+ *
+ *  Container for textual content.
+ *
+ */
+
+///
+/// @block        Text
+/// @description  Default text block.
+///
+/// [1] set maximum length for text
+/// [2] prevent long words from overflowing the container
+/// [3] automatically extend heading tags to heading objects
+/// [4] automatically extend link tags to link objects
+/// [5] automatically extend list tags to list objects
+/// [6] automatically extend table tags to table objects
+///
+%c-text {
+  @extend %l-column, %l-row--stretch !optional;
+
+  /// [1] ///
+  max-width: map-get( $_config, max-width );
+
+  /// [2] ///
+  p {
+    word-break: break-all;
+  }
+
+  @if ( map-get( $_config, "include_headings" ) == true ) {
+
+  /// [3] ///
+  h1, h2, h3, h4, h5, h6 {
+    @extend %o-heading !optional;
+  }
+  h1 { @extend %o-heading--h1 !optional; }
+  h2 { @extend %o-heading--h2 !optional; }
+  h3 { @extend %o-heading--h3 !optional; }
+  h4 { @extend %o-heading--h4 !optional; }
+  h5 { @extend %o-heading--h5 !optional; }
+  h6 { @extend %o-heading--h6 !optional; }
+
+  } // include_headings
+
+  /// [4] ///
+  a {
+    @extend %o-link !optional;
+  }
+
+  /// [5] ///
+  ul {
+    @extend %o-list--disc !optional;
+  }
+  ol {
+    @extend %o-list--decimal !optional;
+  }
+
+  @if ( map-get( $_config, "include_tables" ) == true ) {
+
+  /// [6] ///
+  table {
+    @extend %o-table !optional;
+  }
+
+  } // include_tables
+
+}
+
+} // enabled

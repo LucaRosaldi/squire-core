@@ -1,0 +1,60 @@
+///-----------------------------------------------------------------------------
+///  LAYOUT: CONTAINER
+///-----------------------------------------------------------------------------
+///
+///  Container which wraps and centers content in the parent.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$l-container: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  "default": 1300px,
+
+  "xxlarge": 1140px,
+  "xlarge":  900px,
+  "large":   780px,
+  "medium":  660px,
+  "small":   540px,
+  "xsmall":  420px,
+  "xxsmall": 300px,
+
+), $l-container );
+
+
+@if ( ui-load( "layout", "container" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  LAYOUT: CONTAINER
+ *-----------------------------------------------------------------------------*
+ *
+ *  Container which wraps and centers content in the parent.
+ *
+ */
+
+///
+/// @block        Container
+/// @description  Default container component.
+///
+%l-container {
+  max-width: map-get-deep( $_config, "default" );
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@each $name, $size in $_config {
+  ///
+  /// @modifier     Container [Size]
+  /// @description  Container of different size.
+  ///
+  %l-container--#{$name} { max-width: $size; }
+}
+
+}

@@ -1,0 +1,76 @@
+///-----------------------------------------------------------------------------
+///  PARTIAL: LOADER
+///-----------------------------------------------------------------------------
+///
+///  Screen displayed while the site is loading.
+///
+
+///
+/// @var    {Map}   Object settings.
+/// @access public
+///
+$p-loader: () !default;
+
+///
+/// @var    {Map}   Object configuration.
+/// @access private
+///
+$_config: map-extend( (
+
+  background:                 ui-color( "light" ),
+  transition-duration:        800ms,
+  transition-timing-function: linear,
+
+), $p-loader );
+
+
+@if ( ui-load( "partials", "loader" ) == true ) {
+/*---------------------------------------------------------------------------*
+ *  PARTIAL: LOADER
+ *---------------------------------------------------------------------------*
+ *
+ *  Screen displayed while the site is loading.
+ *
+ */
+
+///
+/// @block        Loader
+/// @description  Default loader block.
+///
+/// [1] hide loading screen when javascript is disabled
+///
+%p-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  z-index: ui-layer( "loader" );
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+
+  text-align: center;
+
+  background-color: map-get( $_config, "background" );
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all map-get( $_config, "transition-duration" );
+
+  /// [1] ///
+  html:not(.js) & {
+    display: none;
+  }
+}
+
+///
+/// @modifier     Loader Loading
+/// @description  Loader in loading state (visible).
+///
+%p-loader--loading {
+  opacity: 1;
+  visibility: visible;
+  transition: all map-get( $_config, "transition-duration" ), visibility 0s;
+}
+
+}  // enabled

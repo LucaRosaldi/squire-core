@@ -1,0 +1,60 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: MAPS
+///-----------------------------------------------------------------------------
+///
+///  Functions for manipulating maps.
+///
+
+///
+/// map-get() for nested values.
+///
+/// @param  {Map}     $map  Map
+/// @param  {Arglist} $keys Chained keys
+/// @return {*}
+///
+@function map-get-deep( $map, $keys... ) {
+  $length: length( $keys );
+  $get: map-get( $map, nth( $keys, 1 ) );
+
+  @if $length == 1 {
+    @return $get;
+  }
+
+  @for $i from 2 through $length {
+    $get: map-get( $get, nth( $keys, $i ) );
+  }
+
+  @return $get;
+}
+
+///
+/// Recursively merge a map with other maps.
+///
+/// @param  {Map} $map1
+/// @param  {Map} $map2
+/// @return {Map}
+///
+@function map-extend( $map1, $map2 ) {
+  @if (
+    ( type-of( $map1 ) == "map" or type-of( $map1 ) == "list" ) and
+    ( type-of( $map2 ) == "map" or type-of( $map2 ) == "list" )
+  ) {
+    $result: $map1;
+    @each $key, $value in $map2 {
+      @if (
+        type-of( map-get( $result, $key ) ) == "map" and
+        type-of( $value ) == "map"
+      ) {
+        $result: map-merge( $result, ( $key: map-extend( map-get( $result, $key ), $value ) ) );
+      }
+      @else {
+        $result: map-merge( $result, ( $key: $value ) );
+      }
+    }
+    @return $result;
+  }
+  @else {
+    @warn 'map-extend() expects it\'s parameters to be map types!';
+    @return null;
+  }
+}

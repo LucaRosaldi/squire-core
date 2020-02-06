@@ -1,0 +1,43 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: UPPERSPACED
+///-----------------------------------------------------------------------------
+///
+///  All-caps text with increased spacing between letters.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-upperspaced: () !default;
+
+///
+/// @var    {Map}   Object configuration.
+/// @access private
+///
+$_config: map-extend( (
+
+  letter-spacing: 0.0625em,
+
+), $o-upperspaced );
+
+
+@if ( ui-load( "objects", "upperspaced" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: UPPERSPACED
+ *-----------------------------------------------------------------------------*
+ *
+ *  All-caps text with increased spacing between letters.
+ *
+ */
+
+///
+/// @block        Upperspaced
+/// @description  Default upperspaced object.
+///
+%o-upperspaced {
+  text-transform: uppercase;
+  letter-spacing: map-get( $_config, "letter-spacing" );
+}
+
+} // enabled

@@ -1,0 +1,73 @@
+///-----------------------------------------------------------------------------
+///  SQUIRE PROTOTYPES
+///-----------------------------------------------------------------------------
+///
+///  Load all the available prototypes included the framework.
+///
+
+// Core
+@import 'core';
+
+/// Base
+// @import 'prototypes/base/generic.animations.prototype';
+@import 'prototypes/base/generic.focus.prototype';
+@import 'prototypes/base/generic.font-families.prototype';
+@import 'prototypes/base/generic.reset.prototype';
+@import 'prototypes/base/generic.text-selection.prototype';
+@import 'prototypes/base/generic.transitions.prototype';
+@import 'prototypes/base/tag.blockquote.prototype';
+@import 'prototypes/base/tag.code.prototype';
+@import 'prototypes/base/tag.figure.prototype';
+@import 'prototypes/base/tag.hr.prototype';
+@import 'prototypes/base/tag.html.prototype';
+
+/// Layout
+@import 'prototypes/layout/layout.container.prototype';
+@import 'prototypes/layout/layout.flex.prototype';
+@import 'prototypes/layout/layout.grid.prototype';
+@import 'prototypes/layout/layout.rhythm.prototype';
+
+/// Objects
+@import 'prototypes/objects/object.badge.prototype';
+@import 'prototypes/objects/object.button.prototype';
+@import 'prototypes/objects/object.fill-parent.prototype';
+@import 'prototypes/objects/object.fluid-pad.prototype';
+@import 'prototypes/objects/object.heading.prototype';
+@import 'prototypes/objects/object.icon.prototype';
+@import 'prototypes/objects/object.link.prototype';
+@import 'prototypes/objects/object.list.prototype';
+@import 'prototypes/objects/object.proportional.prototype';
+@import 'prototypes/objects/object.shadow.prototype';
+@import 'prototypes/objects/object.table.prototype';
+@import 'prototypes/objects/object.text-separator.prototype';
+@import 'prototypes/objects/object.upperspaced.prototype';
+
+/// Components
+@import 'prototypes/components/component.breadcrumbs.prototype';
+@import 'prototypes/components/component.callout.prototype';
+@import 'prototypes/components/component.card.prototype';
+@import 'prototypes/components/component.circlet.prototype';
+@import 'prototypes/components/component.input-control.prototype';
+@import 'prototypes/components/component.input-file.prototype';
+@import 'prototypes/components/component.input-select.prototype';
+@import 'prototypes/components/component.input-submit.prototype';
+@import 'prototypes/components/component.input-text.prototype';
+@import 'prototypes/components/component.menu.prototype';
+@import 'prototypes/components/component.pagination.prototype';
+@import 'prototypes/components/component.popup.prototype';
+@import 'prototypes/components/component.tabs.prototype';
+@import 'prototypes/components/component.text.prototype';
+
+/// Partials
+@import 'prototypes/partials/partial.card-flipper.prototype';
+@import 'prototypes/partials/partial.form.prototype';
+@import 'prototypes/partials/partial.loader.prototype';
+@import 'prototypes/partials/partial.section.prototype';
+@import 'prototypes/partials/partial.site.prototype';
+
+/// Modules
+@import 'prototypes/modules/module.button-stateful.prototype';
+@import 'prototypes/modules/module.carousel.prototype';
+@import 'prototypes/modules/module.headroom.prototype';
+@import 'prototypes/modules/module.password-mask.prototype';
+@import 'prototypes/modules/module.scrollstep.prototype';

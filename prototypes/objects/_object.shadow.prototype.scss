@@ -1,0 +1,136 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: SHADOW
+///-----------------------------------------------------------------------------
+///
+///  Elements which cast a outer shadow.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-shadow: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+///
+$_config: map-merge( (
+
+  "color": rgba( $black, 0.35 ),
+
+), $o-shadow );
+
+
+@if ( ui-load( "objects", "shadow" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: SHADOW
+ *-----------------------------------------------------------------------------*
+ *
+ *  Elements which cast a outer shadow.
+ *
+ */
+
+$_c: map-get( $_config, "color" );
+$_r: red( $_c );
+$_g: green( $_c );
+$_b: blue( $_c );
+$_a: alpha( $_c );
+
+///
+/// @block        Shadow
+/// @description  Default Shadow Block.
+///
+%o-shadow {
+  position: relative;
+  z-index: 1;
+
+  &::after {
+    @extend %transition !optional;
+
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+
+    box-shadow: material-shadow( 1, rgb( $_r, $_g, $_b ), $_a );
+    border-radius: inherit;
+
+    opacity: 1;
+  }
+}
+
+///
+/// @modifier     Shadow [depth]
+/// @description  Box shadow, depth value [depth].
+///
+%o-shadow--dp0 {
+  &::after { box-shadow: 0 0 0 rgba( black, 0 ); }
+}
+%o-shadow--dp1 {
+  &::after { box-shadow: material-shadow( 1, rgb( $_r, $_g, $_b ), $_a ); }
+}
+%o-shadow--dp2 {
+  &::after { box-shadow: material-shadow( 2, rgb( $_r, $_g, $_b ), $_a ); }
+}
+%o-shadow--dp3 {
+  &::after { box-shadow: material-shadow( 3, rgb( $_r, $_g, $_b ), $_a ); }
+}
+%o-shadow--dp4 {
+  &::after { box-shadow: material-shadow( 4, rgb( $_r, $_g, $_b ), $_a ); }
+}
+%o-shadow--dp5 {
+  &::after { box-shadow: material-shadow( 5, rgb( $_r, $_g, $_b ), $_a ); }
+}
+
+///
+/// @modifier     Shadow Hover
+/// @description  Fade in the shadow on hover.
+///
+%o-shadow--hover {
+  &:not(:hover)::after { opacity: 0; }
+}
+
+///
+/// @block        Drop Shadow
+/// @description  Default Drop Shadow block.
+///
+%o-dropshadow {
+  filter: material-shadow-filter( 1, rgb( $_r, $_g, $_b ), $_a );
+}
+
+///
+/// @modifier     Drop Shadow [depth]
+/// @description  Drop shadow, depth value [depth].
+///
+%o-dropshadow--dp0 {
+  filter: none;
+}
+%o-dropshadow--dp1 {
+  filter: material-shadow-filter( 1, rgb( $_r, $_g, $_b ), $_a );
+}
+%o-dropshadow--dp2 {
+  filter: material-shadow-filter( 2, rgb( $_r, $_g, $_b ), $_a );
+}
+%o-dropshadow--dp3 {
+  filter: material-shadow-filter( 3, rgb( $_r, $_g, $_b ), $_a );
+}
+%o-dropshadow--dp4 {
+  filter: material-shadow-filter( 4, rgb( $_r, $_g, $_b ), $_a );
+}
+%o-dropshadow--dp5 {
+  filter: material-shadow-filter( 5, rgb( $_r, $_g, $_b ), $_a );
+}
+
+///
+/// @modifier     Drop Shadow Hover
+/// @description  Fade in the shadow on hover.
+///
+%o-dropshadow--hover {
+  @extend %transition !optional;
+  &:not(:hover) { filter: none; }
+}
+
+} // enabled

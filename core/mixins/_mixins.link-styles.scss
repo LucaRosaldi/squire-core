@@ -1,0 +1,117 @@
+///-----------------------------------------------------------------------------
+///  MIXINS: LINK STYLES
+///-----------------------------------------------------------------------------
+///
+///  Mixins giving links various different styles.
+///
+
+///
+/// @mixin        Link Medium
+/// @description  Link underlined with the same technique used in Medium.com.
+///
+@mixin link-style-medium(
+  $line-color: currentColor,
+  $line-color-hover: null
+) {
+  text-decoration: none;
+
+  border: 0;
+  background-image: linear-gradient( to bottom,
+    $line-color 50%,
+    transparent 50%
+  );
+  background-repeat: repeat-x;
+  background-size: 2px .1em;
+  background-position: 0 1.07em;
+
+  @if ( $line-color-hover ) {
+    &:hover {
+      background-image: linear-gradient( to bottom,
+        $line-color-hover 50%,
+        transparent 50%
+      );
+    }
+  }
+}
+
+///
+/// @mixin        Link Style Underscore
+/// @description  Link which displays a growing line on bottom when hovered.
+///
+@mixin link-style-underscore(
+  $line-thickness: 1px,
+  $line-origin: center,
+  $line-color: currentColor
+) {
+  @extend %transition !optional;
+
+  text-decoration: none;
+  border: 0;
+
+  background-image: linear-gradient( $line-color, $line-color );
+  background-repeat: no-repeat;
+  background-size: 0% $line-thickness;
+
+  background-position: 0% 100%;
+  @if ( unquote( $line-origin ) == center ) {
+    background-position: 50% 100%;
+  }
+  @if ( unquote( $line-origin ) == right ) {
+    background-position: 100% 100%;
+  }
+
+  &:hover {
+    background-size: 100% $line-thickness;
+  }
+
+}
+
+///
+/// @mixin        Link Style Fill
+/// @description  Link which fills with a background color when hovered.
+///
+@mixin link-style-fill(
+  $fill-background: ui-color( "primary" ),
+  $fill-color: $white,
+  $fill-origin: "bottom",
+) {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  vertical-align: bottom;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+
+    background: $fill-background;
+    color: $fill-color;
+
+    will-change: transform;
+    transition: transform 300ms ease;
+
+    @if ( $fill-origin == "bottom" ) {
+      transform: translate( 0, 100% );
+    }
+    @elseif ( $fill-origin == "top" ) {
+      transform: translate( 0, -100% );
+    }
+    @elseif ( $fill-origin == "left" ) {
+      transform: translate( -100%, 0 );
+    }
+    @elseif ( $fill-origin == "right" ) {
+      transform: translate( 100%, 0 );
+    }
+    transform-origin: $fill-origin;
+  }
+
+  &:hover:before {
+    transform: translate( 0 );
+  }
+
+}

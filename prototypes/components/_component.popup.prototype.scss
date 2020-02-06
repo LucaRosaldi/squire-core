@@ -1,0 +1,222 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: POPUP
+///-----------------------------------------------------------------------------
+///
+///  Element which is only displayed when another element is hovered or clicked.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-popup: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  "distance": 1rem,
+  "arrow-size": 0.75rem,
+  "fade-offset": ui-spacing(),
+
+  min-width: 10rem,
+  background: ui-color( "light" ),
+  color: ui-color( "default" ),
+
+  border-radius: null,
+
+), $c-popup );
+
+
+@if ( ui-load( "components", "popup" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: POPUP
+ *-----------------------------------------------------------------------------*
+ *
+ *  Element which is only displayed when another element is hovered or clicked.
+ *
+ */
+
+///
+/// @block        Popup Container
+/// @description  The parent element containing the popup.
+///
+%c-popup-wrapper {
+  position: relative;
+  overflow: visible;
+}
+
+///
+/// @block        Popup
+/// @description  Default popup wrapper.
+///
+%c-popup {
+  @extend %transition--exit !optional;
+
+  position: absolute;
+  z-index: 1000;
+
+  padding: map-get( $_config, "distance" );
+
+  visibility: hidden;
+  opacity: 0;
+}
+
+  ///
+  /// @element      Popup Content
+  /// @description  The wrapper for the content inside the popup.
+  ///
+  /// [1] fix overflowing border-radius in Chrome
+  /// [2] the popup arrow
+  ///
+  %c-popup__content {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    min-width: map-get( $_config, "min-width" );
+
+    background: map-get( $_config, "background" );
+    color: map-get( $_config, "color" );
+
+    @if ( map-get( $_config, "border-radius" ) ) {
+      border-radius: map-get( $_config, "border-radius" );
+
+      > :first-child {
+        border-top-left-radius: map-get( $_config, "border-radius" );
+        border-top-right-radius: map-get( $_config, "border-radius" );
+      }
+      > :last-child {
+        border-bottom-left-radius: map-get( $_config, "border-radius" );
+        border-bottom-right-radius: map-get( $_config, "border-radius" );
+      }
+    }
+
+    /// [2] ///
+    &::before {
+      content: "";
+      position: absolute;
+      color: map-get( $_config, "background" );
+      border: map-get( $_config, "arrow-size" ) solid transparent;
+    }
+  }
+
+///
+/// @modifier     Popup Bottom
+/// @description  Popup which appears on the bottom of parent element.
+///
+%c-popup--bottom {
+  top: 100%; bottom: auto;
+  left: 50%; right: auto;
+  transform: translateX( -50% );
+
+  %c-popup__content {
+    transform: translateY( map-get( $_config, "fade-offset" ) );
+    &::before {
+      top: auto; bottom: 100%;
+      left: 50%; right: auto;
+      margin: 0;
+      margin-left: -( map-get( $_config, "arrow-size" ) );
+      border-color: transparent;
+      border-bottom-color: map-get( $_config, "background" );
+    }
+  }
+}
+
+///
+/// @modifier     Popup Top
+/// @description  Popup which appears on the top of parent element.
+///
+%c-popup--top {
+  top: auto; bottom: 100%;
+  left: 50%; right: auto;
+  transform: translateX( -50% );
+
+  %c-popup__content {
+    transform: translateY( -( map-get( $_config, "fade-offset" ) ) );
+    &::before {
+      top: 100%; bottom: auto;
+      left: 50%; right: auto;
+      margin: 0;
+      margin-left: -( map-get( $_config, "arrow-size" ) );
+      border-color: transparent;
+      border-top-color: map-get( $_config, "background" );
+    }
+  }
+}
+
+///
+/// @modifier     Popup Left
+/// @description  Popup which appears on the top of parent element.
+///
+%c-popup--left {
+  top: 50%; right: auto;
+  left: auto; right: 100%;
+  transform: translateY( -50% );
+
+  %c-popup__content {
+    transform: translateX( -( map-get( $_config, "fade-offset" ) ) );
+    &::before {
+      top: 50%; bottom: auto;
+      left: 100%; right: auto;
+      margin: 0;
+      margin-top: -( map-get( $_config, "arrow-size" ) );
+      border-color: transparent;
+      border-left-color: map-get( $_config, "background" );
+    }
+  }
+}
+
+///
+/// @modifier     Popup Right
+/// @description  Popup which appears on the top of parent element.
+///
+%c-popup--right {
+  top: 50%; bottom: auto;
+  left: 100%; right: auto;
+  transform: translateY( 50% );
+
+  %c-popup__content {
+    transform: translateX( map-get( $_config, "fade-offset" ) );
+    &::before {
+      top: 50%; bottom: auto;
+      left: auto; right: 100%;
+      margin: 0;
+      margin-top: -( map-get( $_config, "arrow-size" ) );
+      border-color: transparent;
+      border-right-color: map-get( $_config, "background" );
+    }
+  }
+}
+
+///
+/// @modifier     Popup Visible
+/// @description  Popup in visible state.
+///
+%c-popup--visible {
+  @extend %transition--enter !optional;
+
+  visibility: visible;
+  opacity: 1;
+
+  %c-popup__content {
+    transform: translateY( 0 );
+  }
+}
+
+///
+/// @modifier     Popup No Arrow
+/// @description  Hide the popup arrow.
+///
+%c-popup--no-arrow {
+  %c-popup__content::before {
+    opacity: 0;
+  }
+}
+
+} // enabled

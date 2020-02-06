@@ -1,0 +1,95 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: MODULAR SCALES
+///-----------------------------------------------------------------------------
+///
+///  Get font-size values based on a modular scale.
+///
+
+///
+/// @var {Number} Common scales.
+/// @access public
+///
+$scale-golden:           1.618;
+$scale-minor-second:     1.067;
+$scale-major-second:     1.125;
+$scale-minor-third:      1.2;
+$scale-major-third:      1.25;
+$scale-perfect-fourth:   1.333;
+$scale-augmented-fourth: 1.414;
+$scale-perfect-fifth:    1.5;
+$scale-minor-sixth:      1.6;
+$scale-major-sixth:      1.667;
+$scale-minor-seventh:    1.778;
+$scale-major-seventh:    1.875;
+$scale-octave:           2;
+$scale-major-tenth:      2.5;
+$scale-major-eleventh:   2.667;
+$scale-major-twelfth:    3;
+$scale-double-octave:    4;
+
+///
+/// Get value based on a modular scale.
+///
+/// @param  {int} $value     Initial value
+/// @param  {int} $increment Incremental factor
+/// @param  {int} $ratio     Ratio of modular scale
+/// @return {int}            Value incremented by the chosen ratio
+///
+@function modular-scale( $value, $increment, $ratio ) {
+	$v1: nth( $value, 1 );
+	$v2: nth( $value, length( $value ) );
+	$value: $v1;
+
+	// scale $v2 to just above $v1
+	@while $v2 > $v1 {
+		$v2: ( $v2 / $ratio ); // will be off-by-1
+	}
+	@while $v2 < $v1 {
+		$v2: ( $v2 * $ratio ); // will fix off-by-1
+	}
+
+	// check AFTER scaling $v2 to prevent double-counting corner-case
+	$double-stranded: $v2 > $v1;
+
+	@if $increment > 0 {
+		@for $i from 1 through $increment {
+			@if $double-stranded and ( $v1 * $ratio ) > $v2 {
+				$value: $v2;
+				$v2: ( $v2 * $ratio );
+			} @else {
+				$v1: ( $v1 * $ratio );
+				$value: $v1;
+			}
+		}
+	}
+
+	@if $increment < 0 {
+		// adjust $v2 to just below $v1
+		@if $double-stranded {
+			$v2: ( $v2 / $ratio );
+		}
+
+		@for $i from $increment through -1 {
+			@if $double-stranded and ( $v1 / $ratio ) < $v2 {
+				$value: $v2;
+				$v2: ( $v2 / $ratio );
+			} @else {
+				$v1: ( $v1 / $ratio );
+				$value: $v1;
+			}
+		}
+	}
+
+	@return $value;
+}
+
+///
+/// Get value based on Golden Ratio scale.
+///
+/// @param  {int} $value     Initial value
+/// @param  {int} $increment Incremental factor
+/// @return {int}
+///
+@function golden-ratio( $value, $increment ) {
+  @return modular-scale( $value, $increment, $scale-golden );
+}

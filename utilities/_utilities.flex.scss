@@ -1,0 +1,93 @@
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: FLEX
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for flex properties.
+ *
+ */
+
+.u-jc-fs      { justify-content: flex-start !important; }
+.u-jc-fe      { justify-content: flex-end !important; }
+.u-jc-sb      { justify-content: space-between !important; }
+.u-jc-sa      { justify-content: space-around !important; }
+.u-jc-c       { justify-content: center !important; }
+
+.u-ai-s       { align-items: stretch !important; }
+.u-ai-fs      { align-items: flex-start !important; }
+.u-ai-fe      { align-items: flex-end !important; }
+.u-ai-c       { align-items: center !important; }
+
+.u-as-s       { align-self: stretch !important; }
+.u-as-fs      { align-self: flex-start !important; }
+.u-as-fe      { align-self: flex-end !important; }
+.u-as-c       { align-self: center !important; }
+
+.u-fd-r       { flex-direction: row !important; }
+.u-fd-c       { flex-direction: column !important; }
+.u-fd-rr      { flex-direction: row-reverse !important; }
+.u-fd-cr      { flex-direction: column-reverse !important; }
+
+.u-fw-w       { flex-wrap: wrap !important; }
+.u-fw-nw      { flex-wrap: nowrap !important; }
+
+.u-fg-1       { flex-grow: 1 !important; }
+.u-fg-0       { flex-grow: 0 !important; }
+.u-fs-1       { flex-shrink: 1 !important; }
+.u-fs-0       { flex-shrink: 0 !important; }
+
+.u-ord-1      { order: 1 !important; }
+.u-ord-2      { order: 2 !important; }
+.u-ord-3      { order: 3 !important; }
+.u-ord-first  { order: -99 !important; }
+.u-ord-last   { order: 99 !important; }
+
+
+///-----------------------------------------------------------------------------
+///  BREAKPOINT VARIANTS
+///-----------------------------------------------------------------------------
+@each $name, $bp in ui-config( "breakpoint" ) { @if ( map-has-key( $bp, "suffix" ) ) {
+  $suffix:  map-get( $bp, "suffix" );
+  $value:   map-get( $bp, "value" );
+  $feature: if( map-has-key( $bp, "feature" ), map-get( $bp, "feature" ), "min-width" );
+  $type:    if( map-has-key( $bp, "type" ), map-get( $bp, "type" ), "all" );
+
+  @media #{$type} and ( #{$feature}: #{$value} ) {
+
+  .u-jc-fs\@#{$suffix}      { justify-content: flex-start !important; }
+  .u-jc-fe\@#{$suffix}      { justify-content: flex-end !important; }
+  .u-jc-sb\@#{$suffix}      { justify-content: space-between !important; }
+  .u-jc-sa\@#{$suffix}      { justify-content: space-around !important; }
+  .u-jc-c\@#{$suffix}       { justify-content: center !important; }
+
+  .u-ai-s\@#{$suffix}       { align-items: stretch !important; }
+  .u-ai-fs\@#{$suffix}      { align-items: flex-start !important; }
+  .u-ai-fe\@#{$suffix}      { align-items: flex-end !important; }
+  .u-ai-c\@#{$suffix}       { align-items: center !important; }
+
+  .u-as-s\@#{$suffix}       { align-self: stretch !important; }
+  .u-as-fs\@#{$suffix}      { align-self: flex-start !important; }
+  .u-as-fe\@#{$suffix}      { align-self: flex-end !important; }
+  .u-as-c\@#{$suffix}       { align-self: center !important; }
+
+  .u-fd-r\@#{$suffix}       { flex-direction: row !important; }
+  .u-fd-c\@#{$suffix}       { flex-direction: column !important; }
+  .u-fd-rr\@#{$suffix}      { flex-direction: row-reverse !important; }
+  .u-fd-cr\@#{$suffix}      { flex-direction: column-reverse !important; }
+
+  .u-fw-w\@#{$suffix}       { flex-wrap: wrap !important; }
+  .u-fw-nw\@#{$suffix}      { flex-wrap: nowrap !important; }
+
+  .u-fg-1\@#{$suffix}       { flex-grow: 1 !important; }
+  .u-fg-0\@#{$suffix}       { flex-grow: 0 !important; }
+  .u-fs-1\@#{$suffix}       { flex-shrink: 1 !important; }
+  .u-fs-0\@#{$suffix}       { flex-shrink: 0 !important; }
+
+  .u-ord-1\@#{$suffix}      { order: 1 !important; }
+  .u-ord-2\@#{$suffix}      { order: 2 !important; }
+  .u-ord-3\@#{$suffix}      { order: 3 !important; }
+  .u-ord-first\@#{$suffix}  { order: -99 !important; }
+  .u-ord-last\@#{$suffix}   { order: 99 !important; }
+
+  }
+}}
+

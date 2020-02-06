@@ -1,0 +1,31 @@
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: BACKGROUND
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for background properties.
+ *
+ */
+
+.u-bgp-c    { background-position: center !important; }
+.u-bgp-t    { background-position: center top !important; }
+.u-bgp-b    { background-position: center bottom !important; }
+.u-bgp-l    { background-position: left center !important; }
+.u-bgp-r    { background-position: right center !important; }
+.u-bgp-lt   { background-position: left top !important; }
+.u-bgp-lb   { background-position: left bottom !important; }
+.u-bgp-rt   { background-position: right top !important; }
+.u-bgp-rb   { background-position: right bottom !important; }
+
+.u-bgs-a    { background-size: auto !important; }
+.u-bgs-ct   { background-size: contain !important; }
+.u-bgs-cv   { background-size: cover !important; }
+.u-bgs-100w { background-size: 100% auto !important; }
+.u-bgs-100h { background-size: auto 100% !important; }
+
+.u-bgr-r    { background-repeat: repeat !important; }
+.u-bgr-x    { background-repeat: repeat-x !important; }
+.u-bgr-y    { background-repeat: repeat-y !important; }
+.u-bgr-n    { background-repeat: no-repeat !important; }
+
+.u-bga-f    { background-attachment: fixed !important; }
+.u-bga-s    { background-attachment: scroll !important; }

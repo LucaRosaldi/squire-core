@@ -1,0 +1,401 @@
+///-----------------------------------------------------------------------------
+///  LAYOUT: FLEX
+///-----------------------------------------------------------------------------
+///
+///  Simple layout system based on flexbox.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$l-flex: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  "polyfill": true,
+
+), $l-flex );
+
+
+@if ( ui-load( "layout", "flex" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  LAYOUT: FLEX
+ *-----------------------------------------------------------------------------*
+ *
+ *  Simple layout system based on flexbox.
+ *
+ */
+
+///
+/// @block        Flex
+/// @description  Default flex block.
+///
+%l-flex {
+  display: flex;
+}
+
+///
+/// @block        Flex
+/// @description  Default flex block.
+///
+%l-flex--wrap {
+  flex-wrap: wrap;
+}
+
+///
+/// @modifier     Flex Justify Start
+/// @description  Align children to the start of the main axis.
+///
+%l-flex--justify--start {
+  justify-content: flex-start;
+}
+
+///
+/// @modifier     Flex Justify Start
+/// @description  Align children to the start of the main axis.
+///
+%l-flex--justify--center {
+  justify-content: center;
+}
+
+///
+/// @modifier     Flex Justify End
+/// @description  Align children to the end of main axis.
+///
+%l-flex--justify--end {
+  justify-content: flex-end;
+}
+
+///
+/// @modifier     Flex Justify Between
+/// @description  Expand space between elements in the main axis.
+///
+%l-flex--justify--between {
+  justify-content: space-between;
+}
+
+///
+/// @modifier     Flex Justify Between
+/// @description  Expand space around elements in the main axis.
+///
+%l-flex--justify--around {
+  justify-content: space-around;
+}
+
+///
+/// @modifier     Flex Justify Evenly
+/// @description  Expand space evenly around elements in the main axis.
+///
+%l-flex--justify--evenly {
+  justify-content: space-evenly;
+}
+
+///
+/// @modifier     Flex Justify Stretch
+/// @description  Expand 'auto' sized elements to fill the main axis.
+///
+%l-flex--justify--stretch {
+  justify-content: stretch;
+}
+
+///
+/// @modifier     Flex Align Start
+/// @description  Align children to the start of the cross axis.
+///
+%l-flex--align--start {
+  align-items: flex-start;
+}
+
+///
+/// @modifier     Flex Align Center
+/// @description  Align children to the center of the cross axis.
+///
+%l-flex--align--center {
+  align-items: center;
+}
+
+///
+/// @modifier     Flex Align End
+/// @description  Align children to the end of the cross axis.
+///
+%l-flex--align--end {
+  align-items: flex-end;
+}
+
+///
+/// @modifier     Flex Align Stretch
+/// @description  Expand 'auto' sized elements to fill the cross axis.
+///
+%l-flex--align--stretch {
+  align-items: stretch;
+}
+
+///-----------------------------------------------------------------------------
+///  ROW
+///-----------------------------------------------------------------------------
+
+///
+/// @block        Row
+/// @description  Elements stacking horizontally and wrapping on overflow.
+///
+/// [1] fix bug in chrome with initial "align-items" value set as "stretch"
+///
+%l-row {
+  @extend %l-flex;
+  @extend %l-flex--justify--start; /// [1] ///
+
+  width: 100%;
+  list-style: none;
+
+  [direction="rtl"] & {
+    @extend %l-flex--justify--end;
+  }
+}
+
+///
+/// @modifier     Row Wrap
+/// @description  Wrap items when they overflow the container.
+///
+%l-row--wrap {
+  @extend %l-flex--wrap;
+}
+
+///
+/// @modifier     Row Left
+/// @description  Align children horizontally to the left of the row.
+///
+%l-row--left {
+  @extend %l-flex--justify--start;
+}
+
+///
+/// @modifier     Row Center
+/// @description  Align children horizontally in the center of the row.
+///
+%l-row--center {
+  @extend %l-flex--justify--center;
+}
+
+///
+/// @modifier     Row Right
+/// @description  Align children horizontally to the right of the row.
+///
+%l-row--right {
+  @extend %l-flex--justify--end;
+}
+
+///
+/// @modifier     Row Between
+/// @description  Expand space between elements in the row.
+///
+%l-row--between {
+  @extend %l-flex--justify--between;
+}
+
+///
+/// @modifier     Row Around
+/// @description  Expand space around elements in the row.
+///
+%l-row--around {
+  @extend %l-flex--justify--around;
+}
+
+///
+/// @modifier     Row Evenly
+/// @description  Expand space evenly around elements in the row.
+///
+%l-row--evenly {
+  @extend %l-flex--justify--evenly;
+}
+
+///
+/// @modifier     Row Stretch
+/// @description  Expand 'auto' sized elements to fill the row.
+///
+%l-row--stretch {
+  @extend %l-flex--justify--stretch;
+}
+
+///
+/// @modifier     Row Top
+/// @description  Align children vertically to the top of the row.
+///
+%l-row--top {
+  @extend %l-flex--align--start;
+}
+
+///
+/// @modifier     Row Middle
+/// @description  Align children vertically in the center of the row.
+///
+%l-row--middle {
+  @extend %l-flex--align--center;
+}
+
+///
+/// @modifier     Row Bottom
+/// @description  Align children vertically to the bottom of the row.
+///
+%l-row--bottom {
+  @extend %l-flex--align--end;
+}
+
+///
+/// @modifier     Row Stretch
+/// @description  Expand children vertically to fill the row.
+///
+%l-row--stretch {
+  @extend %l-flex--align--stretch;
+}
+
+///
+/// @modifier     Row Cover
+/// @description  Row which covers the whole viewport.
+///
+%l-row--cover {
+  width: 100%;
+  min-height: 100vh;
+}
+
+///
+/// @modifier     Row Reverse
+/// @description  Elements stacking horizontally in reverse order.
+///
+%l-row--reverse {
+  flex-direction: row-reverse;
+}
+
+///
+/// @block        Column
+/// @description  Stack children vertically.
+///
+%l-column {
+  @extend %l-flex, %l-flex--wrap;
+  @extend %l-flex--align--start;
+
+  flex-direction: column;
+  width: 100%;
+}
+
+///
+/// @block        Column Top
+/// @description  Align children vertically to the top of the column.
+///
+%l-column--top {
+  @extend %l-flex--justify--start;
+}
+
+///
+/// @modifier     Column Middle
+/// @description  Align children vertically in the middle of the column.
+///
+%l-column--middle {
+  @extend %l-flex--justify--center;
+}
+
+///
+/// @modifier     Column Bottom
+/// @description  Align children vertically to the bottom of the column.
+///
+%l-column--bottom {
+  @extend %l-flex--justify--end;
+}
+
+///
+/// @modifier     Column Left
+/// @description  Align children horizontally to the left of the column.
+///
+%l-column--left {
+  @extend %l-flex--align--start;
+
+  [direction="rtl"] & {
+    @extend %l-flex--align--end;
+  }
+}
+
+///
+/// @modifier     Column Center
+/// @description  Align children horizontally in the center of the column.
+///
+%l-column--center {
+  @extend %l-flex--align--center;
+}
+
+///
+/// @modifier     Column Right
+/// @description  Align children horizontally to the right of the column.
+///
+%l-column--right {
+  @extend %l-flex--align--end;
+
+  [direction="rtl"] & {
+    @extend %l-flex--align--start;
+  }
+}
+
+///
+/// @modifier     Column Stretch
+/// @description  Expand children horizontally to fill the row.
+///
+%l-column--stretch {
+  @extend %l-flex--align--stretch;
+}
+
+///
+/// @modifier     Column Cover
+/// @description  Column which covers the whole viewport.
+///
+%l-column--cover {
+  @extend %l-row--cover;
+}
+
+} // enabled
+
+
+@if ( map-get( $_config, "enabled" ) == true and map-get( $_config, "polyfill" ) == true ) {
+
+/* Polyfill for IE 10 AND 11 */
+@media screen and ( -ms-high-contrast: none ), ( -ms-high-contrast: active ) {
+
+  %l-row {
+    display: block;
+    width: 100%;
+    word-spacing: -0.31em;
+
+    > * {
+      display: inline-block;
+      vertical-align: inherit;
+      text-align: left;
+      word-spacing: 0;
+    }
+  }
+  %l-row--left {
+    text-align: left;
+  }
+  %l-row--center {
+    text-align: center;
+  }
+  %l-row--right {
+    text-align: right;
+  }
+  %l-row--stretch {
+    > * { width: 100%; }
+  }
+  %l-row--top {
+    vertical-align: top;
+  }
+  %l-row--middle {
+    vertical-align: middle;
+  }
+  %l-row--bottom {
+    vertical-align: bottom;
+  }
+
+}
+
+} // polyfill

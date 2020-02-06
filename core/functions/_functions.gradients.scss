@@ -1,0 +1,101 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: SCRIM GRADIENT
+///-----------------------------------------------------------------------------
+///
+///  A linear-gradient() alternative which uses a ease-out bezier curve to
+///  generate a more natural gradient that fades solid color to transparent.
+///
+///  @author  Andreas Larsen
+///  @link    https://css-tricks.com/easing-linear-gradients/
+///
+
+
+///
+/// Output a scrim gradient from solid color to transparent.
+///
+/// @param  {String} [$direction]  Direction of gradient (default: to bottom)
+/// @param  {Color}  [$startColor] Start color of gradient (default: black)
+/// @return {String}               CSS linear-gradient() function
+///
+@function soft-linear-gradient(
+  $direction:  to bottom,
+  $startColor: rgba( #000, 1 ),
+  $endColor:   rgba( #fff, 1 )
+  ) {
+
+  $_map: (
+    0:    1,
+    8.1:  0.987,
+    15.5: 0.951,
+    22.5: 0.896,
+    29:   0.825,
+    35.3: 0.741,
+    41.2: 0.648,
+    47.1: 0.55,
+    52.9: 0.45,
+    58.8: 0.352,
+    64.7: 0.259,
+    71:   0.175,
+    77.5: 0.104,
+    84.5: 0.049,
+    91.9: 0.013,
+    100:  0,
+  );
+
+  $_dir:   unquote( quote( #{$direction} ) );
+  $_stops: __linear-gradient-color-stops( $startColor, $endColor, $_map );
+
+  @return linear-gradient( $_dir, $_stops );
+}
+
+///
+/// Output a scrim gradient from solid color to transparent.
+///
+/// @param  {String} [$direction]  Direction of gradient (default: to bottom)
+/// @param  {Color}  [$startColor] Start color of gradient (default: black)
+/// @return {String}               CSS linear-gradient() function
+///
+@function scrim-linear-gradient( $direction: to bottom, $color: rgba( #000, 1 ) ) {
+
+  $_map: (
+    0:    1,
+    19:   0.738,
+    34:   0.541,
+    47:   0.382,
+    56.5: 0.278,
+    65:   0.194,
+    73:   0.126,
+    80.2: 0.075,
+    86.1: 0.042,
+    91:   0.021,
+    95.2: 0.008,
+    98.2: 0.002,
+    100:  0
+  );
+
+  $_dir:   unquote( quote( #{$direction} ) );
+  $_stops: __linear-gradient-color-stops( $color, transparent, $_map );
+
+  @return linear-gradient( $_dir, $_stops );
+}
+
+///
+/// Output a scrim gradient from solid color to transparent.
+///
+/// @access private
+///
+/// @param  {Color}  $startColor  Start color
+/// @param  {Color}  $endColor    End color
+/// @param  {Map}    [$map]       Easing map
+/// @return {String}              Color stops for linear-gradient() function
+///
+@function __linear-gradient-color-stops( $startColor, $endColor, $map: ( 0: 1, 100: 0 ) ) {
+
+  $stops: ();
+  @each $colorStop, $alphaValue in $map {
+    $stop: mix( $startColor, $endColor, $alphaValue * 100% ) percentage( $colorStop / 100 );
+    $stops: append( $stops, $stop, comma );
+  }
+
+  @return $stops;
+}

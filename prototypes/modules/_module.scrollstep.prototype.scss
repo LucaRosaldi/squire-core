@@ -1,0 +1,189 @@
+///-----------------------------------------------------------------------------
+///  MODULE: SCROLL STEP
+///-----------------------------------------------------------------------------
+///
+///  Animate elements on scroll.
+///
+///  Requires '.js-scrollstep' class on <htlm>. Animations are toggled when the
+///  '.is-in-viewport' class is set on '[data-scrollstep]' container elements.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$m-scrollstep: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  /// @var {Number<Time>} Duration of opacity transition
+  "opacity-duration": 500ms,
+
+  /// @var {String} Easing of opacity transition
+  "opacity-easing": linear,
+
+  /// @var {Number<Time>} Duration of transform transition
+  "transform-duration": 1000ms,
+
+  /// @var {String} Easing of transform transition
+  "transform-easing": ease-out,
+
+  /// @var {Number<Time>} Duration of each delay step for staggering animations
+  "delay-duration": 80ms,
+
+  /// @var {Number} Offset of fade transition
+  "fade-offset": 2rem
+
+), $m-scrollstep );
+
+
+@if ( ui-load( "modules", "scrollstep" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  MODULE: SCROLL STEP
+ *-----------------------------------------------------------------------------*
+ *
+ *  Animate elements on scroll.
+ *
+ */
+
+///
+/// @var {Number} Initial element offset for fading animations.
+///
+$_offset: map-get( $_config, "fade-offset" );
+
+///
+/// @block        Scrollstep
+/// @description  Default scrollstep block.
+///
+%m-scrollstep {
+}
+
+///
+/// @block        Scrollstep Hidden
+/// @description  Initial (hidden) state for the scrollstep container.
+///
+%m-scrollstep--hidden {
+}
+
+///
+/// @modifier     Scrollstep Disabled
+/// @description  Disable animations for inner elements.
+///
+%m-scrollstep--disabled {
+  %m-scrollstep_element {
+    transition: none;
+  }
+}
+
+  ///
+  /// @element      Scroll Step Element
+  /// @description  Element with entering animation.
+  ///
+  %m-scrollstep_element {
+    transition:
+      opacity map-get( $_config, "opacity-duration" ) map-get( $_config, "opacity-easing" ),
+      transform map-get( $_config, "transform-duration" ) map-get( $_config, "transform-easing" );
+    animation: map-get( $_config, "transform-duration" ) map-get( $_config, "transform-easing" ) both;
+
+    @media ( prefers-reduced-motion: reduce ) {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+  }
+
+  ///
+  /// @modifier     Scroll Step [Effect]
+  /// @description  Various entering animations for elements.
+  ///
+  %m-scrollstep_element--fade {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      opacity: 0;
+    }
+  }
+  %m-scrollstep_element--fade-up {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      opacity: 0;
+      transform: translateY( $_offset );
+    }
+  }
+  %m-scrollstep_element--fade-down {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      opacity: 0;
+      transform: translateY( -$_offset );
+    }
+  }
+  %m-scrollstep_element--fade-left {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      opacity: 0;
+      transform: translateX( $_offset );
+    }
+  }
+  %m-scrollstep_element--fade-right {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      opacity: 0;
+      transform: translateX( -$_offset );
+    }
+  }
+  %m-scrollstep_element--slide-left {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      transform: translateX( calc( 100vw + 100% ) );
+    }
+  }
+  %m-scrollstep_element--slide-right {
+    %m-scrollstep--hidden &,
+    &%m-scrollstep--hidden {
+      transform: translateX( calc( -100vw + 100% ) );
+    }
+  }
+  %m-scrollstep_element--grow {
+    animation-name: scale-in-bounce;
+  }
+
+  ///
+  /// @modifier     Scroll Step Element [Slower|Slow|Fast|Faster]
+  /// @description  Make entering animation faster or slower.
+  ///
+  %m-scrollstep_element--slow {
+    transition-duration: map-get( $_config, "opacity-duration" ) * 1.5,
+                         map-get( $_config, "transform-duration" ) * 1.5;
+    animation-duration: map-get( $_config, "transform-duration" ) * 1.5;
+  }
+  %m-scrollstep_element--slower {
+    transition-duration: map-get( $_config, "opacity-duration" ) * 2,
+                         map-get( $_config, "transform-duration" ) * 2;
+    animation-duration: map-get( $_config, "transform-duration" ) * 2;
+  }
+  %m-scrollstep_element--fast {
+    transition-duration: map-get( $_config, "opacity-duration" ) / 1.5,
+                         map-get( $_config, "transform-duration" ) / 1.5;
+    animation-duration: map-get( $_config, "transform-duration" ) / 1.5;
+  }
+  %m-scrollstep_element--faster {
+    transition-duration: map-get( $_config, "opacity-duration" ) / 2,
+                         map-get( $_config, "transform-duration" ) / 2;
+    animation-duration: map-get( $_config, "transform-duration" ) / 2;
+  }
+
+  ///
+  /// @modifier     Scroll Step Delay [1-20]
+  /// @description  Delay entering animation.
+  ///
+  @for $i from 1 through 20 {
+    %m-scrollstep_element--delay-#{$i} {
+      transition-delay: map-get( $_config, "delay-duration" ) * $i;
+    }
+  }
+
+} // enabled

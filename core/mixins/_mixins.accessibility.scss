@@ -1,0 +1,19 @@
+///-----------------------------------------------------------------------------
+///  MIXINS: ACCESSIBILITY
+///-----------------------------------------------------------------------------
+///
+///  Mixins for enhancing accessibility.
+///
+
+///
+/// @mixin        Screenreader Text
+/// @description  Hide element visually without affecting accessibility.
+////
+@mixin screenreader-text {
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+}

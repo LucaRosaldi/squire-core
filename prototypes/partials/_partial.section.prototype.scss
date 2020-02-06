@@ -1,0 +1,93 @@
+///-----------------------------------------------------------------------------
+///  PARTIAL: SECTION
+///-----------------------------------------------------------------------------
+///
+///  Section of the webpage.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$p-section: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  "vertical-spacing": ui-spacing( "l" ),
+
+), $p-section );
+
+
+@if ( ui-load( "partials", "section" ) == true ) {
+/*---------------------------------------------------------------------------*
+ *  PARTIAL: SECTION
+ *---------------------------------------------------------------------------*
+ *
+ *  Section of the webpage.
+ *
+ */
+
+$_vsp: map-get( $_config, "vertical-spacing" );
+
+///
+/// @block        Section
+/// @description  Default Section block.
+///
+%p-section {
+  @extend %l-row, %l-row--wrap !optional;
+
+  position: relative;
+
+  @include maybe-fluid( "padding-top", $_vsp );
+  @include maybe-fluid( "padding-bottom", $_vsp );
+}
+
+  ///
+  /// @element      Section Header
+  /// @description  The section heading.
+  ///
+  %p-section__header {
+    @extend %o-fluid-pad, %o-fluid-pad--sides !optional;
+
+    position: relative;
+
+    width: 100%;
+    @include maybe-fluid( "padding-bottom", $_vsp );
+  }
+
+  ///
+  /// @element      Section Text
+  /// @description  Wrapper for textual content.
+  ///
+  %p-section__text {
+    @extend %o-fluid-pad, %o-fluid-pad--sides !optional;
+
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+  }
+
+  ///
+  /// @element      Section Visual
+  /// @description  Wrapper for graphic content.
+  ///
+  %p-section__visual {
+    position: relative;
+    z-index: 0;
+    width: 100%;
+  }
+
+  ///
+  /// @element      Section Title
+  /// @description  Title of the section.
+  ///
+  %p-section__title {
+    @extend %o-heading !optional;
+  }
+
+} // enabled

@@ -1,0 +1,219 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: TABS
+///-----------------------------------------------------------------------------
+///
+///  Tabs are used to display alternate but equally-important content, saving a
+///  lot of vertical space on the screen, especially on small screen devices.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-tabs: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  padding: 1em,
+
+  color: null,
+  background: $white,
+  border-width: 1px,
+  border-color: currentColor,
+
+  "__nav": (
+
+    "--selected": (
+      background: null,
+      color: null,
+    ),
+
+    "--hover": (
+      background: null,
+      color: null,
+    ),
+
+    "--disabled": (
+      background: null,
+      color: null,
+      opacity: 0.5,
+    ),
+
+  ),
+
+  "--horizontal": (
+    "breakpoint": ui-breakpoint( "medium" ),
+  ),
+
+), $c-tabs );
+
+
+@if ( ui-load( "components", "tabs" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: TABS
+ *-----------------------------------------------------------------------------*
+ *
+ *  Tabs are used to display alternate but equally-important content, saving a
+ *  lot of vertical space on the screen, especially on small screen devices.
+ *
+ */
+$_bw: map-get( $_config, "border-width" );
+$_bc: map-get( $_config, "border-color" );
+
+///
+/// @block        Tabs
+/// @description  Default tabs wrapper.
+///
+%c-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  position: relative;
+  width: 100%;
+
+  color: map-get( $_config, "color" );
+}
+
+  ///
+  /// @element      Tabs Navigation
+  /// @description  Novigation holding links for switching tabs.
+  ///
+  /// 1. move down the link to overlap the border in the content section.
+  /// 3. selected state
+  /// 2. hover state
+  /// 4. disabled state
+  /// 5. space the TOC from content if tabs javascript library is not active
+  ///
+  %c-tabs__nav {
+    display: flex;
+    position: relative;
+
+    width: 100%;
+    margin: 0;
+    @if ( $_bw ) { margin-bottom: -#{$_bw}; }
+
+    list-style: none;
+
+    > li > a {
+      display: block;
+      position: relative;
+
+      padding: map-get( $_config, "padding" );
+
+      background: map-get( $_config, "background" );
+
+      /// [1] ///
+      @if ( $_bw ) {
+        border: $_bw solid transparent;
+        border-bottom-width: 0;
+      }
+
+      /// [2] ///
+      &[aria-selected] {
+        z-index: 2;
+        background: map-get-deep( $_config, "__nav", "--selected", "background" );
+        color: map-get-deep( $_config, "__nav", "--selected", "color" );
+        @if ( $_bw ) { border-color: $_bc; }
+      }
+
+      /// [3] ///
+      &:not([aria-selected]):not([disabled]):hover {
+        background: map-get-deep( $_config, "__nav", "--hover", "background" );
+        color: map-get-deep( $_config, "__nav", "--hover", "color" );
+      }
+
+      /// [4] ///
+      &[disabled] {
+        background: map-get-deep( $_config, "__nav", "--disabled", "background" );
+        color: map-get-deep( $_config, "__nav", "--disabled", "color" );
+        opacity: map-get-deep( $_config, "__nav", "--disabled", "opacity" );
+        cursor: not-allowed;
+      }
+    }
+
+    /// [5] ///
+    &:not([role="tablist"]) {
+      > li > a { border: 0; }
+    }
+  }
+
+  ///
+  /// @modifier     Tabs Nav Fit
+  /// @description  Expand the tab navigation to fit the tabs width.
+  ///
+  %c-tabs__nav--expand {
+    > li {
+      flex-grow: 1;
+    }
+  }
+
+  ///
+  /// @element      Tabs Content
+  /// @description  Tab inner sections which display content.
+  ///
+  /// [1] space the TOC from content if tabs javascript library is not active
+  ///
+  %c-tabs__content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    padding: map-get( $_config, "padding" );
+
+    background: map-get( $_config, "background" );
+    @if ( $_bw && $_bc ) { border: $_bw solid $_bc; }
+
+    &[aria-hidden] {
+      display: none;
+    }
+
+    /// [5] ///
+    &:not([role="tabpanel"]) {
+      margin-top: ui-spacing();
+    }
+  }
+
+///
+/// @modifier     Tabs Horizontal
+/// @description  Default tabs wrapper.
+///
+%c-tabs--horizontal {
+  $_bp: map-get-deep( $_config, "--horizontal", "breakpoint" );
+
+  @if ( $_bp ) { @include bp( $_bp ) {
+    flex-direction: row;
+
+    %c-tabs__nav {
+      flex-direction: column;
+      align-items: stretch;
+      width: auto;
+
+      @if ( $_bw ) {
+        margin-right: -#{$_bw};
+        margin-bottom: 0;
+      }
+
+      > li > a {
+        @if ( $_bw ) {
+          border-bottom-width: $_bw;
+          border-right-width: 0;
+        }
+      }
+
+      &:not([role="tablist"]) {
+        margin-right: ui-spacing();
+      }
+    }
+
+  }}  // @if breakpoint
+
+}
+
+} // enabled

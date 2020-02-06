@@ -1,0 +1,59 @@
+////
+///-----------------------------------------------------------------------------
+///  VARS: WIDTHS
+///-----------------------------------------------------------------------------
+///
+/// Sizes in human readable format.
+///
+////
+
+$one-whole:         100%;
+$one-half:          50%;
+
+$one-third:         33.333%;
+$two-thirds:        66.666%;
+
+$one-quarter:       25%;
+$two-quarters:      $one-half;
+$three-quarters:    75%;
+
+$one-fifth:         20%;
+$two-fifths:        40%;
+$three-fifths:      60%;
+$four-fifths:       80%;
+
+$one-sixth:         16.666%;
+$two-sixths:        $one-third;
+$three-sixths:      $one-half;
+$four-sixths:       $two-thirds;
+$five-sixths:       83.333%;
+
+$one-eighth:        12.5%;
+$two-eighths:       $one-quarter;
+$three-eighths:     37.5%;
+$four-eighths:      $one-half;
+$five-eighths:      62.5%;
+$six-eighths:       $three-quarters;
+$seven-eighths:     87.5%;
+
+$one-tenth:          10%;
+$two-tenths:        $one-fifth;
+$three-tenths:      30%;
+$four-tenths:       $two-fifths;
+$five-tenths:       $one-half;
+$six-tenths:        $three-fifths;
+$seven-tenths:      70%;
+$eight-tenths:      $four-fifths;
+$nine-tenths:       90%;
+
+$one-twelfth:       8.333%;
+$two-twelfths:      $one-sixth;
+$three-twelfths:    $one-quarter;
+$four-twelfths:     $one-third;
+$five-twelfths:     41.666%;
+$six-twelfths:      $one-half;
+$seven-twelfths:    58.333%;
+$eight-twelfths:    $two-thirds;
+$nine-twelfths:     $three-quarters;
+$ten-twelfths:      $five-sixths;
+$eleven-twelfths:   91.666%;

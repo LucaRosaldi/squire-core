@@ -1,0 +1,33 @@
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: SVG
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for SVG elements.
+ *
+ */
+
+.u-fill-white { fill: #fff !important; }
+.u-fill-white\:hover:hover { fill: #fff !important; }
+.u-fill-current { fill: currentColor !important; }
+.u-fill-current\:hover:hover { fill: currentColor !important; }
+
+.u-stroke-white { stroke: #fff !important; }
+.u-stroke-white\:hover:hover { stroke: #fff !important; }
+.u-stroke-current { stroke: currentColor !important; }
+.u-stroke-current\:hover:hover { stroke: currentColor !important; }
+
+@each $name, $color in ui-config( "color" ) {
+
+  .u-fill-#{$name} { fill: $color !important; }
+  .u-fill-#{$name}\:hover:hover { fill: $color !important; }
+
+  .u-stroke-#{$name} { stroke: $color !important; }
+  .u-stroke-#{$name}\:hover:hover { stroke: $color !important; }
+
+}
+
+.u-sw-1 { stroke-width: 1px !important; }
+.u-sw-2 { stroke-width: 2px !important; }
+.u-sw-3 { stroke-width: 3px !important; }
+.u-sw-4 { stroke-width: 4px !important; }
+.u-sw-5 { stroke-width: 5px !important; }

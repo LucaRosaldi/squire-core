@@ -1,0 +1,87 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: ICON
+///-----------------------------------------------------------------------------
+///
+///  SVG icons.
+///
+///  All icons are defined in a SVG spritesheet, which is included in the page
+///  immediately after the opening <body> tag.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-icon: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  fill: none,
+  stroke: currentColor,
+  stroke-width: 2px,
+  stroke-linecap: round,
+  stroke-linejoin: round,
+
+), $o-icon );
+
+
+@if ( ui-load( "objects", "icon" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: ICON
+ *-----------------------------------------------------------------------------*
+ *
+ *  SVG icons.
+ *
+ */
+
+$_fill:      map-get( $_config, "fill" );
+$_stroke:    map-get( $_config, "stroke" );
+$_stroke_w:  map-get( $_config, "stroke-width" );
+$_stroke_lc: map-get( $_config, "stroke-linecap" );
+$_stroke_lj: map-get( $_config, "stroke-linejoin" );
+
+///
+/// @block        Icon
+/// @description  Standard SVG icon.
+///
+/// [1] set default size when not explicitly set
+///
+%o-icon {
+  display: inline-flex;
+  vertical-align: middle;
+
+  fill: $_fill;
+  stroke: $_stroke;
+  stroke-width: $_stroke_w;
+  stroke-linecap: $_stroke_lc;
+  stroke-linejoin: $_stroke_lj;
+
+  /// [1] ///
+  &:not([width])  { width: 1em; }
+  &:not([height]) { height: 1em; }
+}
+
+///
+/// @block        Icon Fill
+/// @description  Icon with a fill color.
+///
+%o-icon--fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+///
+/// @modifier     Icon Stroke
+/// @description  Icon with a stroke.
+///
+%o-icon--stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: $_stroke_w;
+}
+
+} // enabled

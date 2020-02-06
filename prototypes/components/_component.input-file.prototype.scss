@@ -1,0 +1,107 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: INPUT FILE
+///-----------------------------------------------------------------------------
+///
+///  Customized file input.
+///
+
+
+@if ( ui-load( "components", "input-file" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  COMPONENT: INPUT FILE
+ *-----------------------------------------------------------------------------*
+ *
+ *  Customized file input.
+ *
+ */
+
+///
+/// @block        Input File
+/// @description  Wrapper for checkbox and radio input type.
+///
+/// 1. hide default input
+/// 2. selected file text
+/// 3. browse button
+///
+%c-input-file {
+  @extend %transition !optional;
+
+  display: block;
+  position: relative;
+  cursor: pointer;
+
+  width: 100%;
+
+  font-family: map-get( ui-input( "default" ), "font-family" );
+  font-weight: map-get( ui-input( "default" ), "font-weight" );
+  font-style: map-get( ui-input( "default" ), "font-style" );
+
+  border: map-get( ui-input( "default" ), "border" );
+  background: map-get( ui-input( "default" ), "background" );
+  color: map-get( ui-input( "default" ), "color" );
+  box-shadow: map-get( ui-input( "default" ), "box-shadow" );
+
+  &:hover {
+    border: map-get( ui-input( "hover" ), "border" );
+    background: map-get( ui-input( "hover" ), "background" );
+    color: map-get( ui-input( "hover" ), "color" );
+    box-shadow: map-get( ui-input( "hover" ), "box-shadow" );
+  }
+
+  &:focus-within {
+    border: map-get( ui-input( "focus" ), "border" );
+    background: map-get( ui-input( "focus" ), "background" );
+    color: map-get( ui-input( "focus" ), "color" );
+    box-shadow: map-get( ui-input( "focus" ), "box-shadow" );
+  }
+
+  border-radius: ui-input( "border-radius" );
+  outline: none;
+
+  /// [1] ///
+  input {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  /// [2] ///
+  &::before {
+    content: attr( data-input-file );
+    display: block;
+    padding: ui-input( "padding" );
+    color: rgba( map-get( ui-input( "default" ), "color" ), 0.5 );
+  }
+
+  /// [3] ///
+  &::after {
+    @extend %transition !optional;
+
+    content: attr( aria-label );
+    display: inline-block;
+    position: absolute;
+    top: 0; right: 0;
+    padding: ui-input( "padding" );
+    border-radius: 0 ui-input( "border-radius" ) ui-input( "border-radius" ) 0;
+    background-color: rgba( $black, 0.05 );
+    color: rgba( map-get( ui-input( "default" ), "color" ), 0.5 );
+  }
+  &:focus-within::after {
+    background-color: map-get( ui-input( "focus" ), "color" );
+    color: map-get( ui-input( "focus" ), "background" );
+  }
+
+}
+
+  ///
+  /// @modifier     Input File Selected
+  /// @description  When a file has been selected.
+  ///
+%c-input-file--selected {
+  &, &::before {
+    color: map-get( ui-input( "default" ), "color" );
+  }
+}
+
+} // enabled

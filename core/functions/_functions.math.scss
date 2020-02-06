@@ -1,0 +1,121 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: MATH
+///-----------------------------------------------------------------------------
+///
+///  Functions for mathematical operations.
+///
+
+
+///
+/// Return the percentage of a number in proportion to another.
+///
+/// @param  {Number}  $partial
+/// @param  {Number}  $whole
+/// @return {Number}
+///
+@function percent( $partial, $whole ) {
+  @return ( $partial * 100% ) / $whole;
+}
+
+///
+/// Round integer to specified number of digits.
+///
+/// @param  {int}    $number Number to round
+/// @param  {int}    $digits How many digits to output
+/// @param  {string} $mode   Round function to use ( round, ceil, floor )
+/// @return {int}            A rounded number.
+///
+@function decimal-round( $number, $digits: 0, $mode: "round" ) {
+  $n: 1;
+
+  // $number must be an integer
+  @if type-of( $number ) != "number" {
+    @warn "#{$number} is not a number.";
+    @return $number;
+  }
+
+  // $digits must be a unitless number
+  @if type-of( $digits ) != "number" {
+    @warn "#{$digits} is not a number.";
+    @return $number;
+  } @else if not unitless( $digits ) {
+    @warn "#{$digits} has a unit.";
+    @return $number;
+  }
+
+  @for $i from 1 through $digits {
+    $n: $n/// 10;
+  }
+
+  @if $mode == "round" {
+    @return round( $number * $n ) / $n;
+  } @else if $mode == "ceil" {
+    @return ceil( $number * $n ) / $n;
+  } @else if $mode == "floor" {
+    @return floor( $number * $n ) / $n;
+  } @else {
+    @warn "'#{$mode}' rounding function is undefined.";
+    @return $number;
+  }
+}
+
+///
+/// Round a value based on its unit.
+///
+/// Pixel values are rounded to integer, em and rem values are rounded to 3 digits.
+///
+/// @param  {string}  $value  Value to round.
+/// @return {string}          Rounded value.
+///
+@function round-unit( $value ) {
+  @if unit( $value ) == 'px' {
+    @return round( $value );
+  }
+  @else {
+    @return decimal-round( $value, 3 );
+  }
+}
+
+///
+/// Multiply x value for y times.
+///
+/// @param  {string|int} $value Value to multiply
+/// @param  {int}        $times Factor to multiply for
+/// @return {string|int}
+///
+@function multiply( $value, $times ) {
+  @return round-unit( $value * $times );
+}
+
+///
+/// Divide x value for y value.
+///
+/// @param  {string|int} $dividend Dividend
+/// @param  {int}        $divisor  Divisor
+/// @return {string|int}
+///
+@function divide( $dividend, $divisor ) {
+  @return round-unit( $dividend / $divisor );
+}
+
+///
+/// Common arithmetical operations.
+///
+/// @param  {string|int}
+/// @return {string|int}
+///
+@function double( $value ) {
+  @return multiply( $value, 2 );
+}
+@function triple( $value ) {
+  @return multiply( $value, 3 );
+}
+@function quadruple( $value ) {
+  @return multiply( $value, 4 );
+}
+@function half( $value ) {
+  @return divide( $value, 2 );
+}
+@function quarter( $value ) {
+  @return divide( $value, 4 );
+}

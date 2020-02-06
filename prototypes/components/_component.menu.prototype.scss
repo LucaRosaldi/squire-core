@@ -1,0 +1,88 @@
+///-----------------------------------------------------------------------------
+///  COMPONENT: MENU
+///-----------------------------------------------------------------------------
+///
+///  A block of stacked links.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$c-menu: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  background: null,
+  color: null,
+
+  border-radius: null,
+
+), $c-menu );
+
+
+@if ( ui-load( "components", "menu" ) == true ) {
+/*---------------------------------------------------------------------------*
+ *  COMPONENT: MENU
+ *---------------------------------------------------------------------------*
+ *
+ *  A block of stacked links.
+ *
+ */
+
+///
+/// @block        Menu
+/// @description  Default Menu block.
+///
+%c-menu {
+  @extend %transition !optional;
+  @extend %l-column, %l-column--stretch;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  position: relative;
+
+  background: map-get( $_config, "background" );
+  color: map-get( $_config, "color" );
+
+  border-radius: map-get( $_config, "border-radius" );
+}
+
+  ///
+  /// @element      Menu Item
+  /// @description  Menu item inside the menu.
+  ///
+  /// [1] fix overflowing border-radius in Chrome
+  ///
+  %c-menu__item {
+    width: 100%;
+    white-space: nowrap;
+
+    /// [1] ///
+    -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+  }
+
+  ///
+  /// @element      Menu Link
+  /// @description  Link inside the menu.
+  ///
+  %c-menu__link {
+    @extend %o-button !optional;
+
+    position: relative;
+    width: 100%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    border-radius: 0;
+  }
+
+} // enabled
