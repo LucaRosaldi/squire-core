@@ -1,11 +1,8 @@
 ///-----------------------------------------------------------------------------
-/// CONFIG
+/// SQUIRE LOADER
 ///-----------------------------------------------------------------------------
 ///
-///  Global configuration settings for the UI.
-///
-///  These settings are used throughout the app by various elements.
-///  Apart from these, each element has its own settings.
+///  Configuration file for elements to include in the CSS bundle.
 ///
 
 $__loader: (
@@ -105,4 +102,4 @@ $__loader: (
     "z-index":               true,
   ),
 
-) !default;
+);
