@@ -1,0 +1,108 @@
+///-----------------------------------------------------------------------------
+/// CONFIG
+///-----------------------------------------------------------------------------
+///
+///  Global configuration settings for the UI.
+///
+///  These settings are used throughout the app by various elements.
+///  Apart from these, each element has its own settings.
+///
+
+$__loader: (
+
+  "base": (
+    "reset":                 true,
+    "font-families":         true,
+    "transitions":           true,
+
+    "animations":            true,
+    "input-placeholder":     true,
+    "focus":                 true,
+    "text-selection":        true,
+  ),
+
+  "tags": (
+    "body":                  true,
+
+    "blockquote":            true,
+    "code":                  true,
+    "figure":                true,
+    "hr":                    true,
+  ),
+
+  "layout": (
+    "container":             true,
+    "fill-parent":           true,
+    "fluid-pad":             true,
+    "grid-css":              true,
+    "grid-flexbox":          true,
+    "proportional":          true,
+    "rhythm":                true,
+  ),
+
+  "objects": (
+    "heading":               true,
+    "icon":                  true,
+    "link":                  true,
+    "list":                  true,
+    "shadow":                true,
+    "upperspaced":           true,
+
+    "badge":                 true,
+    "table":                 true,
+    "text-divider":          true,
+  ),
+
+  "components": (
+    "button":                true,
+    "callout":               true,
+    "card":                  true,
+    "input-control":         true,
+    "input-file":            true,
+    "input-select":          true,
+    "input-text":            true,
+    "menu":                  true,
+    "text":                  true,
+
+    "breadcrumbs":           true,
+    "pagination":            true,
+    "popup":                 true,
+    "tabs":                  true,
+  ),
+
+  "partials": (
+    "form":                  true,
+    "section":               true,
+    "site":                  true,
+
+    "card-flipper":          true,
+    "content-wheel":         true,
+    "preload-screen":        true,
+  ),
+
+  "modules": (
+    "carousel":              true,
+    "password-mask":         true,
+    "scrollstep":            true,
+    "smart-header":          true,
+  ),
+
+  "utilities": (
+    "background":            true,
+    "border-radius":         true,
+    "border":                true,
+    "color":                 true,
+    "display":               true,
+    "flexbox":               true,
+    "opacity":               true,
+    "overflow":              true,
+    "position":              true,
+    "size":                  true,
+    "spacing":               true,
+    "svg":                   true,
+    "text":                  true,
+    "transform":             true,
+    "z-index":               true,
+  ),
+
+) !default;

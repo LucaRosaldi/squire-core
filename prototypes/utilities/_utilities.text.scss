@@ -1,0 +1,127 @@
+///-----------------------------------------------------------------------------
+///  UTILITIES: TEXT
+///-----------------------------------------------------------------------------
+///
+///  Utility classes for styling text.
+///
+
+
+@if ( ui-load( "utilities", "text" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: TEXT
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for styling text.
+ *
+ */
+
+///
+/// Font size
+///
+.u-fz-def     { font-size: 1rem !important; }
+
+.u-fz-xxs     { font-size: 0.625em !important; }
+.u-fz-xs      { font-size: 0.75em !important; }
+.u-fz-s       { font-size: 0.875em !important; }
+.u-fz-m       { font-size: 1em !important; }
+.u-fz-l       { font-size: 1.125em !important; }
+.u-fz-xl      { font-size: 1.25em !important; }
+.u-fz-xxl     { font-size: 1.5em !important; }
+
+.u-fz-10      { font-size: 10px !important; }
+.u-fz-11      { font-size: 11px !important; }
+.u-fz-12      { font-size: 12px !important; }
+.u-fz-13      { font-size: 13px !important; }
+.u-fz-14      { font-size: 14px !important; }
+
+///
+/// Font weight
+///
+.u-fw-300     { font-weight: 300 !important; }
+.u-fw-400     { font-weight: 400 !important; }
+.u-fw-600     { font-weight: 600 !important; }
+.u-fw-700     { font-weight: 700 !important; }
+.u-fw-900     { font-weight: 900 !important; }
+
+///
+/// Font style
+///
+.u-fs-n       { font-style: normal !important; }
+.u-fs-o       { font-style: oblique !important; }
+
+///
+/// Line height
+///
+.u-lh-xs      { line-height: 1.1 !important; }
+.u-lh-s       { line-height: 1.2 !important; }
+.u-lh-m       { line-height: 1.3 !important; }
+.u-lh-l       { line-height: 1.4 !important; }
+.u-lh-xl      { line-height: 1.5 !important; }
+.u-lh-xxl     { line-height: 1.6 !important; }
+.u-lh-1       { line-height: 1 !important; }
+
+///
+/// Text transform
+///
+.u-tt-u       { text-transform: uppercase !important; }
+.u-tt-l       { text-transform: lowercase !important; }
+.u-tt-n       { text-transform: none !important; }
+
+///
+/// Text align
+///
+.u-ta-l       { text-align: left !important; }
+.u-ta-c       { text-align: center !important; }
+.u-ta-r       { text-align: right !important; }
+
+///
+/// Text decoration
+///
+.u-td-u       { text-decoration: underline !important; }
+.u-td-l       { text-decoration: line-through !important; }
+.u-td-n       { text-decoration: none !important; }
+
+///
+/// White space
+///
+.u-whs-n      { white-space: normal !important; }
+.u-whs-nw     { white-space: nowrap !important; }
+
+///
+/// Letter spacing
+///
+.u-ls-0       { letter-spacing: 0 !important; }
+
+
+///-----------------------------------------------------------------------------
+///  BREAKPOINT VARIANTS
+///-----------------------------------------------------------------------------
+@each $name, $bp in ui-config( "breakpoint" ) { @if ( map-has-key( $bp, "suffix" ) ) {
+  $suffix:  map-get( $bp, "suffix" );
+  $value:   map-get( $bp, "value" );
+  $feature: if( map-has-key( $bp, "feature" ), map-get( $bp, "feature" ), "min-width" );
+  $type:    if( map-has-key( $bp, "type" ), map-get( $bp, "type" ), "all" );
+
+  @media #{$type} and ( #{$feature}: #{$value} ) {
+
+    @each $name, $value in ui-config( "font-size" ) {
+      .u-fz-#{$name}#{$suffix} { font-size: $value !important; }
+    }
+
+    .u-fz-xxs#{$suffix}     { font-size: 10px !important; }
+    .u-fz-xs#{$suffix}      { font-size: 0.75em !important; }
+    .u-fz-s#{$suffix}       { font-size: 0.875em !important; }
+    .u-fz-m#{$suffix}       { font-size: 1em !important; }
+    .u-fz-l#{$suffix}       { font-size: 1.125em !important; }
+    .u-fz-xl#{$suffix}      { font-size: 1.25em !important; }
+    .u-fz-xxl#{$suffix}     { font-size: 1.5em !important; }
+    .u-fz-default#{$suffix} { font-size: 1rem !important; }
+
+    .u-ta-l#{$suffix}       { text-align: left !important; }
+    .u-ta-c#{$suffix}       { text-align: center !important; }
+    .u-ta-r#{$suffix}       { text-align: right !important; }
+
+  }
+}}
+
+} // ui-load()

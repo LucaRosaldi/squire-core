@@ -32,21 +32,12 @@ $_config: map-extend( (
  *
  */
 
-///
-/// @var    {Number} The input side padding.
-/// @access private
-///
-$pad_side: if( type-of( ui-input( "padding" ) ) == "list", nth( ui-input( "padding" ), 2 ), ui-input( "padding" ) );
-
-///
-/// @var    {Number} The input right padding, including the indicator.
-/// @access private
-///
-$_pad_right: em( ( $pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" ) );
+$_pad_side: if( type-of( ui-input( "padding" ) ) == "list", nth( ui-input( "padding" ), 2 ), ui-input( "padding" ) );
+$_pad_right: em( ( $_pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" ) );
 
 ///
 /// @block        Input Select
-/// @description  Default input select.
+/// @description  Default Input Select block.
 ///
 /// [1] placeholder text
 /// [2] browser-specific fixes for hiding dropdown indicator
@@ -122,7 +113,7 @@ $_pad_right: em( ( $pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" )
     pointer-events: none;
 
     position: absolute;
-    right: $pad_side;
+    right: $_pad_side;
 
     width: 0;
     height: 0;
@@ -179,4 +170,4 @@ $_pad_right: em( ( $pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" )
 
 }
 
-} // enabled
+} // ui-load()

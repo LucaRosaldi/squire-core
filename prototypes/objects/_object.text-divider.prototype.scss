@@ -1,0 +1,96 @@
+///-----------------------------------------------------------------------------
+///  OBJECT: TEXT DIVIDER
+///-----------------------------------------------------------------------------
+///
+///  Horizontal divider with text in the center.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$o-text-divider: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+/// 1. line thickness of divider
+///
+$_config: map-merge( (
+
+  "line-thickness": 1px,
+
+), $o-text-divider );
+
+
+@if ( ui-load( "objects", "text-divider" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  OBJECT: TEXT DIVIDER
+ *-----------------------------------------------------------------------------*
+ *
+ *  Horizontal divider with text in the center.
+ *
+ */
+
+///
+/// @block        Text Divider
+/// @description  Default text divider.
+///
+%o-text-divider {
+  position: relative;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  white-space: nowrap;
+
+  &::before, &::after {
+    content: "";
+    flex-grow: 1;
+    height: map-get( $_config, "line-thickness" );
+    background: currentColor;
+  }
+  &::before {
+    margin-right: 1em;
+  }
+  &::after  {
+    margin-left: 1em;
+    transform: rotate( 180deg );
+  }
+}
+
+///
+/// @modifier     Text Divider Fade
+/// @description  Divider with line(s) that fade out.
+///
+%o-text-divider--fade {
+  &::before, &::after {
+    background: linear-gradient( to left, currentColor, transparent 90% );
+  }
+}
+
+///
+/// @modifier     Text Divider Left
+/// @description  Left-aligned divider.
+///
+%o-text-divider--left {
+  &::before {
+    display: none;
+  }
+}
+
+///
+/// @modifier     Text Divider Thick
+/// @description  Right-aligned divider.
+///
+%o-text-divider--right {
+  &::after {
+    display: none;
+  }
+}
+
+} // ui-load()

@@ -1,0 +1,30 @@
+///-----------------------------------------------------------------------------
+///  FUNCTIONS: LOADER
+///-----------------------------------------------------------------------------
+///
+///  Functions for getting loader settings.
+///
+///  @uses $__loader
+///
+
+///
+/// Check whether to load a specific element.
+///
+/// @param  {String}  $group
+/// @param  {String}  $element
+/// @return {Boolean}
+///
+@function ui-load( $group, $element ) {
+
+  @if ( ! map-has-key( $__loader, $group ) ) {
+    @return false;
+  }
+
+  $group: map-get( $__loader, $group );
+
+  @if ( ! map-has-key( $group, $element ) ) {
+    @return false;
+  }
+
+  @return if( map-get( $group, $element ) == true, true, false );
+}

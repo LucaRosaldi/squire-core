@@ -1,0 +1,36 @@
+///-----------------------------------------------------------------------------
+///  SQUIRE CORE
+///-----------------------------------------------------------------------------
+///
+///  Variables, Functions and Mixins for the Squire framework.
+///
+
+// Default Config
+@import '../config.default';
+
+/// Functions
+@import 'functions/functions.colors';
+@import 'functions/functions.config';
+@import 'functions/functions.is';
+@import 'functions/functions.fluid-value';
+@import 'functions/functions.gradients';
+@import 'functions/functions.lists';
+@import 'functions/functions.maps';
+@import 'functions/functions.math';
+@import 'functions/functions.shadows';
+@import 'functions/functions.strings';
+@import 'functions/functions.modular-scales';
+@import 'functions/functions.units';
+
+/// Variables
+@import 'vars/vars.base-colors';
+@import 'vars/vars.brand-colors';
+@import 'vars/vars.easings';
+@import 'vars/vars.font-stacks';
+@import 'vars/vars.widths';
+
+/// Mixins
+@import 'mixins/mixins.accessibility';
+@import 'mixins/mixins.breakpoint';
+@import 'mixins/mixins.fluid';
+@import 'mixins/mixins.link-styles';

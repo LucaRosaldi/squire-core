@@ -1,0 +1,48 @@
+///-----------------------------------------------------------------------------
+///  UTILITIES: SVG
+///-----------------------------------------------------------------------------
+///
+///  Utility classes for SVG elements.
+///
+
+
+@if ( ui-load( "utilities", "svg" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: SVG
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for SVG elements.
+ *
+ */
+
+.u-fill-white              { fill: #fff !important; }
+.u-fill-current            { fill: currentColor !important; }
+.u-stroke-white            { stroke: #fff !important; }
+.u-stroke-current          { stroke: currentColor !important; }
+
+.u-fill-white\:h:hover     { fill: #fff !important; }
+.u-fill-current\:h:hover   { fill: currentColor !important; }
+.u-stroke-white\:h:hover   { stroke: #fff !important; }
+.u-stroke-current\:h:hover { stroke: currentColor !important; }
+
+///-----------------------------------------------------------------------------
+///  COLOR VARIANTS
+///-----------------------------------------------------------------------------
+@each $name, $color in ui-config( "color" ) {
+
+  .u-fill-#{$name}            { fill: $color !important; }
+  .u-stroke-#{$name}          { stroke: $color !important; }
+
+  .u-fill-#{$name}\:h:hover   { fill: $color !important; }
+  .u-stroke-#{$name}\:h:hover { stroke: $color !important; }
+
+}
+
+// stroke width
+.u-sw-1 { stroke-width: 1px !important; }
+.u-sw-2 { stroke-width: 2px !important; }
+.u-sw-3 { stroke-width: 3px !important; }
+.u-sw-4 { stroke-width: 4px !important; }
+.u-sw-5 { stroke-width: 5px !important; }
+
+} // ui-load()

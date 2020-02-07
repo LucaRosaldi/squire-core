@@ -1,0 +1,95 @@
+///-----------------------------------------------------------------------------
+///  GENERIC: TRANSITIONS
+///-----------------------------------------------------------------------------
+///
+///  Elements which share the same transition property.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$g-transitions: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-merge( (
+
+  "default": (
+    "duration": 150ms,
+    "easing":   linear,
+  ),
+  "enter": (
+    "duration": 600ms,
+    "easing":   $ease-material-enter,
+  ),
+  "exit": (
+    "duration": 300ms,
+    "easing":   $ease-material-exit,
+  ),
+
+), $g-transitions );
+
+
+@if ( ui-load( "generic", "transitions" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  GENERIC: TRANSITIONS
+ *-----------------------------------------------------------------------------*
+ *
+ *  Elements which share the same transition property.
+ *
+ */
+
+$_default_dur: map-get-deep( $_config, "default", "duration" );
+$_default_eas: map-get-deep( $_config, "default", "easing" );
+$_enter_dur:   map-get-deep( $_config, "enter", "duration" );
+$_enter_eas:   map-get-deep( $_config, "enter", "easing" );
+$_exit_dur:    map-get-deep( $_config, "exit", "duration" );
+$_exit_eas:    map-get-deep( $_config, "exit", "easing" );
+
+///
+/// @block        Transition
+/// @description  Default transition.
+///
+%transition {
+  transition: all $_default_dur $_default_eas;
+}
+
+///
+/// @modifier     Transition Enter
+/// @description  Transition for elements appearing into the viewport.
+///
+%transition--enter {
+  transition: all $_default_dur $_default_eas,
+              transform $_enter_dur $_enter_eas;
+}
+
+///
+/// @modifier     Transition Exit
+/// @description  Transition for elements disappearing from the viewport.
+///
+%transition--exit {
+  transition: all $_default_dur $_default_eas,
+              transform $_exit_dur $_exit_eas,
+              visibility 0s linear $_default_dur;
+}
+
+///
+/// @modifier     Transition Fast
+/// @description  Faster transition.
+///
+%transition--fast {
+  transition-duration: $_default_dur / 2;
+}
+
+///
+/// @modifier     Transition Slow
+/// @description  Slower transition.
+///
+%transition--slow {
+  transition-duration: $_default_dur * 2;
+}
+
+} // ui-load()

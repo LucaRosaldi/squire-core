@@ -4,28 +4,17 @@
 ///
 ///  Functions for getting configuration settings.
 ///
-///  @uses $config
+///  @uses $__config
 ///
 
 ///
 /// Get setting in the configuration.
 ///
 /// @param  {String} $key
-/// @return {Mixed}
+/// @return {Map}
 ///
 @function ui-config( $key ) {
-  @return map-get( $config, $key );
-}
-
-///
-/// Get setting in the "layout" configuration.
-///
-/// @param  {String} $element
-/// @param  {String} $key
-/// @return {Mixed}
-///
-@function ui-layout( $element, $key ) {
-  @return map-get( map-get( ui-config( "layout" ), $element ), $key );
+  @return if( map-has-key( $__config, $key ), map-get( $__config, $key ), () );
 }
 
 ///
@@ -36,7 +25,7 @@
 /// @return {Mixed}
 ///
 @function ui-breakpoint( $size, $key: "value" ) {
-  @return map-get( map-get( ui-config( "breakpoint" ), $size ), $key );
+  @return map-get( map-get( ui-config( "breakpoints" ), $size ), $key );
 }
 
 ///
@@ -46,7 +35,7 @@
 /// @return {Color}
 ///
 @function ui-color( $name ) {
-  @return map-get( ui-config( "color" ), $name );
+  @return map-get( ui-config( "colors" ), $name );
 }
 
 ///
@@ -60,23 +49,13 @@
 }
 
 ///
-/// Get setting in the "font-family" configuration.
-///
-/// @param  {String} $name
-/// @return {String}
-///
-@function ui-font-family( $name ) {
-  @return map-get( ui-config( "font-family" ), $name );
-}
-
-///
 /// Get setting in the "font-size" configuration.
 ///
 /// @param  {String}              $size
 /// @return {Number|List<Number>}
 ///
 @function ui-font-size( $size ) {
-  @return map-get( ui-config( "font-size" ), $size );
+  @return map-get( ui-config( "font-sizes" ), $size );
 }
 
 ///
@@ -86,16 +65,5 @@
 /// @return {Mixed}
 ///
 @function ui-input( $key ) {
-  @return map-get( ui-config( "input" ), $key );
-}
-
-///
-/// Get setting in the "load" configuration.
-///
-/// @param  {String}  $group
-/// @param  {String}  $element
-/// @return {Boolean}
-///
-@function ui-load( $group, $element ) {
-  @return map-get( map-get( ui-config( "load" ), $group ), $element );
+  @return map-get( ui-config( "inputs" ), $key );
 }

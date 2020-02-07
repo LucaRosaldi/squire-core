@@ -1,0 +1,27 @@
+///-----------------------------------------------------------------------------
+///  LAYOUT: FILL PARENT
+///-----------------------------------------------------------------------------
+///
+///  Element which fills the closest relative-positioned parent.
+///
+
+@if ( ui-load( "layout", "fill-parent" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  LAYOUT: FILL PARENT
+ *-----------------------------------------------------------------------------*
+ *
+ *  Element which fills the closest relative-positioned parent.
+ *
+ */
+
+///
+/// @block        Fill Parent
+/// @description  Default Fill Parent block.
+///
+%l-fill-parent {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+} // ui-load()

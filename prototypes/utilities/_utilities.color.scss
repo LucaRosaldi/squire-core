@@ -1,0 +1,51 @@
+///-----------------------------------------------------------------------------
+///  UTILITIES: COLOR
+///-----------------------------------------------------------------------------
+///
+///  Utility classes for text, background and border colors.
+///
+
+
+@if ( ui-load( "utilities", "color" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  UTILITIES: COLOR
+ *-----------------------------------------------------------------------------*
+ *
+ *  Utility classes for text, background and border colors.
+ *
+ */
+
+// color
+.u-col-inherit         { color: inherit !important; }
+.u-col-trans           { color: transparent !important; }
+.u-col-white           { color: #fff !important; }
+.u-col-invert          { filter: invert(100%) !important; }
+.u-col-trans\:h:hover  { color: transparent !important; }
+.u-col-white\:h:hover  { color: #fff !important; }
+.u-col-invert\:h:hover { filter: invert(100%) !important; }
+
+// background-color
+.u-bg-trans            { background-color: transparent !important; }
+.u-bg-white            { background-color: #fff !important; }
+.u-bg-current          { background-color: currentColor !important; }
+.u-bg-trans\:h:hover   { background-color: transparent !important; }
+.u-bg-white\:h:hover   { background-color: #fff !important; }
+.u-bg-current\:h:hover { background-color: currentColor !important; }
+
+// border-color
+.u-bd-trans            { border-color: transparent !important; }
+.u-bd-white            { border-color: #fff !important; }
+.u-bd-trans\:h:hover   { border-color: transparent !important; }
+.u-bd-white\:h:hover   { border-color: #fff !important; }
+
+// custom colors
+@each $name, $color in ui-config( "color" ) {
+  .u-col-#{$name}          { color: $color !important; }
+  .u-col-#{$name}\:h:hover { color: $color !important; }
+  .u-bg-#{$name}           { background-color: $color !important; }
+  .u-bg-#{$name}\:h:hover  { background-color: $color !important; }
+  .u-bd-#{$name}           { border-color: $color !important; }
+  .u-bd-#{$name}\:h:hover  { border-color: $color !important; }
+}
+
+} // ui-load()

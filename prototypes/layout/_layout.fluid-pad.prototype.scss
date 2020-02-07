@@ -1,0 +1,60 @@
+///-----------------------------------------------------------------------------
+///  LAYOUT: FLUID PAD
+///-----------------------------------------------------------------------------
+///
+///  Responsive padding which increases relatively to the viewport width.
+///
+
+///
+/// @var    {Map}  Element settings.
+/// @access public
+///
+$l-fluid-pad: () !default;
+
+///
+/// @var    {Map}
+/// @access private
+///
+$_config: map-extend( (
+
+  "min": ui-spacing(),
+  "max": ui-spacing( "l" ),
+
+  "multiplier":  1.0,
+
+)l $l-fluid-pad );
+
+
+@if ( ui-load( "layout", "fluid-pad" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  LAYOUT: FLUID PAD
+ *-----------------------------------------------------------------------------*
+ *
+ *  Responsive padding which increases relatively to the viewport width.
+ *
+ */
+
+$_min: map-get( $_config, "min" );
+$_max: map-get( $_config, "max" );
+$_mul: map-get( $_config, "multiplier" );
+
+///
+/// @block        Fluid Pad
+/// @description  Defaul Fluid Pad block.
+///
+%l-fluid-pad {
+  @if ( $_min and $_max ) {
+    @include fluid( "padding", $_min, $_max * $_mul );
+  }
+}
+
+///
+/// @modifier     Fluid Pad Sides
+/// @description  Pad only on left and right sides.
+///
+%l-fluid-pad--sides {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+} // ui-load()

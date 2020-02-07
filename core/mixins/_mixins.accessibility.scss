@@ -6,10 +6,10 @@
 ///
 
 ///
-/// @mixin        Screenreader Text
+/// @mixin        Screenreader Only
 /// @description  Hide element visually without affecting accessibility.
 ////
-@mixin screenreader-text {
+@mixin screenreader-only {
   overflow: hidden;
   position: absolute;
   z-index: -1;
