@@ -1,15 +1,15 @@
 ///-----------------------------------------------------------------------------
-///  BASE: FONT FAMILIES
+///  BASE: FONTS
 ///-----------------------------------------------------------------------------
 ///
-///  Elements which share the same font family.
+///  @font-face declarations and font stacks.
 ///
 
 ///
 /// @var    {Map}  Element settings.
 /// @access public
 ///
-$b-font-families: () !default;
+$b-fonts: () !default;
 
 ///
 /// @var    {Map}
@@ -22,15 +22,15 @@ $_config: map-merge( (
   "display": null,
   "mono":    $font-stack-mono,
 
-), $b-font-families );
+), $b-fonts );
 
 
-@if ( ui-load( "base", "font-families" ) == true ) {
+@if ( ui-load( "base", "fonts" ) == true ) {
 /*-----------------------------------------------------------------------------*
- *  BASE: FONT FAMILIES
+ *  BASE: FONTS
  *-----------------------------------------------------------------------------*
  *
- *  Elements which share the same font family.
+ *  @font-face declarations and font stacks.
  *
  */
 
