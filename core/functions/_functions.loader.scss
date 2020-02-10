@@ -16,13 +16,13 @@
 ///
 @function ui-load( $group, $element ) {
 
-  @if ( ! map-has-key( $__loader, $group ) ) {
+  @if ( map-has-key( $__loader, $group ) == false ) {
     @return false;
   }
 
   $group: map-get( $__loader, $group );
 
-  @if ( ! map-has-key( $group, $element ) ) {
+  @if ( map-has-key( $group, $element ) == false ) {
     @return false;
   }
 
