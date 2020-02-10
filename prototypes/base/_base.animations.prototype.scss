@@ -9,7 +9,7 @@
 /// @var    {Map}  Element settings.
 /// @access public
 ///
-$g-animations: () !default;
+$b-animations: () !default;
 
 ///
 /// @var    {Map}
@@ -22,7 +22,7 @@ $_config: map-merge( (
   /// [1] ///
   "fade-offset": ui-spacing()
 
-), $g-animations );
+), $b-animations );
 
 
 @if ( ui-load( "base", "animations" ) == true ) {

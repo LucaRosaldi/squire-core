@@ -9,7 +9,7 @@
 /// @var    {Map}  Element settings.
 /// @access public
 ///
-$g-font-families: () !default;
+$b-font-families: () !default;
 
 ///
 /// @var    {Map}
@@ -22,7 +22,7 @@ $_config: map-merge( (
   "display": null,
   "mono":    $font-stack-mono,
 
-), $g-font-families );
+), $b-font-families );
 
 
 @if ( ui-load( "base", "font-families" ) == true ) {

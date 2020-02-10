@@ -1,5 +1,5 @@
 ///-----------------------------------------------------------------------------
-///  GENERIC: TRANSITIONS
+///  BASE: TRANSITIONS
 ///-----------------------------------------------------------------------------
 ///
 ///  Elements which share the same transition property.
@@ -9,7 +9,7 @@
 /// @var    {Map}  Element settings.
 /// @access public
 ///
-$g-transitions: () !default;
+$b-transitions: () !default;
 
 ///
 /// @var    {Map}
@@ -30,12 +30,12 @@ $_config: map-merge( (
     "easing":   $ease-material-exit,
   ),
 
-), $g-transitions );
+), $b-transitions );
 
 
-@if ( ui-load( "generic", "transitions" ) == true ) {
+@if ( ui-load( "base", "transitions" ) == true ) {
 /*-----------------------------------------------------------------------------*
- *  GENERIC: TRANSITIONS
+ *  BASE: TRANSITIONS
  *-----------------------------------------------------------------------------*
  *
  *  Elements which share the same transition property.
