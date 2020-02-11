@@ -18,13 +18,13 @@ $o-link: () !default;
 $_config: map-extend( (
 
   text-decoration: underline,
-  border: 0,
   color: null,
+  border: 0,
 
   "hover": (
-    text-decoration: null,
-    border-color: null,
+    text-decoration: underline,
     color: ui-color( "primary" ),
+    border: null,
   ),
 
 ), $o-link );
@@ -41,7 +41,7 @@ $_config: map-extend( (
 
 ///
 /// @block        Link
-/// @description  Default link.
+/// @description  Default Link block.
 ///
 %o-link {
   @extend %transition !optional;
@@ -49,15 +49,15 @@ $_config: map-extend( (
   text-decoration: map-get-deep( $_config, "text-decoration" );
   text-decoration-skip-ink: auto;
 
-  border-bottom: map-get-deep( $_config, "border" );
   color: map-get-deep( $_config, "color" );
+  border-bottom: map-get-deep( $_config, "border" );
 
   appearance: none;
 
   &:hover {
     text-decoration: map-get-deep( $_config, "hover", "text-decoration" );
-    border-color: map-get-deep( $_config, "hover", "border-color" );
     color: map-get-deep( $_config, "hover", "color" );
+    border-bottom: map-get-deep( $_config, "hover", "border" );
   }
 }
 
