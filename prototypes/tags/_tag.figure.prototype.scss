@@ -51,10 +51,11 @@ $_config: map-merge( (
 
 ///
 /// @block        Figure
-/// @description  Element container.
+/// @description  Default Figure block.
 ///
 %t-figure {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
 
   padding: map-get( $_config, "padding" );
 
