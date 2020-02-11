@@ -42,7 +42,7 @@ $_config: map-extend( (
 /// @description  Default heading.
 ///
 %o-heading {
-  @extend %ff-display !optional;
+  @extend %font-display !optional;
 
   $_mb: if( map-get( $_config, 'line-height' ), #{ 1 - strip-unit( map-get( $_config, 'line-height' ) ) }em, null );
   margin-bottom: $_mb;

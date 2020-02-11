@@ -36,7 +36,7 @@ $_config: map-merge( (
 /// @description  The <code> tag.
 ///
 %t-code {
-  @extend %ff-mono !optional;
+  @extend %font-mono !optional;
 
   font-family: map-get( $_config, "font-family" );
 }
