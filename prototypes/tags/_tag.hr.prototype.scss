@@ -2,7 +2,7 @@
 ///  TAG: HR
 ///-----------------------------------------------------------------------------
 ///
-///  A horizontal divider.
+///  Horizontal divider.
 ///
 
 ///
@@ -33,13 +33,13 @@ $_config: map-merge( (
  *  TAG: HR
  *-----------------------------------------------------------------------------*
  *
- *  A horizontal divider.
+ *  Horizontal divider.
  *
  */
 
 ///
-/// @block        Horizontal Ruler
-/// @description  Default horizontal ruler.
+/// @block        Hr
+/// @description  Default Hr block.
 ///
 %t-hr {
   max-width: map-get( $_config, "max-width" );
