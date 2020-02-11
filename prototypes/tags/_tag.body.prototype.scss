@@ -21,7 +21,7 @@ $_config: map-merge( (
   line-height: 1.5,
 
   color: ui-color( "default" ),
-  background: ui-color( "default" ),
+  background: null,
 
   "selection-color": null,
   "selection-background": null,
