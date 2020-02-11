@@ -45,10 +45,10 @@
   $to-values: ();
 
   // if breakpoint key was passed instead of Number, retrieve the actual value
-  @if ( map-has-key( ui-config( "breakpoint" ), $increase-from ) ) {
+  @if ( map-has-key( ui-config( "breakpoints" ), $increase-from ) ) {
     $increase-from: ui-breakpoint( $increase-from );
   }
-  @if ( map-has-key( ui-config( "breakpoint" ), $increase-until ) ) {
+  @if ( map-has-key( ui-config( "breakpoints" ), $increase-until ) ) {
     $increase-until: ui-breakpoint( $increase-until );
   }
 

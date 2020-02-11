@@ -35,8 +35,8 @@
 @mixin bp( $value, $feature: "min-width", $type: "all" ) {
 
   // retrieve the value if a key for global breakpoint was passed
-  @if ( map-has-key( ui-config( "breakpoint" ), $value ) ) {
-    $breakpoint: map-get( ui-config( "breakpoint" ), $value );
+  @if ( map-has-key( ui-config( "breakpoints" ), $value ) ) {
+    $breakpoint: map-get( ui-config( "breakpoints" ), $value );
     $value: map-get( $breakpoint, "value" );
 
     @if ( map-has-key( $breakpoint, "feature" ) ) {
