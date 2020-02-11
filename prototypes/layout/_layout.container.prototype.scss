@@ -2,7 +2,7 @@
 ///  LAYOUT: CONTAINER
 ///-----------------------------------------------------------------------------
 ///
-///  Container which wraps and centers content in the parent.
+///  Container which wraps and centers its children.
 ///
 
 ///
@@ -35,7 +35,7 @@ $_config: map-merge( (
  *  LAYOUT: CONTAINER
  *-----------------------------------------------------------------------------*
  *
- *  Container which wraps and centers content in the parent.
+ *  Container which wraps and centers its children.
  *
  */
 
@@ -49,11 +49,11 @@ $_config: map-merge( (
   margin-right: auto;
 }
 
+///
+/// @modifier     Container [Size]
+/// @description  Container of different size.
+///
 @each $name, $size in $_config {
-  ///
-  /// @modifier     Container [Size]
-  /// @description  Container of different size.
-  ///
   %l-container--#{$name} { max-width: $size; }
 }
 
