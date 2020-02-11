@@ -17,7 +17,10 @@ $t-code: () !default;
 ///
 $_config: map-merge( (
 
-  font-family: null,
+  padding: null,
+
+  color: null,
+  background: null,
 
 ), $t-code );
 
@@ -38,7 +41,10 @@ $_config: map-merge( (
 %t-code {
   @extend %font-mono !optional;
 
-  font-family: map-get( $_config, "font-family" );
+  padding: map-get( $_config, "padding" );
+
+  color: map-get( $_config, "color" );
+  background: map-get( $_config, "background" );
 }
 
 } // ui-load()
