@@ -42,10 +42,6 @@ $_config: map-merge( (
     display: inline-block;
   }
 
-  li a {
-    @extend %o-link !optional;
-  }
-
   li:not(:last-child)::after {
     content: map-get( $_config, "separator" );
     padding: 0 0.5em;
