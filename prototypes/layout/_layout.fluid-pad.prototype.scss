@@ -22,7 +22,7 @@ $_config: map-extend( (
 
   "multiplier":  1.0,
 
-)l $l-fluid-pad );
+), $l-fluid-pad );
 
 
 @if ( ui-load( "layout", "fluid-pad" ) == true ) {
