@@ -35,34 +35,34 @@ $_config: map-merge( (
  */
 
 ///
-/// @block        FF Sans
+/// @block        Font Sans
 /// @description  Stack of sans-serif fonts.
 ///
-%ff-sans {
+%font-sans {
   font-family: map-get( $_config, "sans" );
 }
 
 ///
-/// @block        FF Serif
+/// @block        Font Serif
 /// @description  Stack of serif fonts.
 ///
-%ff-serif {
+%font-serif {
   font-family: map-get( $_config, "serif" );
 }
 
 ///
-/// @block        FF Display
+/// @block        Font Display
 /// @description  Stack of display fonts used for titles.
 ///
-%ff-display {
+%font-display {
   font-family: map-get( $_config, "display" );
 }
 
 ///
-/// @block        FF Mono
+/// @block        Font Mono
 /// @description  Stack of monospace fonts.
 ///
-%ff-mono {
+%font-mono {
   font-family: map-get( $_config, "mono" );
 }
 
