@@ -77,15 +77,6 @@ $_config: map-merge( (
 }
 
 ///
-/// @block        Rhythm Unset
-/// @description  Unset the vertical rhythm.
-///
-%l-rhythm--unset {
-  > * + *,
-  > p + p { margin-top: 0; }
-}
-
-///
 /// @block        Rhythm [Variant] [Breakpoint]
 /// @description  Duplicate object variants for each defined breakpoint.
 ///
@@ -113,10 +104,6 @@ $_config: map-merge( (
     %l-rhythm--xshort--#{$suffix} {
       > * + * { margin-top: ui-spacing( "xs" ) * map-get( $_config, "multiplier" ); }
       > p + p { margin-top: ( ui-spacing( "xs" ) / 1.5 ) * map-get( $_config, "multiplier" ); }
-    }
-    %l-rhythm--unset--#{$suffix} {
-      > * + *,
-      > p + p { margin-top: 0; }
     }
 
   }
