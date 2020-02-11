@@ -15,22 +15,23 @@ $o-list: () !default;
 /// @var    {Map}
 /// @access private
 ///
-/// [1] The bullet indicator for unordered lists
-/// [2] The separator character after numbers for ordered lists
+/// [1] bullet indicator for unordered lists
+/// [2] control alignment for bullet indicator
+/// [3] separator character after numbers for ordered lists
 ///
 $_config: map-merge( (
 
   "ul": (
-    "bullet": "\25CF",      /// [1] ///
+    "bullet": "\25CF",        /// [1] ///
     "margin": 0.5rem,
     "font-family": null,
     "font-size": 0.5em,
     "font-weight": null,
-    "vertical-align": null,
+    "vertical-align": null,   /// [2] ///
   ),
 
   "ol": (
-    "separator": ".",       /// [2] ///
+    "separator": ".",         /// [3] ///
     "margin": 0.5rem,
     "font-family": null,
     "font-weight": null,
