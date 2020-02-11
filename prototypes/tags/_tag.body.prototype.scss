@@ -20,8 +20,11 @@ $_config: map-merge( (
   font-size: ui-font-size( "default" ),
   line-height: 1.5,
 
-  background: ui-color( "default" ),
   color: ui-color( "default" ),
+  background: ui-color( "default" ),
+
+  "selection-color": null,
+  "selection-background": null,
 
 ), $t-body );
 
@@ -35,9 +38,14 @@ $_config: map-merge( (
  *
  */
 
+$_tsc: map-get( $_config, "selection-color" );
+$_tsb: map-get( $_config, "selection-background" );
+
 ///
-/// @block        Horizontal Ruler
-/// @description  Default horizontal ruler.
+/// @block        Body
+/// @description  Default Body block.
+///
+/// [1] remove focus indicator if user is not using tabs
 ///
 %t-body {
   @extend %ff-sans !optional;
@@ -47,6 +55,19 @@ $_config: map-merge( (
 
   background: map-get( $_config, "background" );
   color: map-get( $_config, "color" );
+
+  @if ( $_tsc OR $_tsb ) {
+    ::selection {
+      color: $_tsc;
+      background: $_tsb;
+      text-shadow: none;
+    }
+  }
+
+  /// [1] ///
+  &.user-is-not-tabbing *:focus {
+    outline: none;
+  }
 }
 
 } // ui-load()
