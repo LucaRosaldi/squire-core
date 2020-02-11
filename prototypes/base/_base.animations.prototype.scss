@@ -20,7 +20,7 @@ $b-animations: () !default;
 $_config: map-merge( (
 
   /// [1] ///
-  "fade-offset": ui-spacing()
+  "fade-offset": ui-spacing(),
 
 ), $b-animations );
 
@@ -34,7 +34,7 @@ $_config: map-merge( (
  *
  */
 
-$_fade_offset: map-get( $_config, "fade-offset" );
+$_fo: map-get( $_config, "fade-offset" );
 
 ///
 /// Fade animations.
@@ -43,31 +43,31 @@ $_fade_offset: map-get( $_config, "fade-offset" );
   from { opacity: 0; }
 }
 @keyframes fade-in-left {
-  from { opacity: 0; transform: translateX( $_fade_offset ); }
+  from { opacity: 0; transform: translateX( $_fo ); }
 }
 @keyframes fade-in-right {
-  from { opacity: 0; transform: translateX( -$_fade_offset ); }
+  from { opacity: 0; transform: translateX( -$_fo ); }
 }
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY( $_fade_offset ); }
+  from { opacity: 0; transform: translateY( $_fo ); }
 }
 @keyframes fade-in-down {
-  from { opacity: 0; transform: translateY( -$_fade_offset ); }
+  from { opacity: 0; transform: translateY( -$_fo ); }
 }
 @keyframes fade-out {
   to { opacity: 0; }
 }
 @keyframes fade-out-left {
-  to { opacity: 0; transform: translateX( $_fade_offset ); }
+  to { opacity: 0; transform: translateX( $_fo ); }
 }
 @keyframes fade-out-right {
-  to { opacity: 0; transform: translateX( -$_fade_offset ); }
+  to { opacity: 0; transform: translateX( -$_fo ); }
 }
 @keyframes fade-out-up {
-  to { opacity: 0; transform: translateY( $_fade_offset ); }
+  to { opacity: 0; transform: translateY( $_fo ); }
 }
 @keyframes fade-out-down {
-  to { opacity: 0; transform: translateY( -$_fade_offset ); }
+  to { opacity: 0; transform: translateY( -$_fo ); }
 }
 
 ///
