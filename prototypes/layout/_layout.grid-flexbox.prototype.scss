@@ -17,7 +17,7 @@ $l-grid-flexbox: () !default;
 ///
 $_config: map-merge( (
 
-  "polyfill": true,
+  "polyfill": false,
 
 ), $l-grid-flexbox );
 
@@ -357,7 +357,7 @@ $_config: map-merge( (
 } // ui-load()
 
 
-@if ( map-get( $_config, "enabled" ) == true and map-get( $_config, "polyfill" ) == true ) {
+@if ( map-get( $_config, "polyfill" ) == true ) {
 
 /* Polyfill for IE 10 AND 11 */
 @media screen and ( -ms-high-contrast: none ), ( -ms-high-contrast: active ) {

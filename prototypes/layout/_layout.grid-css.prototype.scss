@@ -20,7 +20,7 @@ $_config: map-merge( (
   "grid-gap": ui-spacing(),
   "item-min-width": 320px,
 
-  "polyfill": true,
+  "polyfill": false,
 
 ), $l-grid-css );
 
