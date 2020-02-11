@@ -48,21 +48,18 @@ $_stroke_lj: map-get( $_config, "stroke-linejoin" );
 /// @block        Icon
 /// @description  Standard SVG icon.
 ///
-/// [1] set default size when not explicitly set
-///
 %o-icon {
   display: inline-flex;
   vertical-align: middle;
+
+  width: 1em;
+  height: 1em;
 
   fill: $_fill;
   stroke: $_stroke;
   stroke-width: $_stroke_w;
   stroke-linecap: $_stroke_lc;
   stroke-linejoin: $_stroke_lj;
-
-  /// [1] ///
-  &:not([width])  { width: 1em; }
-  &:not([height]) { height: 1em; }
 }
 
 ///
