@@ -18,17 +18,9 @@ $t-blockquote: () !default;
 $_config: map-merge( (
 
   padding: null,
-
-  color: null,
   background: null,
 
-  border: null,
-  border-top: null,
-  border-right: null,
-  border-bottom: null,
-  border-left: null,
-
-  "text": (
+  "quote": (
 
     "before": open-quote,
     "after": close-quote,
@@ -76,33 +68,25 @@ $_config: map-merge( (
 ///
 %t-blockquote {
   padding: map-get( $_config, "padding" );
-
-  color: map-get( $_config, "color" );
   background: map-get( $_config, "background" );
-
-  border: map-get( $_config, "border" );
-  border-top: map-get( $_config, "border-top" );
-  border-right: map-get( $_config, "border-right" );
-  border-bottom: map-get( $_config, "border-bottom" );
-  border-left: map-get( $_config, "border-left" );
 }
 
   ///
-  /// @element      Blockquote Text
+  /// @element      Blockquote Quote
   /// @description  The quoted text.
   ///
-  %t-blockquote__text {
-    @include maybe-fluid( "font-size", map-get-deep( $_config, "text", "font-size" ) );
-    font-weight: map-get-deep( $_config, "text", "font-weight" );
-    font-style: map-get-deep( $_config, "text", "font-style" );
+  %t-blockquote__quote {
+    @include maybe-fluid( "font-size", map-get-deep( $_config, "quote", "font-size" ) );
+    font-weight: map-get-deep( $_config, "quote", "font-weight" );
+    font-style: map-get-deep( $_config, "quote", "font-style" );
 
-    color: map-get-deep( $_config, "text", "color" );
+    color: map-get-deep( $_config, "quote", "color" );
 
     &::before {
-      content: map-get-deep( $_config, "text", "before" );
+      content: map-get-deep( $_config, "quote", "before" );
     }
     &::after {
-      content: map-get-deep( $_config, "text", "after" );
+      content: map-get-deep( $_config, "quote", "after" );
     }
   }
 
