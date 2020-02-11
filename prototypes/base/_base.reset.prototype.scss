@@ -21,6 +21,10 @@
   background-repeat: no-repeat;
   background-size: cover;
 
+  &:focus {
+    outline-width: 0.15em;
+  }
+
   @media ( prefers-reduced-motion: reduce ) {
     transition: none !important;
     animation: none !important;
@@ -153,6 +157,11 @@ a {
   text-decoration: none;
   color: inherit;
   background-color: transparent;
+
+  &:focus {
+    outline-color: currentColor;
+    outline-offset: 0.15em;
+  }
 }
 
 img,
