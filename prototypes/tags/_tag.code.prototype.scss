@@ -32,8 +32,8 @@ $_config: map-merge( (
  */
 
 ///
-/// @block        <code>
-/// @description  The <code> tag.
+/// @block        Code
+/// @description  Default <code> tag.
 ///
 %t-code {
   @extend %font-mono !optional;

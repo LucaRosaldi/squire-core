@@ -33,13 +33,13 @@ $_config: map-extend( (
  *  OBJECT: HEADING
  *-----------------------------------------------------------------------------*
  *
- *  Styles for heading elements.
+ *  Heading elements.
  *
  */
 
 ///
 /// @block        Heading
-/// @description  Default heading.
+/// @description  Default Heading block.
 ///
 %o-heading {
   @extend %font-display !optional;
