@@ -1,0 +1,161 @@
+///-----------------------------------------------------------------------------
+///  MIXINS: CONTENT WHEEL
+///-----------------------------------------------------------------------------
+///
+///  Create a circle element with "content points" which are positioned along
+///  its perimeter.
+///
+///  @link https://codepen.io/LucaRosaldi/pen/qPbeXW?editors=1100
+///
+
+///
+/// @mixin        Content Wheel
+/// @description  Circle element with content alongside its perimeter.
+///
+/// @param {Map} $settings Wheel settings (see $defaults list below)
+////
+@mixin content-wheel( $settings ) {
+
+  $defaults: (
+
+    /// {Number} Diameter of the wheel
+    "wheel-size": 15em,
+
+    /// {Border} External border of the wheel
+    "wheel-border": 2px solid,
+
+    /// {Border} Border of the wheel spokes
+    "spokes-border": 2px solid,
+
+    /// {Number} Number of points container in the wheel
+    "points-number": 5,
+
+    /// {Number} Size of each of the points
+    "points-size": 4em,
+
+    /// {Number} Time to complete a revolution (0 means wheel is not moving)
+    "rev-time": 90s,
+
+    /// Whether to revolve clockwise (false = anticlockwise)
+    "rev-clockwise": true,
+
+    /// Whether to revolve only on hover
+    "rev-start-on-hover": false,
+
+    /// Whether to revolve only on hover
+    "rev-stop-on-hover": false,
+
+  );
+
+  $_config: map-merge( $defaults, $settings );
+  $_ws: map-get( $_config, "wheel-size" );
+  $_wb: map-get( $_config, "wheel-border" );
+  $_pn: map-get( $_config, "points-number" );
+  $_ps: map-get( $_config, "points-size" );
+  $_rt: map-get( $_config, "rev-time" );
+  $_rcw: map-get( $_config, "rev-clockwise" );
+  $_rstah: map-get( $_config, "rev-start-on-hover" );
+  $_rstoh: map-get( $_config, "rev-stop-on-hover" );
+  $_angle: ( 360deg / $_pn );
+  $_offset: if( $_rcw == false, 360deg, -360deg );
+
+  position: relative;
+
+  width:  $_ws;
+  height: $_ws;
+  margin: $_ps / 2;
+  padding: 0;
+
+  border: $_wb;
+
+  border-radius: 50%;
+
+  ///
+  /// Revolving animation.
+  ///
+  @if ( $_rt > 0 ) {
+    animation: $_rt linear infinite both rotate-wheel;
+
+    @if ( $_rstah == true AND $_rstoh == false ) {
+      animation-play-state: running;
+      &:hover { animation-play-state: paused; }
+    }
+    @if ( $_rstoh == true AND $_rstah == false ) {
+      animation-play-state: paused;
+      &:hover { animation-play-state: running; }
+    }
+
+    @keyframes rotate-wheel {
+      to {
+        transform: rotate( $_offset );
+      }
+    }
+  }
+
+  ///
+  /// Item inside the content wheel.
+  ///
+  > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 50%; left: 50%;
+    width: $_ps;
+    height: $_ps;
+    margin: -( $_ps / 2 );
+    list-style: none;
+
+    ///
+    /// Spoke connecting the point with the center of the wheel.
+    ///
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      right: 50%; top: 50%;
+      width: $_ws / 2;
+      height: 0;
+
+      @if ( $_wb ) {
+        border-top: $_wb;
+        margin-top: -( nth( $_wb, 1 ) / 2 );
+      }
+    }
+
+    ///
+    /// This is the black magic that does the trick. Basically, we rotate and
+    /// translate each item along the wheel circumference, and then rotate each
+    /// item in the opposite direction to preserve the horizontal axis.
+    ///
+    @for $i from 1 to ( $_pn + 1 ) {
+
+      $rotate: $_offset + ( ( 360deg / $_pn ) * $i );
+      $rotate-back: $rotate * -1;
+      $revolve-back: ( $_offset + $rotate ) * -1;
+
+      &:nth-of-type( #{$i} ) {
+        transform: rotate( $rotate ) translate( $_ws / 2  ) rotate( $rotate-back );
+        animation: inherit;
+        animation-name: rotate-wheel-child-#{$i};
+      }
+      &:nth-of-type( #{$i} )::before {
+        transform: rotate( ( $_angle * $i ) );
+        transform-origin: right;
+        animation: inherit;
+        animation-name: rotate-wheel-child-spoke-#{$i};
+      }
+
+      @keyframes rotate-wheel-child-#{$i} {
+        to { transform: rotate( $rotate ) translate( $_ws / 2 ) rotate( $revolve-back ); }
+      }
+      @keyframes rotate-wheel-child-spoke-#{$i} {
+        to { transform: rotate( $_offset + ( ( 360deg / $_pn ) * $i ) ); }
+      }
+
+    }
+
+  } // item
+
+} // @mixin
