@@ -17,8 +17,37 @@ $c-input-select: () !default;
 ///
 $_config: map-extend( (
 
-  "indicator-size": 0.25em,
+  padding: 0.5em 0.75em,
+
+  border-radius: null,
+
   "placeholder-color": rgba( map-get-deep( ui-input( "default" ), "color" ), 0.5 ),
+  "indicator-size": 0.25em,
+
+  "default": (
+    color:      null,
+    background: null,
+    border:     null,
+    box-shadow: inset 0 0 0 1px rgba( ui-color( "default" ), 0.25 ),
+  ),
+  "hover": (
+    color:      null,
+    background: null,
+    border:     null,
+    box-shadow: null,
+  ),
+  "focus": (
+    color:      null,
+    background: null,
+    border:     null,
+    box-shadow: inset 0 0 0 1px ui-color( "primary" ),
+  ),
+  "filled": (
+    color:      null,
+    background: null,
+    border:     null,
+    box-shadow: null,
+  ),
 
 ), $c-input-select );
 
@@ -32,8 +61,9 @@ $_config: map-extend( (
  *
  */
 
-$_pad_side: if( type-of( ui-input( "padding" ) ) == "list", nth( ui-input( "padding" ), 2 ), ui-input( "padding" ) );
-$_pad_right: em( ( $_pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" ) );
+$_pad:        map-get( $_config, "padding" );
+$_pad_side:   if( type-of( $_pad ) == "list", nth( ui-input( "padding" ), 2 ), $_pad );
+$_pad_right:  em( ( $_pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" ) );
 
 ///
 /// @block        Input Select
@@ -55,30 +85,26 @@ $_pad_right: em( ( $_pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" 
     display: block;
 
     width: 100%;
-    padding: ui-input( "padding" );
+    padding: $_pad;
     padding-right: $_pad_right;
 
-    font-family: map-get( ui-input( "default" ), "font-family" );
-    font-weight: map-get( ui-input( "default" ), "font-weight" );
-    font-style: map-get( ui-input( "default" ), "font-style" );
-
-    border: map-get( ui-input( "default" ), "border" );
-    background: map-get( ui-input( "default" ), "background" );
-    color: map-get( ui-input( "default" ), "color" );
-    box-shadow: map-get( ui-input( "default" ), "box-shadow" );
+    color: map-get-deep( $_config, "default", "color" );
+    background: map-get-deep( $_config, "default", "background" );
+    border: map-get-deep( $_config, "default", "border" );
+    box-shadow: map-get-deep( $_config, "default", "box-shadow" );
 
     &:hover {
-      border: map-get( ui-input( "hover" ), "border" );
-      background: map-get( ui-input( "hover" ), "background" );
-      color: map-get( ui-input( "hover" ), "color" );
-      box-shadow: map-get( ui-input( "hover" ), "box-shadow" );
+      color: map-get-deep( $_config, "hover", "color" );
+      background: map-get-deep( $_config, "hover", "background" );
+      border: map-get-deep( $_config, "hover", "border" );
+      box-shadow: map-get-deep( $_config, "hover", "box-shadow" );
     }
 
     &:focus {
-      border: map-get( ui-input( "focus" ), "border" );
-      background: map-get( ui-input( "focus" ), "background" );
-      color: map-get( ui-input( "focus" ), "color" );
-      box-shadow: map-get( ui-input( "focus" ), "box-shadow" );
+      color: map-get-deep( $_config, "focus", "color" );
+      background: map-get-deep( $_config, "focus", "background" );
+      border: map-get-deep( $_config, "focus", "border" );
+      box-shadow: map-get-deep( $_config, "focus", "box-shadow" );
     }
 
     /// [1] ///
@@ -86,7 +112,7 @@ $_pad_right: em( ( $_pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" 
       color: map-get( $_config, "placeholder-color" );
     }
 
-    border-radius: ui-input( "border-radius" );
+    border-radius: map-get( $_config, "border-radius" );
     outline: none;
 
     /// [2] ///
@@ -155,10 +181,10 @@ $_pad_right: em( ( $_pad_side * 2 ) ) + em( map-get( $_config, "indicator-size" 
 
   select[multiple] > option {
     margin-top: 0;
-    padding: ui-input( "padding" );
+    padding: $_pad;
 
     &:not(:first-child) {
-      border-top: map-get( ui-input( "default" ), "border" );
+      border-top: map-get-deep( $_config, "default", "border" );
     }
 
     /// [2] ///
