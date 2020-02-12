@@ -5,6 +5,43 @@
 ///  Customized file input.
 ///
 
+///
+/// @var    {Map}   Object settings.
+/// @access public
+///
+$c-input-file: () !default;
+
+///
+/// @var    {Map}   Object configuration.
+/// @access private
+///
+$_config: map-extend( (
+
+  padding:        0.5em 0.75em,
+
+  border-radius:  0,
+
+  "default": (
+    color:        null,
+    background:   #ffffff,
+    border:       0,
+    box-shadow:   inset 0 0 0 1px rgba( #000, 0.2 ),
+  ),
+  "hover": (
+    color:        null,
+    background:   null,
+    border:       null,
+    box-shadow:   inset 0 0 0 1px rgba( #000, 0.3 ),
+  ),
+  "focus": (
+    color:        null,
+    background:   null,
+    border:       null,
+    box-shadow:   null,
+  ),
+
+), $c-input-file );
+
 
 @if ( ui-load( "components", "input-file" ) == true ) {
 /*-----------------------------------------------------------------------------*
@@ -32,30 +69,26 @@
 
   width: 100%;
 
-  font-family: map-get( ui-input( "default" ), "font-family" );
-  font-weight: map-get( ui-input( "default" ), "font-weight" );
-  font-style: map-get( ui-input( "default" ), "font-style" );
-
-  border: map-get( ui-input( "default" ), "border" );
-  background: map-get( ui-input( "default" ), "background" );
-  color: map-get( ui-input( "default" ), "color" );
-  box-shadow: map-get( ui-input( "default" ), "box-shadow" );
+  color: map-get-deep( $_config, "default", "color" );
+  border: map-get-deep( $_config, "default", "border" );
+  background: map-get-deep( $_config, "default", "background" );
+  box-shadow: map-get-deep( $_config, "default", "box-shadow" );
 
   &:hover {
-    border: map-get( ui-input( "hover" ), "border" );
-    background: map-get( ui-input( "hover" ), "background" );
-    color: map-get( ui-input( "hover" ), "color" );
-    box-shadow: map-get( ui-input( "hover" ), "box-shadow" );
+    color: map-get-deep( $_config, "hover", "color" );
+    border: map-get-deep( $_config, "hover", "border" );
+    background: map-get-deep( $_config, "hover", "background" );
+    box-shadow: map-get-deep( $_config, "hover", "box-shadow" );
   }
 
   &:focus-within {
-    border: map-get( ui-input( "focus" ), "border" );
-    background: map-get( ui-input( "focus" ), "background" );
-    color: map-get( ui-input( "focus" ), "color" );
-    box-shadow: map-get( ui-input( "focus" ), "box-shadow" );
+    color: map-get-deep( $_config, "focus", "color" );
+    border: map-get-deep( $_config, "focus", "border" );
+    background: map-get-deep( $_config, "focus", "background" );
+    box-shadow: map-get-deep( $_config, "focus", "box-shadow" );
   }
 
-  border-radius: ui-input( "border-radius" );
+  border-radius: map-get( $_config, "border-radius" );
   outline: none;
 
   /// [1] ///
@@ -70,7 +103,7 @@
   &::before {
     content: attr( data-input-file );
     display: block;
-    padding: ui-input( "padding" );
+    padding: map-get( $_config, "padding" );
     color: rgba( map-get( ui-input( "default" ), "color" ), 0.5 );
   }
 
@@ -82,14 +115,13 @@
     display: inline-block;
     position: absolute;
     top: 0; right: 0;
-    padding: ui-input( "padding" );
-    border-radius: 0 ui-input( "border-radius" ) ui-input( "border-radius" ) 0;
+    padding: map-get( $_config, "padding" );
+    border-radius: 0 map-get( $_config, "border-radius" ) map-get( $_config, "border-radius" ) 0;
     background-color: rgba( $black, 0.05 );
-    color: rgba( map-get( ui-input( "default" ), "color" ), 0.5 );
   }
   &:focus-within::after {
-    background-color: map-get( ui-input( "focus" ), "color" );
-    color: map-get( ui-input( "focus" ), "background" );
+    background-color: map-get-deep( $_config, "focus", "color" );
+    color: map-get-deep( $_config, "focus", "background" );
   }
 
 }
@@ -100,7 +132,7 @@
   ///
 %c-input-file--selected {
   &, &::before {
-    color: map-get( ui-input( "default" ), "color" );
+    color: map-get-deep( $_config, "default", "color" );
   }
 }
 
