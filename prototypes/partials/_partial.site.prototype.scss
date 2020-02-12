@@ -303,8 +303,8 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
   /// @description  Hidden link which skips to main content (for accessibility).
   ///
   %p-site__skip-link {
-    @extend %o-button;
     @extend %transition !optional;
+    @extend %c-button !optional;
 
     position: fixed;
     z-index: 6000;
