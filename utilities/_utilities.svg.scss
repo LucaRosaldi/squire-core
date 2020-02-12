@@ -28,7 +28,7 @@
 ///-----------------------------------------------------------------------------
 ///  COLOR VARIANTS
 ///-----------------------------------------------------------------------------
-@each $name, $color in ui-config( "color" ) {
+@each $name, $color in ui-config( "colors" ) {
 
   .u-fill-#{$name}            { fill: $color !important; }
   .u-stroke-#{$name}          { stroke: $color !important; }

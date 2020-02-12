@@ -39,7 +39,7 @@
 .u-bd-white\:h:hover   { border-color: #fff !important; }
 
 // custom colors
-@each $name, $color in ui-config( "color" ) {
+@each $name, $color in ui-config( "colors" ) {
   .u-col-#{$name}          { color: $color !important; }
   .u-col-#{$name}\:h:hover { color: $color !important; }
   .u-bg-#{$name}           { background-color: $color !important; }
