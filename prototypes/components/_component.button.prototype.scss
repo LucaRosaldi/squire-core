@@ -208,13 +208,17 @@ $_config: map-extend( (
     opacity: 0.75;
     &::before {
       content: url( "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18' width='100%' height='100%'><path d='M9 13.5c-2.49 0-4.5-2.01-4.5-4.5S6.51 4.5 9 4.5c1.24 0 2.36.52 3.17 1.33L10 8h5V3l-1.76 1.76A6.003 6.003 0 0 0 9 3C5.69 3 3.01 5.69 3.01 9S5.69 15 9 15a5.98 5.98 0 0 0 5.9-5h-1.52c-.46 2-2.24 3.5-4.38 3.5z'/></svg>" );
-      animation: spin 1000ms linear infinite;
+      animation: spin-loader 1000ms linear infinite;
       animation-play-state: paused;
     }
     &::after {
       content: attr( data-button-state-loading );
     }
   }
+  @keyframes spin-loader {
+    from { transform: rotate( -360deg ); }
+  }
+
 
   ///
   /// @modifier     Button Stateful State Error
