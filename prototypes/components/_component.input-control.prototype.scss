@@ -17,12 +17,6 @@ $c-input-control: () !default;
 ///
 $_config: map-extend( (
 
-  font-family: map-get( ui-input( "default" ), "font-family" ),
-  font-size: null,
-  font-weight: map-get( ui-input( "default" ), "font-weight" ),
-  font-style: map-get( ui-input( "default" ), "font-style" ),
-  line-height: null,
-
   "control-size": 1.25em,
   "control-margin": 0.375em,
   "checkbox-border-radius": null,
@@ -63,12 +57,6 @@ $_config: map-extend( (
   [direction="rtl"] & {
     flex-direction: row-reverse;
   }
-
-  font-family: map-get( $_config, "font-family" );
-  font-size: map-get( $_config, "font-size" );
-  font-weight: map-get( $_config, "font-weight" );
-  font-style: map-get( $_config, "font-style" );
-  line-height: map-get( $_config, "line-height" );
 
   /// [1] ///
   input {
