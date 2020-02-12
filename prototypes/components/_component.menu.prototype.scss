@@ -17,10 +17,25 @@ $c-menu: () !default;
 ///
 $_config: map-extend( (
 
+  padding: null,
+
   background: null,
-  color: null,
+  border: null,
 
   border-radius: null,
+
+  "item": (
+    padding: null,
+
+    color: null,
+    background: null,
+    border: null,
+  ),
+  "item--hover": (
+    color: null,
+    background: null,
+    border: null,
+  ),
 
 ), $c-menu );
 
@@ -38,10 +53,9 @@ $_config: map-extend( (
 /// @block        Menu
 /// @description  Default Menu block.
 ///
+/// [1] fix overflowing border-radius bug (Chrome)
+///
 %c-menu {
-  @extend %transition !optional;
-  @extend %l-column, %l-column--stretch;
-
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -49,40 +63,47 @@ $_config: map-extend( (
   position: relative;
 
   background: map-get( $_config, "background" );
-  color: map-get( $_config, "color" );
+  border: map-get( $_config, "border" );
 
   border-radius: map-get( $_config, "border-radius" );
+
+  > * {
+    /// [1] ///
+    -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+
+    &:not(:first-child) {
+      border-top: map-get-deep( $_config, "item", "border" );
+      &:hover { border-top: map-get-deep( $_config, "item--hover", "border" ); }
+    }
+  }
 }
 
   ///
   /// @element      Menu Item
-  /// @description  Menu item inside the menu.
-  ///
-  /// [1] fix overflowing border-radius in Chrome
+  /// @description  Item inside the menu.
   ///
   %c-menu__item {
-    width: 100%;
-    white-space: nowrap;
+    @extend %transition !optional;
 
-    /// [1] ///
-    -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
-  }
-
-  ///
-  /// @element      Menu Link
-  /// @description  Link inside the menu.
-  ///
-  %c-menu__link {
-    @extend %o-button !optional;
+    display: flex;
+    align-items: center;
 
     position: relative;
-    width: 100%;
+    padding: map-get-deep( $_config, "item", "padding" );
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
     border-radius: 0;
+
+    color: map-get-deep( $_config, "item", "color" );
+    background: map-get-deep( $_config, "item", "background" );
+
+    &:hover {
+      color: map-get-deep( $_config, "item--hover", "color" );
+      background: map-get-deep( $_config, "item--hover", "background" );
+    }
+
   }
 
 } // ui-load()
