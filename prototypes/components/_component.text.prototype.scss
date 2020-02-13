@@ -19,6 +19,7 @@ $_config: map-merge( (
 
   max-width: 70ch,
 
+  "vertical-rhythm":  ui-spacing(),
   "include_headings": true,
   "include_tables":   true,
 
@@ -38,27 +39,37 @@ $_config: map-merge( (
 /// @block        Text
 /// @description  Default text block.
 ///
-/// [1] set maximum length for text
-/// [2] prevent long words from overflowing the container
-/// [3] automatically extend heading tags to heading objects
-/// [4] automatically extend link tags to link objects
-/// [5] automatically extend list tags to list objects
-/// [6] automatically extend table tags to table objects
-///
 %c-text {
-  @extend %l-column, %l-row--stretch !optional;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 
-  /// [1] ///
-  max-width: map-get( $_config, max-width );
+  max-width: map-get( $_config, "max-width" );
 
-  /// [2] ///
+  > * + * {
+    margin-top: map-get( $_config, "vertical-rhythm" );
+  }
+  > p + p {
+    margin-top: map-get( $_config, "vertical-rhythm" ) / 2;
+  }
+
   p {
     word-break: break-all;
   }
 
+  p a {
+    @extend %o-link !optional;
+  }
+
+  ul {
+    @extend %o-list--disc !optional;
+  }
+  ol {
+    @extend %o-list--decimal !optional;
+  }
+
   @if ( map-get( $_config, "include_headings" ) == true ) {
 
-  /// [3] ///
   h1, h2, h3, h4, h5, h6 {
     @extend %o-heading !optional;
   }
@@ -71,22 +82,8 @@ $_config: map-merge( (
 
   } // include_headings
 
-  /// [4] ///
-  a {
-    @extend %o-link !optional;
-  }
-
-  /// [5] ///
-  ul {
-    @extend %o-list--disc !optional;
-  }
-  ol {
-    @extend %o-list--decimal !optional;
-  }
-
   @if ( map-get( $_config, "include_tables" ) == true ) {
 
-  /// [6] ///
   table {
     @extend %o-table !optional;
   }
