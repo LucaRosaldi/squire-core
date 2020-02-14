@@ -66,6 +66,9 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
   position: relative;
   scroll-behavior: smooth;
 
+  /// [1] ///
+  overflow: hidden;
+
   /// [2] ///
   min-height: 100vh;
 }
