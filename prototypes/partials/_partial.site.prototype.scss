@@ -74,6 +74,19 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
 }
 
   ///
+  /// @element      Site Logo
+  /// @description  The main logo.
+  ///
+  %p-site__logo {
+    position: relative;
+    white-space: nowrap;
+
+    a {
+      display: block;
+    }
+  }
+
+  ///
   /// @element      Site Header
   /// @description  Header section of the webpage.
   ///
@@ -137,24 +150,10 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
     @extend %l-column, %l-column--stretch !optional;
 
     align-self: flex-end;
-    order: -9999;
+    order: 9999;
 
     position: relative;
     width: 100%;
-  }
-
-  ///
-  /// @element      Site Logo
-  /// @description  The main logo.
-  ///
-  %p-site__logo {
-    position: relative;
-    z-index: 3000;
-    white-space: nowrap;
-
-    a {
-      display: block;
-    }
   }
 
   ///
