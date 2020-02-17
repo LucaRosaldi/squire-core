@@ -53,9 +53,10 @@ $_vsp: map-get( $_config, "vertical-spacing" );
   %p-section__header {
     @extend %o-fluid-pad, %o-fluid-pad--sides !optional;
 
+    flex-grow: 1;
+
     position: relative;
 
-    width: 100%;
     @include maybe-fluid( "padding-bottom", $_vsp );
   }
 
@@ -64,12 +65,12 @@ $_vsp: map-get( $_config, "vertical-spacing" );
   /// @description  Wrapper for textual content.
   ///
   %p-section__text {
-    @extend %o-fluid-pad, %o-fluid-pad--sides !optional;
+    @extend %o-fluid-pad;
+
+    flex-grow: 1;
 
     position: relative;
     z-index: 1;
-
-    width: 100%;
   }
 
   ///
@@ -77,8 +78,11 @@ $_vsp: map-get( $_config, "vertical-spacing" );
   /// @description  Wrapper for graphic content.
   ///
   %p-section__visual {
+    flex-grow: 1;
+
     position: relative;
     z-index: 0;
+
     width: 100%;
   }
 
