@@ -61,13 +61,6 @@
 .u-lh-1       { line-height: 1 !important; }
 
 ///
-/// Text transform
-///
-.u-tt-u       { text-transform: uppercase !important; }
-.u-tt-l       { text-transform: lowercase !important; }
-.u-tt-n       { text-transform: none !important; }
-
-///
 /// Text align
 ///
 .u-ta-l       { text-align: left !important; }
@@ -80,6 +73,13 @@
 .u-td-u       { text-decoration: underline !important; }
 .u-td-l       { text-decoration: line-through !important; }
 .u-td-n       { text-decoration: none !important; }
+
+///
+/// Text transform
+///
+.u-tt-u       { text-transform: uppercase !important; }
+.u-tt-l       { text-transform: lowercase !important; }
+.u-tt-n       { text-transform: none !important; }
 
 ///
 /// White space
@@ -109,10 +109,12 @@
 
   @media #{$type} and ( #{$feature}: #{$value} ) {
 
+    ///
+    /// Font size
+    ///
     @each $name, $value in ui-config( "font-size" ) {
       .u-fz-#{$name}#{$suffix} { font-size: $value !important; }
     }
-
     .u-fz-xxs#{$suffix}     { font-size: 10px !important; }
     .u-fz-xs#{$suffix}      { font-size: 0.75em !important; }
     .u-fz-s#{$suffix}       { font-size: 0.875em !important; }
@@ -122,9 +124,19 @@
     .u-fz-xxl#{$suffix}     { font-size: 1.5em !important; }
     .u-fz-default#{$suffix} { font-size: 1rem !important; }
 
+    ///
+    /// Text align
+    ///
     .u-ta-l#{$suffix}       { text-align: left !important; }
     .u-ta-c#{$suffix}       { text-align: center !important; }
     .u-ta-r#{$suffix}       { text-align: right !important; }
+
+    ///
+    /// Text decoration
+    ///
+    .u-td-u#{$suffix}       { text-decoration: underline !important; }
+    .u-td-l#{$suffix}       { text-decoration: line-through !important; }
+    .u-td-n#{$suffix}       { text-decoration: none !important; }
 
   }
 }}
