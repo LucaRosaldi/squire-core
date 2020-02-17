@@ -51,7 +51,7 @@ $_vsp: map-get( $_config, "vertical-spacing" );
   /// @description  The section heading.
   ///
   %p-section__header {
-    @extend %o-fluid-pad, %o-fluid-pad--sides !optional;
+    @extend %l-fluid-pad, %l-fluid-pad--sides !optional;
 
     flex-grow: 1;
 
@@ -65,7 +65,7 @@ $_vsp: map-get( $_config, "vertical-spacing" );
   /// @description  Wrapper for textual content.
   ///
   %p-section__text {
-    @extend %o-fluid-pad;
+    @extend %l-fluid-pad !optional;
 
     flex-grow: 1;
 
