@@ -39,8 +39,10 @@
 .u-fw-w      { flex-wrap: wrap !important; }
 .u-fw-nw     { flex-wrap: nowrap !important; }
 
+.u-fg        { flex-grow: 9999 !important; }
 .u-fg-1      { flex-grow: 1 !important; }
 .u-fg-0      { flex-grow: 0 !important; }
+.u-fs        { flex-shrink: 9999 !important; }
 .u-fs-1      { flex-shrink: 1 !important; }
 .u-fs-0      { flex-shrink: 0 !important; }
 
@@ -86,8 +88,10 @@
   .u-fw-w#{$suffix}      { flex-wrap: wrap !important; }
   .u-fw-nw#{$suffix}     { flex-wrap: nowrap !important; }
 
+  .u-fg#{$suffix}        { flex-grow: 9999 !important; }
   .u-fg-1#{$suffix}      { flex-grow: 1 !important; }
   .u-fg-0#{$suffix}      { flex-grow: 0 !important; }
+  .u-fs#{$suffix}        { flex-shrink: 9999 !important; }
   .u-fs-1#{$suffix}      { flex-shrink: 1 !important; }
   .u-fs-0#{$suffix}      { flex-shrink: 0 !important; }
 
