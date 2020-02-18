@@ -76,8 +76,10 @@ $_config: map-extend( (
   width: 100%;
   padding: map-get( $_config, "padding" );
 
-  border-radius: map-get( $_config, "border-radius" );
+  border: 0;
   outline: none;
+
+  border-radius: map-get( $_config, "border-radius" );
 
   color: map-get-deep( $_config, "default", "color" );
   background: map-get-deep( $_config, "default", "background" );
