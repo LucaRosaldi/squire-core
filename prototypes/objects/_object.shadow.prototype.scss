@@ -43,23 +43,7 @@ $_a: alpha( $_c );
 /// @description  Default Shadow Block.
 ///
 %o-shadow {
-  position: relative;
-  z-index: 1;
-
-  &::after {
-    @extend %transition !optional;
-
-    content: "";
-    position: absolute;
-    z-index: -1;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-
-    box-shadow: material-shadow( 1, rgb( $_r, $_g, $_b ), $_a );
-    border-radius: inherit;
-
-    opacity: 1;
-  }
+  box-shadow: material-shadow( 1, rgb( $_r, $_g, $_b ), $_a );
 }
 
 ///
@@ -67,30 +51,22 @@ $_a: alpha( $_c );
 /// @description  Box shadow, depth value [depth].
 ///
 %o-shadow--dp0 {
-  &::after { box-shadow: 0 0 0 rgba( black, 0 ); }
+  box-shadow: 0 0 0 rgba( black, 0 );
 }
 %o-shadow--dp1 {
-  &::after { box-shadow: material-shadow( 1, rgb( $_r, $_g, $_b ), $_a ); }
+  box-shadow: material-shadow( 1, rgb( $_r, $_g, $_b ), $_a );
 }
 %o-shadow--dp2 {
-  &::after { box-shadow: material-shadow( 2, rgb( $_r, $_g, $_b ), $_a ); }
+  box-shadow: material-shadow( 2, rgb( $_r, $_g, $_b ), $_a );
 }
 %o-shadow--dp3 {
-  &::after { box-shadow: material-shadow( 3, rgb( $_r, $_g, $_b ), $_a ); }
+  box-shadow: material-shadow( 3, rgb( $_r, $_g, $_b ), $_a );
 }
 %o-shadow--dp4 {
-  &::after { box-shadow: material-shadow( 4, rgb( $_r, $_g, $_b ), $_a ); }
+  box-shadow: material-shadow( 4, rgb( $_r, $_g, $_b ), $_a );
 }
 %o-shadow--dp5 {
-  &::after { box-shadow: material-shadow( 5, rgb( $_r, $_g, $_b ), $_a ); }
-}
-
-///
-/// @modifier     Shadow Hover
-/// @description  Fade in the shadow on hover.
-///
-%o-shadow--hover {
-  &:not(:hover)::after { opacity: 0; }
+  box-shadow: material-shadow( 5, rgb( $_r, $_g, $_b ), $_a );
 }
 
 ///
@@ -122,15 +98,6 @@ $_a: alpha( $_c );
 }
 %o-dropshadow--dp5 {
   filter: material-shadow-filter( 5, rgb( $_r, $_g, $_b ), $_a );
-}
-
-///
-/// @modifier     Drop Shadow Hover
-/// @description  Fade in the shadow on hover.
-///
-%o-dropshadow--hover {
-  @extend %transition !optional;
-  &:not(:hover) { filter: none; }
 }
 
 } // ui-load()
