@@ -2,7 +2,7 @@
 ///  PARTIAL: FORM
 ///-----------------------------------------------------------------------------
 ///
-///  Elemenents which are contained in a web form.
+///  Styling for form elements, such as labels, fields and hints.
 ///
 
 ///
@@ -18,45 +18,26 @@ $p-form: () !default;
 $_config: map-extend( (
 
   "label": (
-    margin:         ui-spacing( "xs" ) 0,
+    padding:        0 0 ui-spacing( "xs" ),
     font-size:      0.875em,
-    font-family:    null,
     font-weight:    700,
-    font-style:     null,
     line-height:    1,
     text-transform: null,
     letter-spacing: null,
     color:          null,
-    background:     null,
-    opacity:        null,
   ),
-  "floating-label": (
+
+  "label-inline": (
+    padding:        0.5em 0.75em,
     font-size:      1em,
     color:          null,
     "color-active": null,
   ),
-  "legend": (
-    margin:         ui-spacing( "xs" ) 0,
-    font-size:      0.75em,
-    font-family:    null,
-    font-weight:    null,
-    font-style:     null,
-    line-height:    null,
-    text-transform: uppercase,
-    letter-spacing: null,
-    background:     null,
-    color:          null,
-    opacity:        0.35,
-  ),
+
   "hint": (
-    margin:         ui-spacing( "xs" ) 0,
+    padding:        0 0 ui-spacing( "xs" ),
     font-size:      0.75em,
-    font-family:    null,
-    font-weight:    null,
-    font-style:     null,
     line-height:    1.25,
-    text-transform: null,
-    letter-spacing: null,
     color:          null,
     opacity:        0.75,
   ),
@@ -69,7 +50,7 @@ $_config: map-extend( (
  *  PARTIAL: FORM
  *-----------------------------------------------------------------------------*
  *
- *  Elemenents which are contained in a web form.
+ *  Styling for form elements, such as labels, fields and hints.
  *
  */
 
@@ -78,10 +59,10 @@ $_config: map-extend( (
 /// @description  Row of fields inside the form.
 ///
 %p-form-row {
-  @extend %l-row !optional;
-
-  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: stretch;
+  flex-grow: 1;
 
   margin-left: -( ui-spacing() / 2 );
   margin-right: -( ui-spacing() / 2 );
@@ -129,44 +110,21 @@ $_config: map-extend( (
   }
 
   ///
-  /// @element      Form Legend
-  /// @description  Label for a group of fields.
-  ///
-  %p-form__legend {
-    font-size: map-get-deep( $_config, "legend", "font-size" );
-    font-family: map-get-deep( $_config, "legend", "font-family" );
-    font-weight: map-get-deep( $_config, "legend", "font-weight" );
-    font-style: map-get-deep( $_config, "legend", "font-style" );
-    line-height: map-get-deep( $_config, "legend", "line-height" );
-    text-transform: map-get-deep( $_config, "legend", "text-transform" );
-    letter-spacing: map-get-deep( $_config, "legend", "letter-spacing" );
-
-    background: map-get-deep( $_config, "legend", "background" );
-    color: map-get-deep( $_config, "legend", "color" );
-
-    opacity: map-get-deep( $_config, "legend", "opacity" );
-  }
-
-  ///
   /// @element      Form Label
   /// @description  Label for a input in a form.
   ///
   %p-form__label {
-    margin: map-get-deep( $_config, "label", "margin" );
-    &:first-child { margin-top: 0; }
+    position: relative;
+
+    padding: map-get-deep( $_config, "label", "padding" );
 
     font-size: map-get-deep( $_config, "label", "font-size" );
-    font-family: map-get-deep( $_config, "label", "font-family" );
     font-weight: map-get-deep( $_config, "label", "font-weight" );
-    font-style: map-get-deep( $_config, "label", "font-style" );
     line-height: map-get-deep( $_config, "label", "line-height" );
     text-transform: map-get-deep( $_config, "label", "text-transform" );
     letter-spacing: map-get-deep( $_config, "label", "letter-spacing" );
 
-    background: map-get-deep( $_config, "label", "background" );
     color: map-get-deep( $_config, "label", "color" );
-
-    opacity: map-get-deep( $_config, "label", "opacity" );
   }
 
   ///
@@ -177,16 +135,10 @@ $_config: map-extend( (
     display: block;
     position: relative;
 
-    margin: map-get-deep( $_config, "hint", "margin" );
-    &:last-child { margin-bottom: 0; }
+    padding: map-get-deep( $_config, "hint", "padding" );
 
     font-size: map-get-deep( $_config, "hint", "font-size" );
-    font-family: map-get-deep( $_config, "hint", "font-family" );
-    font-weight: map-get-deep( $_config, "hint", "font-weight" );
-    font-style: map-get-deep( $_config, "hint", "font-style" );
     line-height: map-get-deep( $_config, "hint", "line-height" );
-    text-transform: map-get-deep( $_config, "hint", "text-transform" );
-    letter-spacing: map-get-deep( $_config, "hint", "letter-spacing" );
 
     color: map-get-deep( $_config, "hint", "color" );
 
@@ -198,26 +150,26 @@ $_config: map-extend( (
   /// @description  Form field with floating label.
   ///
   %p-form__field--floating-label {
-    $_pad_left: list-direction( ui-input( "padding" ), "left" );
-    $_pad_top: list-direction( ui-input( "padding" ), "top" );
-
-    $_fz: map-get-deep( $_config, "floating-label", "font-size" );
+    $_fz: map-get-deep( $_config, "label-inline", "font-size" );
+    $_p:  map-get-deep( $_config, "label-inline", "padding" );
+    $_pl: list-direction( $_p, "left" );
+    $_pt: list-direction( $_p, "top" );
 
     %c-input-text {
-      padding-top: calc(#{$_pad_top} + #{$_fz});
+      padding-top: calc(#{$_pt} + #{$_fz});
     }
 
     %p-form__label {
       @extend %transition !optional;
 
       position: absolute;
-      top: calc(#{$_pad_top} + #{$_fz});
-      left: calc(#{ui-spacing() / 2} + #{$_pad_left});
+      top: calc(#{$_pt} + #{$_fz});
+      left: calc(#{ui-spacing() / 2} + #{$_pl});
 
       width: auto;
       margin: 0;
 
-      color: map-get-deep( $_config, "floating-label", "color" );
+      color: map-get-deep( $_config, "label-inline", "color" );
 
       will-change: transform, opacity;
       transform-origin: bottom left;
@@ -230,7 +182,7 @@ $_config: map-extend( (
     %c-input-text:focus + %p-form__label,
     %c-input-text:not(:placeholder-shown) + %p-form__label {
       transform: translateY( -1em ) scale( 0.75 );
-      color: map-get-deep( $_config, "floating-label", "color-active" );
+      color: map-get-deep( $_config, "label-inline", "color-active" );
     }
   }
 
