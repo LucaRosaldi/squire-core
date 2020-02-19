@@ -15,6 +15,9 @@
  *
  */
 
+///
+/// Show only for screenreaders and assistive technologies.
+///
 .u-sr-only {
   position: absolute !important;
   z-index: -1 !important;
@@ -22,6 +25,13 @@
   width: 0.1px !important;
   height: 0.1px !important;
   opacity: 0 !important;
+}
+
+///
+/// Show only when javascript is enabled.
+///
+.u-js-only {
+  html:not(.js) & { display: none !important; }
 }
 
 .u-d-b  { display: block !important; }
