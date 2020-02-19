@@ -15,25 +15,6 @@
  *
  */
 
-///
-/// Show only for screenreaders and assistive technologies.
-///
-.u-sr-only {
-  position: absolute !important;
-  z-index: -1 !important;
-  overflow: hidden !important;
-  width: 0.1px !important;
-  height: 0.1px !important;
-  opacity: 0 !important;
-}
-
-///
-/// Show only when javascript is enabled.
-///
-.u-js-only {
-  html:not(.js) & { display: none !important; }
-}
-
 .u-d-b  { display: block !important; }
 .u-d-ib { display: inline-block !important; }
 .u-d-f  { display: flex !important; }
@@ -43,10 +24,9 @@
 .u-d-tc { display: table-cell !important; }
 .u-d-n  { display: none !important; }
 
-
-///-----------------------------------------------------------------------------
-///  BREAKPOINT VARIANTS
-///-----------------------------------------------------------------------------
+///
+/// Breakpoint variants
+///
 @each $name, $bp in ui-config( "breakpoints" ) { @if ( map-has-key( $bp, "suffix" ) ) {
   $suffix:  map-get( $bp, "suffix" );
   $value:   map-get( $bp, "value" );
@@ -63,5 +43,23 @@
 
   }
 }}
+
+///
+/// Show only for screenreaders and assistive technologies.
+///
+.u-sr-only {
+  position: absolute !important;
+  z-index: -1 !important;
+  overflow: hidden !important;
+  width: 0.1px !important;
+  height: 0.1px !important;
+  opacity: 0 !important;
+}
+
+///
+/// Show only when javascript is enabled or disabled.
+///
+.u-js-only { html:not(.js) & { display: none !important; } }
+.u-js-hide { html.js & { display: none !important; } }
 
 } // ui-load()
