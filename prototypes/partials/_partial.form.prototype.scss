@@ -146,10 +146,10 @@ $_config: map-extend( (
   }
 
   ///
-  /// @modifier     Form Field Floating Label
-  /// @description  Form field with floating label.
+  /// @modifier     Form Field Label Inline
+  /// @description  Form field with label floating inside the input.
   ///
-  %p-form__field--floating-label {
+  %p-form__field--label-inline {
     $_fz: map-get-deep( $_config, "label-inline", "font-size" );
     $_p:  map-get-deep( $_config, "label-inline", "padding" );
     $_pl: list-direction( $_p, "left" );
