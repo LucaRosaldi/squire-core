@@ -44,7 +44,6 @@ $_config: map-merge( (
 /// @description  Default container component.
 ///
 %l-container {
-  flex-grow: 1;
   flex-direction: inherit;
   flex-wrap: inherit;
   justify-content: inherit;
@@ -53,6 +52,7 @@ $_config: map-merge( (
   display: inherit;
   position: relative;
 
+  width: 100%;
   max-width: map-get-deep( $_config, "default" );
   margin-left: auto;
   margin-right: auto;
