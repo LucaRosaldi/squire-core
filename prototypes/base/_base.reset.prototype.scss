@@ -46,10 +46,10 @@ html {
   word-break: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  overflow-x: hidden;
+  -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
 
   tab-size: 2;
 }
