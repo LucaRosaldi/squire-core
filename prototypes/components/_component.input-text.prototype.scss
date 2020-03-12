@@ -77,7 +77,6 @@ $_config: map-extend( (
   padding: map-get( $_config, "padding" );
 
   border: 0;
-  outline: none;
 
   border-radius: map-get( $_config, "border-radius" );
 
