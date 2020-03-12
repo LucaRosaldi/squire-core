@@ -16,7 +16,7 @@
 /// @return {Number}
 ///
 @function list-direction( $list, $direction, $fallback: null ) {
-  @if ( type-of( ui-input( "padding" ) ) != "list" or length( $list ) == 1 ) {
+  @if ( type-of( $list ) != "list" or length( $list ) == 1 ) {
     $list: if( $fallback, $fallback, $list );
   }
   @elseif ( $direction == "top" or $direction == "bottom" ) {
