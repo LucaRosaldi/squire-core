@@ -19,10 +19,10 @@
   @if ( type-of( $list ) != "list" or length( $list ) == 1 ) {
     $list: if( $fallback, $fallback, $list );
   }
-  @elseif ( $direction == "top" or $direction == "bottom" ) {
+  @else if ( $direction == "top" or $direction == "bottom" ) {
     $list: if( length( $list ) < 3, nth( $list, 1 ), nth( $list, 3 ) );
   }
-  @elseif ( $direction == "left" or $direction == "right" ) {
+  @else if ( $direction == "left" or $direction == "right" ) {
     $list: if( length( $list ) < 4, nth( $list, 2 ), nth( $list, 4 ) );
   }
 

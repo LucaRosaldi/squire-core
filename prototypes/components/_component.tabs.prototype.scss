@@ -168,7 +168,7 @@ $_bc: map-get( $_config, "border-color" );
     padding: map-get( $_config, "padding" );
 
     background: map-get( $_config, "background" );
-    @if ( $_bw && $_bc ) { border: $_bw solid $_bc; }
+    @if ( $_bw and $_bc ) { border: $_bw solid $_bc; }
 
     &[aria-hidden] {
       display: none;

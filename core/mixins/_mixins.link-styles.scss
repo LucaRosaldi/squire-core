@@ -99,13 +99,13 @@
     @if ( $fill-origin == "bottom" ) {
       transform: translate( 0, 100% );
     }
-    @elseif ( $fill-origin == "top" ) {
+    @else if ( $fill-origin == "top" ) {
       transform: translate( 0, -100% );
     }
-    @elseif ( $fill-origin == "left" ) {
+    @else if ( $fill-origin == "left" ) {
       transform: translate( -100%, 0 );
     }
-    @elseif ( $fill-origin == "right" ) {
+    @else if ( $fill-origin == "right" ) {
       transform: translate( 100%, 0 );
     }
     transform-origin: $fill-origin;
