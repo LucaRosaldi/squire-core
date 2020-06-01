@@ -21,11 +21,25 @@ $_config: map-extend( (
   "control-margin": 0.375em,
   "checkbox-border-radius": null,
 
-  "checked": (
+  border-radius: 4px,
+
+  "default": (
+    color: ui-color( "primary" ),
+    background: null,
     border: null,
-    background: ui-color( "primary" ),
-    color: $white,
+    box-shadow: inset 0 0 0 1px rgba( ui-color( "default" ), 0.25 ),
+  ),
+  "hover": (
+    color: null,
+    background: null,
+    border: null,
     box-shadow: null,
+  ),
+  "checked": (
+    color: $white,
+    background: ui-color( "primary" ),
+    border: null,
+    box-shadow: inset 0 0 0 1px ui-color( "primary" ),
   ),
 
 ), $c-input-control );
@@ -52,6 +66,7 @@ $_config: map-extend( (
 %c-input-control {
   display: inline-flex;
   align-items: center;
+
   position: relative;
 
   [direction="rtl"] & {
