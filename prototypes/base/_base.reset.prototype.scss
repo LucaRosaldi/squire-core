@@ -37,8 +37,13 @@
   box-sizing: inherit;
 }
 
+///
+/// [1] Mobile webkit fix
+/// @see https://allthingssmitty.com/2020/05/11/css-fix-for-100vh-in-mobile-webkit/
+///
 html {
   min-height: 100%;
+  height: -webkit-fill-available; /// [1] ///
 
   font-family: sans-serif;
   font-size: 100%;
@@ -46,16 +51,21 @@ html {
   word-break: break-word;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
-  -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+  overflow-x: hidden;
 
   tab-size: 2;
 }
 
 body {
   min-height: 100vh;
+  min-height: -webkit-fill-available; /// [1] ///
+}
+
+main {
+  flex: 1;
 }
 
 body,
