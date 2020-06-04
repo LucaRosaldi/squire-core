@@ -66,8 +66,9 @@ $_config: map-extend( (
 /// @block        Button
 /// @description  Default Button block.
 ///
-/// [1] reset transition to avoid delay on nested buttons
-/// [2] disable click on child elements to avoid js conflicts
+/// [1] give child element their own block context
+/// [2] reset transition to avoid delay on nested buttons
+/// [3] disable click on child elements to avoid js conflicts
 ///
 %c-button {
   @extend %transition !optional;
@@ -89,7 +90,9 @@ $_config: map-extend( (
 
   color: map-get( $_config, "color" );
   background: map-get( $_config, "background" );
+  background-color: map-get( $_config, "background-color" );
   border: map-get( $_config, "border" );
+  border-color: map-get( $_config, "border-color" );
   box-shadow: map-get( $_config, "box-shadow" );
 
   border-radius: map-get( $_config, "border-radius" );
@@ -100,8 +103,9 @@ $_config: map-extend( (
   }
 
   * {
-    transition: auto;     /// [1] ///
-    pointer-events: none; /// [2] ///
+    position: relative;   /// [1] ///
+    transition: auto;     /// [2] ///
+    pointer-events: none; /// [3] ///
   }
 }
 
@@ -307,7 +311,9 @@ $_config: map-extend( (
   %c-button--#{$_name} {
     color: map-get( $_props, "color" );
     background: map-get( $_props, "background" );
+    background-color: map-get( $_props, "background-color" );
     border: map-get( $_props, "border" );
+    border-color: map-get( $_props, "border-color" );
     box-shadow: map-get( $_props, "box-shadow" );
   }
 
