@@ -63,15 +63,21 @@
 
     // values must be in pixel, em or rems unit, or the responsive function will not run
     @if ( type-of( $fv ) == "number" and not unitless( $fv ) and unit( $fv ) != "%" ) {
-      $fv: if( unit( $fv ) != "px", ( $fv / ( $fv * 0 + 1 ) * 16 ) * 1px, $fv );
       $bvf: $fv;
     }
     @if ( type-of( $tv ) == "number" and not unitless( $tv ) and unit( $tv ) != "%" ) {
-      $tv: if( unit( $tv ) != "px", ( $tv / ( $tv * 0 + 1 ) * 16 ) * 1px, $tv );
       $bvt: $tv;
     }
     @if ( $bvf != false and $bvt != false ) {
-      $bv: fluid-value( ( $bvf ), ( $bvt ), $increase-from, $increase-until );
+      @if ( unit( $bvt ) == "px" ) {
+        $bv: fluid-value( px( $bvf ), px( $bvt ), px( $increase-from ), px( $increase-until ) );
+      }
+      @if ( unit( $bvt ) == "em" ) {
+        $bv: fluid-value( em( $bvf ), em( $bvt ), em( $increase-from ), em( $increase-until ) );
+      }
+      @if ( unit( $bvt ) == "rem" ) {
+        $bv: fluid-value( rem( $bvf ), rem($bvt), rem( $increase-from ), rem( $increase-until ) );
+      }
     }
 
     $from-values: append( $from-values, $fv );
