@@ -111,8 +111,7 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
   %p-site__main {
     @extend %l-column, %l-column--stretch !optional;
 
-    flex-grow: 999;
-    flex-basis: 0;
+    flex: 1 0 auto;
 
     position: relative;
     min-width: 50%;
@@ -125,8 +124,7 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
   %p-site__sidebar {
     @extend %l-column, %l-column--stretch !optional;
 
-    flex-basis: $_sidebar_width;
-    flex-grow: 1;
+    flex: 0 0 $_sidebar_width;
 
     position: relative;
   }
