@@ -59,8 +59,8 @@
 ///
 /// Show or hide for touch devices.
 ///
-.u-touch-only { @media (hover: none)  { display: none !important; } }
-.u-touch-hide { @media (hover: hover) { display: none !important; } }
+.u-touch-only { @media (hover: hover) { display: none !important; } }
+.u-touch-hide { @media (hover: none)  { display: none !important; } }
 
 ///
 /// Show or hide when javascript is enabled.
