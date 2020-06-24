@@ -148,7 +148,7 @@ $_config: map-extend( (
 %c-callout--top {
   @extend %c-callout--fixed;
   animation-name: slideOutUp;
-  body:not(.dom-ready) &:not([aria-hidden="true"]),
+  body:not(.dom-is-ready) &:not([aria-hidden="true"]),
   &[aria-hidden="true"] {
     transform: translate( 0, -100% );
   }
@@ -175,7 +175,7 @@ $_config: map-extend( (
 /// @description  Fixed  full-width callout which disappears after a timeout.
 ///
 %c-callout--auto-dismiss {
-  body.dom-ready &:not([aria-hidden="true"]) {
+  body.dom-is-ready &:not([aria-hidden="true"]) {
     animation-play-state: running;
   }
 }
