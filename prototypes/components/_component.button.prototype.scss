@@ -179,11 +179,18 @@ $_config: map-extend( (
   /// @modifier     Button Stateful State Default
   /// @description  Container for default state.
   ///
-  %c-button--stateful__state--default {
+  %c-button--stateful__state {
     @extend %c-button;
 
     background: transparent;
     transition: inherit;
+  }
+
+  ///
+  /// @modifier     Button Stateful State Default
+  /// @description  Container for default state.
+  ///
+  %c-button--stateful__state--default {
   }
 
   ///
