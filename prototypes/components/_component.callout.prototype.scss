@@ -92,16 +92,13 @@ $_config: map-extend( (
   /// @description  Close button inside the callout.
   ///
   %c-callout__close {
-    @extend %o-shape, %o-shape--cross !optional;
     position: absolute;
     top: 0; right: 0;
     z-index: 2;
 
-    margin: 0.5em;
-    font-size: 1em;
-    text-align: center;
-
-    cursor: pointer;
+    width: 2em;
+    height: 2em;
+    padding: 0.5em;
 
     opacity: 0.35;
     &:hover {
