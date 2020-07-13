@@ -14,7 +14,7 @@
  *
  */
 :root {
-  --section-vertical-spacing: var(--spacing-l);
+  --section-vertical-spacing: var(--spacing-l, 2rem);
 }
 
 ///
@@ -29,8 +29,8 @@
 
   position: relative;
 
-  padding-top: var(--section-vertical-spacing, 2rem);
-  padding-bottom: var(--section-vertical-spacing, 2rem);
+  padding-top: var(--section-vertical-spacing);
+  padding-bottom: var(--section-vertical-spacing);
 }
 
   ///
@@ -59,7 +59,7 @@
 
     position: relative;
 
-    padding-bottom: var(--section-vertical-spacing, 2rem);
+    padding-bottom: var(--section-vertical-spacing);
   }
 
   ///
