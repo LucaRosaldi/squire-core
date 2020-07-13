@@ -47,6 +47,21 @@ $_vsp: map-get( $_config, "vertical-spacing" );
 }
 
   ///
+  /// @element      Section Container
+  /// @description  The section main container.
+  ///
+  %p-section__container {
+    @extend %l-container !optional;
+
+    flex-direction: inherit;
+    flex-wrap: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+
+    display: inherit;
+  }
+
+  ///
   /// @element      Section Header
   /// @description  The section heading.
   ///
