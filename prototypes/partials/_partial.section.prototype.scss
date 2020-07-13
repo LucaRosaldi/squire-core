@@ -5,23 +5,6 @@
 ///  Section of the webpage.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$p-section: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-merge( (
-
-  "vertical-spacing": ui-spacing( "l" ),
-
-), $p-section );
-
-
 @if ( ui-load( "partials", "section" ) == true ) {
 /*---------------------------------------------------------------------------*
  *  PARTIAL: SECTION
@@ -30,20 +13,24 @@ $_config: map-merge( (
  *  Section of the webpage.
  *
  */
-
-$_vsp: map-get( $_config, "vertical-spacing" );
+:root {
+  --section-vertical-spacing: var(--spacing-l);
+}
 
 ///
 /// @block        Section
 /// @description  Default Section block.
+///
+/// @vars
+/// --section-vertical-spacing  Vertical spacing for the section.
 ///
 %p-section {
   @extend %l-row, %l-row--wrap !optional;
 
   position: relative;
 
-  @include maybe-fluid( "padding-top", $_vsp );
-  @include maybe-fluid( "padding-bottom", $_vsp );
+  padding-top: var(--section-vertical-spacing, 2rem);
+  padding-bottom: var(--section-vertical-spacing, 2rem);
 }
 
   ///
@@ -72,7 +59,7 @@ $_vsp: map-get( $_config, "vertical-spacing" );
 
     position: relative;
 
-    @include maybe-fluid( "padding-bottom", $_vsp );
+    padding-bottom: var(--section-vertical-spacing, 2rem);
   }
 
   ///
