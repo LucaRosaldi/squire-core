@@ -21,19 +21,9 @@ $p-site: () !default;
 ///
 $_config: map-extend( (
 
-  "header": (
-    "position": relative,
-  ),
-
-  "nav": (
-    "breakpoint-horizontal": ui-breakpoint( "medium" ),   /// [1] ///
-    "offcanvas-menu":        true,                        /// [2] ///
-    "offcanvas-direction":   false                        /// [3] ///
-  ),
-
-  "sidebar": (
-    "width": 20rem,
-  ),
+  "nav-breakpoint-horizontal": ui-breakpoint( "medium" ),   /// [1] ///
+  "nav-offcanvas-menu":        true,                        /// [2] ///
+  "nav-offcanvas-direction":   false                        /// [3] ///
 
 ), $p-site );
 
@@ -46,60 +36,37 @@ $_config: map-extend( (
  *  The site wrapper.
  *
  */
-
-$_header_position: map-get-deep( $_config, "header", "position" );
-$_nav_hr_bp:       map-get-deep( $_config, "nav", "breakpoint-horizontal" );
-$_nav_oc_menu:     map-get-deep( $_config, "nav", "offcanvas-menu" );
-$_nav_oc_dir:      map-get-deep( $_config, "nav", "offcanvas-direction" );
-$_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
+$_nav_hr_bp:       map-get( $_config, "nav-breakpoint-horizontal" );
+$_nav_oc_menu:     map-get( $_config, "nav-offcanvas-menu" );
+$_nav_oc_dir:      map-get( $_config, "nav-offcanvas-direction" );
 
 ///
 /// @block        Site
 /// @description  Default site block.
 ///
-/// [1] hide the scrollbar when something overflows the main viewport
-/// [2] fill the viewport height
-///
 %p-site {
-  @extend %l-row, %l-row--wrap, %l-row--stretch !optional;
+  display: grid;
+  grid-template-areas:
+    "site-header"
+    "site-main"
+    "site-footer";
+  grid-template-rows: auto 1fr auto;
 
   position: relative;
-  scroll-behavior: smooth;
 
-  /// [1] ///
-  overflow: hidden;
-
-  /// [2] ///
   min-height: 100vh;
+  overflow: hidden;
+  scroll-behavior: smooth;
 }
-
-  ///
-  /// @element      Site Logo
-  /// @description  The main logo.
-  ///
-  %p-site__logo {
-    position: relative;
-    white-space: nowrap;
-
-    a {
-      display: block;
-    }
-  }
 
   ///
   /// @element      Site Header
   /// @description  Header section of the webpage.
   ///
   %p-site__header {
-    @extend %l-row, %l-row--wrap, %l-row--center, %l-row--middle !optional;
-
-    align-self: flex-start;
-    order: -9999;
-
-    position: $_header_position;
+    grid-area: site-header;
+    position: relative;
     z-index: 3000;
-
-    width: 100%;
   }
 
   ///
@@ -109,35 +76,8 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
   /// [1] compensate for the header height
   ///
   %p-site__main {
-    @extend %l-column, %l-column--stretch !optional;
-
-    flex: 1 0 auto;
-
+    grid-area: site-main;
     position: relative;
-    min-width: 50%;
-  }
-
-  ///
-  /// @element      Site Sidebar
-  /// @description  Sidebar of the webpage.
-  ///
-  %p-site__sidebar {
-    @extend %l-column, %l-column--stretch !optional;
-
-    flex: 0 0 $_sidebar_width;
-
-    position: relative;
-  }
-
-  ///
-  /// @modifier     Site Sidebar Sticky
-  /// @description  Sticky sidebar.
-  ///
-  %p-site__sidebar--sticky {
-    :first-child {
-      position: sticky;
-      top: 0;
-    }
   }
 
   ///
@@ -145,13 +85,20 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
   /// @description  Footer section of the webpage.
   ///
   %p-site__footer {
-    @extend %l-column, %l-column--stretch !optional;
-
-    align-self: flex-end;
-    order: 9999;
-
+    grid-area: site-footer;
     position: relative;
-    width: 100%;
+  }
+
+  ///
+  /// @element      Site Logo
+  /// @description  The main logo.
+  ///
+  %p-site__logo {
+    position: relative;
+
+    a {
+      display: flex;
+    }
   }
 
   ///
@@ -177,8 +124,8 @@ $_sidebar_width:   map-get-deep( $_config, "sidebar", "width" );
       top: 0; left: 0;
       width: 100vw; height: 100vh;
 
-      background: ui-color( "dark" );
       color: ui-color( "light" );
+      background: ui-color( "dark" );
 
       @if ( $_nav_oc_dir == false )    { opacity: 0; visibility: hidden; }
       @if ( $_nav_oc_dir == "top" )    { transform: translate( 0, -100% ); }

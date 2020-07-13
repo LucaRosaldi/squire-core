@@ -1,0 +1,95 @@
+///-----------------------------------------------------------------------------
+///  PARTIAL: PAGE
+///-----------------------------------------------------------------------------
+///
+///  The page wrapper.
+///
+
+@if ( ui-load( "partials", "page" ) == true ) {
+/*---------------------------------------------------------------------------*
+ *  PARTIAL: PAGE
+ *---------------------------------------------------------------------------*
+ *
+ *  The page wrapper.
+ *
+ */
+
+///
+/// @block        Page
+/// @description  Default page block.
+///
+/// @vars
+/// --page-nav-width    Width of side navigation
+/// --page-aside-width  Width of sidebar content
+///
+%p-page {
+  display: grid;
+  grid-template-areas:
+    "page-header"
+    "page-nav"
+    "page-main"
+    "page-aside"
+    "page-footer";
+  grid-template-rows: auto auto 1fr auto auto;
+
+  @media screen and ( min-width: 960px ) {
+    grid-template-areas:
+      "page-header page-header"
+      "page-nav page-main"
+      "page-aside page-aside"
+      "page-footer page-footer";
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-columns: fit-content( var(----page-nav-width, 280px) ) 1fr;
+  }
+
+  @media screen and ( min-width: 1280px ) {
+    grid-template-areas:
+      "page-header page-header page-header"
+      "page-nav page-main page-aside"
+      "page-footer page-footer page-footer";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: fit-content( var(----page-nav-width, 280px) ) 1fr fit-content( var(----page-aside-width, 280px) );
+  }
+}
+
+  ///
+  /// @element      Page Header
+  /// @description  Header section of the page.
+  ///
+  %p-page__header {
+    grid-area: page-header;
+  }
+
+  ///
+  /// @element      Page Main
+  /// @description  Main section of the page.
+  ///
+  %p-page__main {
+    grid-area: page-main;
+  }
+
+  ///
+  /// @element      Page Nav
+  /// @description  Side navigation of the page.
+  ///
+  %p-page__nav {
+    grid-area: page-nav;
+  }
+
+  ///
+  /// @element      Page Sidebar
+  /// @description  Sidebar of the page.
+  ///
+  %p-page__aside {
+    grid-area: page-aside;
+  }
+
+  ///
+  /// @element      Page Footer
+  /// @description  Footer section of the page.
+  ///
+  %p-page__footer {
+    grid-area: page-footer;
+  }
+
+} // ui-load()
