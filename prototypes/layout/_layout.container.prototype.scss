@@ -5,31 +5,6 @@
 ///  Container which wraps and centers its children.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$l-container: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-merge( (
-
-  "default": 1300px,
-
-  "xxlarge": 1140px,
-  "xlarge":  900px,
-  "large":   780px,
-  "medium":  660px,
-  "small":   540px,
-  "xsmall":  420px,
-  "xxsmall": 300px,
-
-), $l-container );
-
-
 @if ( ui-load( "layout", "container" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  LAYOUT: CONTAINER
@@ -47,17 +22,65 @@ $_config: map-merge( (
   position: relative;
 
   width: 100%;
-  max-width: map-get-deep( $_config, "default" );
+  max-width: var(--l-container-width, 1300px);
   margin-left: auto;
   margin-right: auto;
 }
 
 ///
-/// @modifier     Container [Size]
-/// @description  Container of different size.
+/// @modifier     Container XXL
+/// @description  Container of size XXL.
 ///
-@each $name, $size in $_config {
-  %l-container--#{$name} { max-width: $size; }
+%l-container--xxl {
+  max-width: var(--l-container-width-xxl, 1280px);
+}
+
+///
+/// @modifier     Container XL
+/// @description  Container of size XL.
+///
+%l-container--xl {
+  max-width: var(--l-container-width-xl, 1140px);
+}
+
+///
+/// @modifier     Container L
+/// @description  Container of size L.
+///
+%l-container--l {
+  max-width: var(--l-container-width-l, 900px);
+}
+
+///
+/// @modifier     Container M
+/// @description  Container of size M.
+///
+%l-container--m {
+  max-width: var(--l-container-width-m, 660px);
+}
+
+///
+/// @modifier     Container S
+/// @description  Container of size S.
+///
+%l-container--s {
+  max-width: var(--l-container-width-s, 540px);
+}
+
+///
+/// @modifier     Container XS
+/// @description  Container of size XS.
+///
+%l-container--xs {
+  max-width: var(--l-container-width-xs, 420px);
+}
+
+///
+/// @modifier     Container XXS
+/// @description  Container of size XXS.
+///
+%l-container--xxs {
+  max-width: var(--l-container-width-xxs, 300px);
 }
 
 } // ui-load()

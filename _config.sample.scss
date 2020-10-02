@@ -5,6 +5,23 @@
 ///  Global configuration settings.
 ///
 
+:root {
+
+  /* Layout: Container */
+  --l-container-width:     1300px;
+  --l-container-width-xxl: 1280px;
+  --l-container-width-xl:  1140px;
+  --l-container-width-l:   900px;
+  --l-container-width-m:   660px;
+  --l-container-width-s:   540px;
+  --l-container-width-xs:  420px;
+  --l-container-width-xxs: 300px;
+
+  /* Partial: Section */
+  --p-section-padding: var(--spacing-l);
+  --p-section-content-width: var(--l-container-width);
+}
+
 $__config: (
 
   ///

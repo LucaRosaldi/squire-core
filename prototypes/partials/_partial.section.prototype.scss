@@ -13,16 +13,14 @@
  *  Section of the webpage.
  *
  */
-:root {
-  --section-vertical-spacing: var(--spacing-l, 2rem);
-}
 
 ///
 /// @block        Section
 /// @description  Default Section block.
 ///
 /// @vars
-/// --section-vertical-spacing  Vertical spacing for the section.
+/// --p-section-padding        Padding applied to the section
+/// --p-section-content-width  Max section content width.
 ///
 /// [1] Set the maximum content width
 ///     (@see https://css-tricks.com/using-max-for-an-inner-element-max-width/)
@@ -34,8 +32,8 @@
 
   position: relative;
 
-  padding-top: var(--section-vertical-spacing);
-  padding-bottom: var(--section-vertical-spacing);
+  /// [1] ///
+  padding: var(--p-section-padding, 2rem) max(var(--p-section-padding, 2rem), 50vw - var(--p-section-content-width, 1300px) / 2);
 
   /// [1] ///
   content-visibility: auto;
@@ -53,7 +51,7 @@
 
     position: relative;
 
-    padding-bottom: var(--section-vertical-spacing);
+    padding-bottom: var(--p-section-padding, 2rem);
   }
 
   ///
