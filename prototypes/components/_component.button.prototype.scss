@@ -87,6 +87,7 @@ $_config: map-extend( (
   letter-spacing: map-get( $_config, "letter-spacing" );
   text-transform: map-get( $_config, "text-transform" );
   text-align: center;
+  leading-trim: both;
 
   color: map-get( $_config, "color" );
   background: map-get( $_config, "background" );

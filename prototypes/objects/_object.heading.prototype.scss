@@ -52,6 +52,8 @@ $_config: map-extend( (
   line-height: map-get( $_config, 'line-height' );
   text-transform: map-get( $_config, 'text-transform' );
   letter-spacing: map-get( $_config, 'letter-spacing' );
+  text-edge: cap alphabetic;
+  leading-trim: both;
 
   color: map-get( $_config, 'color' );
 }
