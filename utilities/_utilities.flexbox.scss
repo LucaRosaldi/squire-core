@@ -56,7 +56,7 @@
 ///-----------------------------------------------------------------------------
 ///  BREAKPOINT VARIANTS
 ///-----------------------------------------------------------------------------
-@each $name, $bp in ui-config( "breakpoints" ) { @if ( map-has-key( $bp, "suffix" ) ) {
+@each $name, $bp in ui-config( "breakpoint" ) { @if ( map-has-key( $bp, "suffix" ) ) {
   $suffix:  map-get( $bp, "suffix" );
   $value:   map-get( $bp, "value" );
   $feature: if( map-has-key( $bp, "feature" ), map-get( $bp, "feature" ), "min-width" );

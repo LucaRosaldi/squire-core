@@ -25,7 +25,7 @@
 /// @return {Mixed}
 ///
 @function ui-breakpoint( $size, $key: "value" ) {
-  @return map-get( map-get( ui-config( "breakpoints" ), $size ), $key );
+  @return map-get( map-get( ui-config( "breakpoint" ), $size ), $key );
 }
 
 ///
@@ -35,7 +35,7 @@
 /// @return {Color}
 ///
 @function ui-color( $name ) {
-  @return map-get( ui-config( "colors" ), $name );
+  @return map-get( ui-config( "color" ), $name );
 }
 
 ///
@@ -55,7 +55,7 @@
 /// @return {Number|List<Number>}
 ///
 @function ui-font-size( $size ) {
-  @return map-get( ui-config( "font-sizes" ), $size );
+  @return map-get( ui-config( "font-size" ), $size );
 }
 
 ///
@@ -65,5 +65,5 @@
 /// @return {Mixed}
 ///
 @function ui-input( $key ) {
-  @return map-get( ui-config( "inputs" ), $key );
+  @return map-get( ui-config( "input" ), $key );
 }

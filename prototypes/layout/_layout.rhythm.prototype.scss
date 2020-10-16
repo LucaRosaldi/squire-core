@@ -80,7 +80,7 @@ $_config: map-merge( (
 /// @block        Rhythm [Variant] [Breakpoint]
 /// @description  Duplicate object variants for each defined breakpoint.
 ///
-@each $name, $bp in ui-config( "breakpoints" ) { @if ( map-has-key( $bp, "suffix" ) ) {
+@each $name, $bp in ui-config( "breakpoint" ) { @if ( map-has-key( $bp, "suffix" ) ) {
   $suffix: map-get( $bp, "suffix" );
 
   @include bp( $name ) {
