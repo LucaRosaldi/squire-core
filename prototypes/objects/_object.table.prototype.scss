@@ -5,30 +5,6 @@
 ///  Enhancements for default <table> elements.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$o-table: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-merge( (
-
-  "border": null,
-
-  "cell-padding": 0.5em 1em,
-
-  "thead-color": null,
-  "thead-background": null,
-
-  "stripe-background": null,
-
-), $o-table );
-
-
 @if ( ui-load( "objects", "table" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  OBJECT: TABLE
@@ -43,14 +19,22 @@ $_config: map-merge( (
 /// @description  Default table object.
 ///
 %o-table {
+
+  --border: 1px solid transparent;
+  --cell-padding: 0.5em 1em;
+  --cell-padding--condensed: 0.25em 0.5em;
+  --thead-color: inherit;
+  --thead-background: inherit;
+  --striped-background: var(--color-light);
+
   width: 100%;
 
   thead {
-    background-color: map-get( $_config, "thead-background" );
-    color: map-get( $_config, "thead-color" );
+    background-color: var(--thead-background);
+    color: var(--thead-color);
   }
   th, td {
-    padding: map-get( $_config, "cell-padding" );
+    padding: var(--cell-padding);
   }
 }
 
@@ -59,11 +43,9 @@ $_config: map-merge( (
 /// @description  Table with condensed cell space.
 ///
 %o-table--condensed {
-  $_pad: nth( map-get( $_config, "cell-padding" ), 1 ) / 2;
 
   th, td {
-    padding-top: $_pad;
-    padding-bottom: $_pad;
+    padding: var(--cell-padding--condensed);
   }
 }
 
@@ -74,12 +56,12 @@ $_config: map-merge( (
 %o-table--bordered {
 
   thead, tbody {
-    border-right: map-get( $_config, "border" );
-    border-bottom: map-get( $_config, "border" );
+    border-right: var(--border);
+    border-bottom: var(--border);
   }
   th, td {
-    border-top: map-get( $_config, "border" );
-    border-left: map-get( $_config, "border" );
+    border-top: var(--border);
+    border-left: var(--border);
   }
 }
 
@@ -90,7 +72,7 @@ $_config: map-merge( (
 %o-table--striped {
 
   tbody tr:nth-of-type(even) td {
-    background-color: map-get( $_config, "stripe-background" );
+    background-color: var(--striped-background);
   }
 }
 

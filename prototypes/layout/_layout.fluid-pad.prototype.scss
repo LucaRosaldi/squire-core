@@ -5,26 +5,6 @@
 ///  Responsive padding which increases relatively to the viewport width.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$l-fluid-pad: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-extend( (
-
-  "min": ui-spacing(),
-  "max": ui-spacing( "l" ),
-
-  "multiplier":  1.0,
-
-), $l-fluid-pad );
-
-
 @if ( ui-load( "layout", "fluid-pad" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  LAYOUT: FLUID PAD
@@ -34,17 +14,14 @@ $_config: map-extend( (
  *
  */
 
-$_min: map-get( $_config, "min" );
-$_max: map-get( $_config, "max" );
-$_mul: map-get( $_config, "multiplier" );
-
 ///
 /// @block        Fluid Pad
 /// @description  Defaul Fluid Pad block.
 ///
 %l-fluid-pad {
-  @if ( $_min and $_max ) {
-    @include fluid( "padding", $_min, $_max * $_mul );
+  padding: var(--pad, 1.5rem);
+  @inlude bp( "large" ) {
+    padding: calc(var(--pad, 1.5rem) * var(--pad-factor, 2));
   }
 }
 

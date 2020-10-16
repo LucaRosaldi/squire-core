@@ -17,9 +17,6 @@ $c-text: () !default;
 ///
 $_config: map-merge( (
 
-  max-width: 70ch,
-
-  "vertical-rhythm":  ui-spacing(),
   "include_headings": true,
   "include_tables":   true,
 
@@ -40,19 +37,23 @@ $_config: map-merge( (
 /// @description  Default text block.
 ///
 %c-text {
+
+  --max-width: 70ch;
+  --spacing: var(--spacing-m);
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   p, ul, ol, h1, h2, h3, h4, h5, h6 {
-    max-width: map-get( $_config, "max-width" );
+    max-width: var(--max-width);
   }
 
   > * + * {
-    margin-top: map-get( $_config, "vertical-rhythm" );
+    margin-top: var(--spacing);
   }
-  > p + p {
-    margin-top: map-get( $_config, "vertical-rhythm" ) / 2;
+  p + p {
+    margin-top: calc( var(--spacing) / 2 );
   }
 
   p a {
@@ -88,6 +89,14 @@ $_config: map-merge( (
 
   } // include_tables
 
+}
+
+///
+/// @modifier     Text Hyphenated
+/// @description  Text with hyphenated words.
+///
+%c-text--hyphenated {
+  hyphens: auto;
 }
 
 } // ui-load()

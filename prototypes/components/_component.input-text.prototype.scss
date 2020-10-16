@@ -5,53 +5,6 @@
 ///  Customized input which contains text.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$c-input-text: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-extend( (
-
-  padding: 0.5em 0.75em,
-
-  border-radius: null,
-
-  "placeholder-color": rgba( ui-color( "default" ), 0.45 ),
-  "caret-color": null,
-
-  "default": (
-    color:      null,
-    background: null,
-    border:     null,
-    box-shadow: inset 0 0 0 1px rgba( ui-color( "default" ), 0.25 ),
-  ),
-  "hover": (
-    color:      null,
-    background: null,
-    border:     null,
-    box-shadow: null,
-  ),
-  "focus": (
-    color:      null,
-    background: null,
-    border:     null,
-    box-shadow: inset 0 0 0 1px ui-color( "primary" ),
-  ),
-  "filled": (
-    color:      null,
-    background: null,
-    border:     null,
-    box-shadow: null,
-  ),
-
-), $c-input-text );
-
-
 @if ( ui-load( "components", "input-text" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  COMPONENT: INPUT TEXT
@@ -68,49 +21,76 @@ $_config: map-extend( (
 /// [1] style for when input is filled, requires the placeholder attribute
 ///
 %c-input-text {
+
+  --padding: var(--input-padding);
+  --border-radius: var(--input-border-radius);
+  --placeholder-color: rgba( var(--color-gray-rgb), 0.8 );
+  --caret-color: var(--color-primary);
+
+  --color: var(--input-color);
+  --background: var(--input-background);
+  --border: var(--input-border);
+  --box-shadow: var(--input-box-shadow);
+
+  --color--hover: var(--input-color--hover);
+  --background--hover: var(--input-background--hover);
+  --border--hover: var(--input-border--hover);
+  --box-shadow--hover: var(--input-box-shadow--hover);
+
+  --color--focus: var(--input-color--focus);
+  --background--focus: var(--input-background--focus);
+  --border--focus: var(--input-border--focus);
+  --box-shadow--focus: var(--input-box-shadow--focus);
+
+  --color--filled: var(--input-color--filled);
+  --background--filled: var(--input-background--filled);
+  --border--filled: var(--input-border--filled);
+  --box-shadow--filled: var(--input-box-shadow--filled);
+
   @extend %transition !optional;
 
   background-clip: padding-box;
   appearance: none;
 
   width: 100%;
-  padding: map-get( $_config, "padding" );
+  padding: var(--padding);
 
   border: 0;
 
-  border-radius: map-get( $_config, "border-radius" );
+  border-radius: var(--border-radius);
 
-  color: map-get-deep( $_config, "default", "color" );
-  background: map-get-deep( $_config, "default", "background" );
-  border: map-get-deep( $_config, "default", "border" );
-  box-shadow: map-get-deep( $_config, "default", "box-shadow" );
+  color: var(--color);
+  background: var(--background);
+  border: var(--border);
+  box-shadow: var(--box-shadow);
+  caret-color: var(--caret-color);
 
   &:hover {
-    color: map-get-deep( $_config, "hover", "color" );
-    background: map-get-deep( $_config, "hover", "background" );
-    border: map-get-deep( $_config, "hover", "border" );
-    box-shadow: map-get-deep( $_config, "hover", "box-shadow" );
+    color: var(--color--hover);
+    background: var(--background--hover);
+    border: var(--border--hover);
+    box-shadow: var(--box-shadow--hover);
   }
 
   &:focus {
-    color: map-get-deep( $_config, "focus", "color" );
-    background: map-get-deep( $_config, "focus", "background" );
-    border: map-get-deep( $_config, "focus", "border" );
-    box-shadow: map-get-deep( $_config, "focus", "box-shadow" );
-    caret-color: map-get( $_config, "caret-color" );
+    color: var(--color--focus);
+    background: var(--background--focus);
+    border: var(--border--focus);
+    box-shadow: var(--box-shadow--focus);
+  }
+
+  &::placeholder {
+    color: var(--placeholder-color);
   }
 
   /// [1] ///
   &[placeholder]:not(:placeholder-shown) {
-    color: map-get-deep( $_config, "filled", "color" );
-    background: map-get-deep( $_config, "filled", "background" );
-    border: map-get-deep( $_config, "filled", "border" );
-    box-shadow: map-get-deep( $_config, "filled", "box-shadow" );
+    color: var(--color--filled);
+    background: var(--background--filled);
+    border: var(--border--filled);
+    box-shadow: var(--box-shadow--filled);
   }
 
-  &::placeholder {
-    color: map-get( $_config, "placeholder-color" );
-  }
   &[disabled] {
     opacity: 0.65;
     pointer-events: none;

@@ -5,46 +5,6 @@
 ///  Customized checkbox and radio inputs.
 ///
 
-///
-/// @var    {Map}   Object settings.
-/// @access public
-///
-$c-input-control: () !default;
-
-///
-/// @var    {Map}   Object configuration.
-/// @access private
-///
-$_config: map-extend( (
-
-  "control-size": 1.25em,
-  "control-margin": 0.375em,
-  "checkbox-border-radius": null,
-
-  border-radius: 4px,
-
-  "default": (
-    color: ui-color( "primary" ),
-    background: null,
-    border: null,
-    box-shadow: inset 0 0 0 1px rgba( ui-color( "default" ), 0.25 ),
-  ),
-  "hover": (
-    color: null,
-    background: null,
-    border: null,
-    box-shadow: null,
-  ),
-  "checked": (
-    color: $white,
-    background: ui-color( "primary" ),
-    border: null,
-    box-shadow: inset 0 0 0 1px ui-color( "primary" ),
-  ),
-
-), $c-input-control );
-
-
 @if ( ui-load( "components", "input-control" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  COMPONENT: CONTROL INPUT
@@ -64,6 +24,31 @@ $_config: map-extend( (
 /// 4. radio indicator
 ///
 %c-input-control {
+
+  --size: 1.25em;
+  --margin: 0.375em;
+  --border-radius: 4px;
+
+  --color: var(--input-color);
+  --background: var(--input-background);
+  --border: var(--input-border);
+  --box-shadow: var(--input-box-shadow);
+
+  --color--hover: var(--input-color--hover);
+  --background--hover: var(--input-background--hover);
+  --border--hover: var(--input-border--hover);
+  --box-shadow--hover: var(--input-box-shadow--hover);
+
+  --color--focus: var(--input-color--focus);
+  --background--focus: var(--input-background--focus);
+  --border--focus: var(--input-border--focus);
+  --box-shadow--focus: var(--input-box-shadow--focus);
+
+  --color--checked: var(--color-white);
+  --background--checked: var(--color-primary);
+  --border--checked: 0;
+  --box-shadow--checked: none;
+
   display: inline-flex;
   align-items: center;
 
@@ -82,7 +67,7 @@ $_config: map-extend( (
   }
 
   input + * {
-    padding-left: em( map-get( $_config, "control-size" ) ) + em( map-get( $_config, "control-margin" ) );
+    padding-left: calc( var(--size) + var(--margin) );
   }
 
   /// [2] ///
@@ -96,18 +81,18 @@ $_config: map-extend( (
 
     flex: 0 1 auto;
     display: inline-flex;
-    vertical-align: text-bottom;
+    vertical-align: center;
 
     width: 1em;
     height: 1em;
-    margin-right: map-get( $_config, "control-margin" );
+    margin-right: var(--margin);
 
-    font-size: map-get( $_config, "control-size" );
+    font-size: var(--size);
 
-    border: map-get( ui-input( "default" ), "border" );
-    background: map-get( ui-input( "default" ), "background" );
-    color: map-get( ui-input( "default" ), "color" );
-    box-shadow: map-get( ui-input( "default" ), "box-shadow" );
+    color: var(--color);
+    background: var(--background);
+    border: var(--border);
+    box-shadow: var(--box-shadow);
 
     background-image: none;
     background-position: center center;
@@ -115,18 +100,18 @@ $_config: map-extend( (
   }
 
   input + *:hover::before {
-    border: map-get( ui-input( "hover" ), "border" );
-    background: map-get( ui-input( "hover" ), "background" );
-    color: map-get( ui-input( "hover" ), "color" );
-    box-shadow: map-get( ui-input( "hover" ), "box-shadow" );
+    color: var(--color--hover);
+    background: var(--background--hover);
+    border: var(--border--hover);
+    box-shadow: var(--box-shadow--hover);
   }
 
   input:focus + *::before {
-    border: map-get( ui-input( "focus" ), "border" );
-    background: map-get( ui-input( "focus" ), "background" );
-    color: map-get( ui-input( "focus" ), "color" );
-    box-shadow: map-get( ui-input( "focus" ), "box-shadow" );
-    outline: 0.15em auto ui-color( "primary" );
+    color: var(--color--focus);
+    background: var(--background--focus);
+    border: var(--border--focus);
+    box-shadow: var(--box-shadow--focus);
+    outline: 0.15em auto var(--color-primary);
     outline-offset: 0.15em;
   }
 
@@ -135,10 +120,10 @@ $_config: map-extend( (
   }
 
   input:checked + *::before {
-    border: map-get-deep( $_config, "checked", "border" );
-    background-color: map-get-deep( $_config, "checked", "background" );
-    color: map-get-deep( $_config, "checked", "color" );
-    box-shadow: map-get-deep( $_config, "checked", "box-shadow" );
+    color: var(--color--checked);
+    background: var(--background--checked);
+    border: var(--border--checked);
+    box-shadow: var(--box-shadow--checked);
   }
 
   input:disabled + *,
@@ -151,7 +136,7 @@ $_config: map-extend( (
   input[type="checkbox"] + *::before {
     background-position: center center;
     background-repeat: no-repeat;
-    border-radius: map-get( $_config, "checkbox-border-radius" );
+    border-radius: var(--border--radius);
   }
   input[type="checkbox"]:checked + *::before {
     background-image: url( "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-6 -6 32 32'><path d='M20,6l-11,11l-5,-5' stroke-linecap='round' stroke-width='4' stroke='%23fff' fill='none' stroke-linejoin='round'></path></svg>" );

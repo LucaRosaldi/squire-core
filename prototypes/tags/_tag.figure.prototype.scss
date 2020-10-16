@@ -5,41 +5,6 @@
 ///  The <figure> and <figcaption> tags.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$t-figure: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-merge( (
-
-  padding: null,
-
-  background: null,
-  border: null,
-
-  "caption": (
-
-    padding: 0.75em 1em,
-
-    font-size: 0.875em,
-    font-weight: null,
-    font-style: null,
-
-    text-align: center,
-
-    background: ui-color( "light" ),
-    color: rgba( ui-color( "default" ), 0.75 ),
-
-  ),
-
-), $t-figure );
-
-
 @if ( ui-load( "tags", "figure" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  TAG: FIGURE
@@ -54,13 +19,16 @@ $_config: map-merge( (
 /// @description  Default Figure block.
 ///
 %t-figure {
+  --padding: 0.75em 1em;
+  --font-size: 0.875em;
+  --font-style: normal;
+  --text-align: center;
+  --color: var(--color-text, #666);
+  --background: var(--color-light, #fff);
+
   display: flex;
   flex-direction: column;
-
-  padding: map-get( $_config, "padding" );
-
-  background: map-get( $_config, "background" );
-  border: map-get( $_config, "border" );
+  align-items: stretch;
 }
 
   ///
@@ -75,18 +43,15 @@ $_config: map-merge( (
   /// @description  Caption for the image inside the figure element.
   ///
   %t-figure__caption {
-    width: 100%;
-
     margin-top: 0;
-    padding: map-get-deep( $_config, "caption", "padding" );
+    padding: var(--padding);
 
-    font-size: map-get-deep( $_config, "caption", "font-size" );
-    font-weight: map-get-deep( $_config, "caption", "font-weight" );
-    font-style: map-get-deep( $_config, "caption", "font-style" );
-    text-align: map-get-deep( $_config, "caption", "text-align" );
+    font-size: var(--font-size);
+    font-style: var(--font-style);
+    text-align: var(--text-align);
 
-    background: map-get-deep( $_config, "caption", "background" );
-    color: map-get-deep( $_config, "caption", "color" );
+    color: var(--color);
+    background: var(--background);
   }
 
 } // ui-load()

@@ -5,29 +5,6 @@
 ///  Heading elements.
 ///
 
-///
-/// @var    {Map}  Element settings.
-/// @access public
-///
-$o-heading: () !default;
-
-///
-/// @var    {Map}
-/// @access private
-///
-$_config: map-extend( (
-
-  font-weight: 700,
-  font-style: null,
-  line-height: 1.1,
-  text-transform: null,
-  letter-spacing: null,
-
-  color: null,
-
-), $o-heading );
-
-
 @if ( ui-load( "objects", "heading" ) == true ) {
 /*-----------------------------------------------------------------------------*
  *  OBJECT: HEADING
@@ -42,32 +19,79 @@ $_config: map-extend( (
 /// @description  Default Heading block.
 ///
 %o-heading {
-  @extend %font-display !optional;
 
-  $_mb: if( map-get( $_config, 'line-height' ), #{ 1 - strip-unit( map-get( $_config, 'line-height' ) ) }em, null );
-  margin-bottom: $_mb;
+  --font-family: var(--font-family-display);
+  --font-size:   inherit;
+  --font-weight: 700;
+  --line-height: 1.1;
+  --letter-spacing: inherit;
+  --color: inherit;
 
-  font-family: map-get( $_config, 'font-family' );
-  font-weight: map-get( $_config, 'font-weight' );
-  line-height: map-get( $_config, 'line-height' );
-  text-transform: map-get( $_config, 'text-transform' );
-  letter-spacing: map-get( $_config, 'letter-spacing' );
-  text-edge: cap alphabetic;
-  leading-trim: both;
+  font-size: var(--font-size);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
 
-  color: map-get( $_config, 'color' );
+  color: var(--color);
 }
 
 ///
-/// @block        Heading H[1-6]
-/// @description  Heading with priority [1-6].
+/// @modifier     Heading H1
+/// @description  Heading with priority 1.
 ///
-/// 1.
+%o-heading--h1 {
+  --font-size:        1.75rem;
+  --font-size-medium: 2.25rem;
+  --font-size-large:  3rem;
+}
+
 ///
-@for $i from 1 through 6 {
-  %o-heading--h#{$i} {
-    @include maybe-fluid( "font-size", ui-font-size( "h#{$i}" ) );
-  }
+/// @modifier     Heading H2
+/// @description  Heading with priority 2.
+///
+%o-heading--h2 {
+  --font-size:        1.5rem;
+  --font-size-medium: 1.875rem;
+  --font-size-large:  2.25rem;
+}
+
+///
+/// @modifier     Heading H3
+/// @description  Heading with priority 3.
+///
+%o-heading--h3 {
+  --font-size:        1.25rem;
+  --font-size-medium: 1.5rem;
+  --font-size-large:  1.75rem;
+}
+
+///
+/// @modifier     Heading H4
+/// @description  Heading with priority 4.
+///
+%o-heading--h4 {
+  --font-size:        1.125rem;
+  --font-size-medium: 1.25rem;
+  --font-size-large:  1.375rem;
+}
+
+@include bp( "medium" ) {
+  %o-heading--h1 { font-size: var(--font-size-medium); }
+  %o-heading--h2 { font-size: var(--font-size-medium); }
+  %o-heading--h3 { font-size: var(--font-size-medium); }
+  %o-heading--h4 { font-size: var(--font-size-medium); }
+  %o-heading--h5 { font-size: var(--font-size-medium); }
+  %o-heading--h6 { font-size: var(--font-size-medium); }
+}
+
+@include bp( "large" ) {
+  %o-heading--h1 { font-size: var(--font-size-large); }
+  %o-heading--h2 { font-size: var(--font-size-large); }
+  %o-heading--h3 { font-size: var(--font-size-large); }
+  %o-heading--h4 { font-size: var(--font-size-large); }
+  %o-heading--h5 { font-size: var(--font-size-large); }
+  %o-heading--h6 { font-size: var(--font-size-large); }
 }
 
 } // ui-load()

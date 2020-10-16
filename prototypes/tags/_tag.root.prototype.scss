@@ -1,0 +1,53 @@
+///-----------------------------------------------------------------------------
+///  TAG: ROOT
+///-----------------------------------------------------------------------------
+///
+///  The root element.
+///
+
+@if ( ui-load( "tags", "root" ) == true ) {
+/*-----------------------------------------------------------------------------*
+ *  TAG: ROOT
+ *-----------------------------------------------------------------------------*
+ *
+ *  The root element.
+ *
+ */
+
+///
+/// @block        Root
+/// @description  The root block.
+///
+/// @vars
+/// --font-family
+/// --font-size
+/// --line-height
+/// --color-{name}
+/// --selection-color
+/// --selection-background
+///
+/// [1] remove focus indicator if user is not using tabs
+///
+%t-body {
+  font-family: var(--font-family);
+
+  font-size: var(--font-size);
+  @include bp( "medium" ) { font-size: var(--font-size--medium); }
+  @include bp( "medium" ) { font-size: var(--font-size--large); }
+  line-height: var( --line-height, 1.5 );
+
+  color: var(--color-text);
+
+  ::selection {
+    color: var(--selection-color, initial);
+    background: var(--selection-background, initial);
+    text-shadow: none;
+  }
+
+  /// [1] ///
+  &.user-is-not-tabbing *:focus {
+    outline: none;
+  }
+}
+
+} // ui-load()

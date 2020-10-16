@@ -45,6 +45,8 @@ $_nav_oc_dir:      map-get( $_config, "nav-offcanvas-direction" );
 /// @description  Default site block.
 ///
 %p-site {
+  @extend %transition !optional;
+
   display: grid;
   grid-template-areas:
     "site-header"

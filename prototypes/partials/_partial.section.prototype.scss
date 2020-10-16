@@ -19,26 +19,33 @@
 /// @description  Default Section block.
 ///
 /// @vars
-/// --p-section-padding        Padding applied to the section
-/// --p-section-content-width  Max section content width.
-///
-/// [1] Set the maximum content width
-///     (@see https://css-tricks.com/using-max-for-an-inner-element-max-width/)
-/// [2] Boost rendering performance
-///     (@see https://web.dev/content-visibility/)
+/// --section-vertical-spacing  Vertical spacing for the section.
 ///
 %p-section {
   @extend %l-row, %l-row--wrap !optional;
 
+  --section-vertical-spacing: var(--spacing-l, 2rem);
+
   position: relative;
 
-  /// [1] ///
-  padding: var(--p-section-padding, 2rem) max(var(--p-section-padding, 2rem), 50vw - var(--p-section-content-width, 1300px) / 2);
-
-  /// [1] ///
-  content-visibility: auto;
-  contain-intrinsic-size: 1000px;
+  padding-top: var(--section-vertical-spacing);
+  padding-bottom: var(--section-vertical-spacing);
 }
+
+  ///
+  /// @element      Section Container
+  /// @description  The section main container.
+  ///
+  %p-section__container {
+    @extend %l-container !optional;
+
+    flex-direction: inherit;
+    flex-wrap: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+
+    display: inherit;
+  }
 
   ///
   /// @element      Section Header
@@ -51,7 +58,7 @@
 
     position: relative;
 
-    padding-bottom: var(--p-section-padding, 2rem);
+    padding-bottom: var(--section-vertical-spacing);
   }
 
   ///
