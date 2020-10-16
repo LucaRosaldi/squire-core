@@ -15,24 +15,6 @@
  *
  */
 
-.u-m-a   { margin:        auto !important; }
-.u-mt-a  { margin-top:    auto !important; }
-.u-mb-a  { margin-bottom: auto !important; }
-.u-ml-a  { margin-left:   auto !important; }
-.u-mr-a  { margin-right:  auto !important; }
-
-.u-m-0   { margin:        0 !important; }
-.u-mt-0  { margin-top:    0 !important; }
-.u-mb-0  { margin-bottom: 0 !important; }
-.u-ml-0  { margin-left:   0 !important; }
-.u-mr-0  { margin-right:  0 !important; }
-
-.u-p-0   { padding:        0 !important; }
-.u-pt-0  { padding-top:    0 !important; }
-.u-pb-0  { padding-bottom: 0 !important; }
-.u-pl-0  { padding-left:   0 !important; }
-.u-pr-0  { padding-right:  0 !important; }
-
 @each $name, $value in ui-config( "spacing" ) {
   $size: if( $name == "default", "", "-#{$name}" );
 
@@ -54,6 +36,24 @@
   .u-pl#{$size}       { padding-left:   ui-spacing( $name ) !important; }
   .u-pr#{$size}       { padding-right:  ui-spacing( $name ) !important; }
 }
+
+.u-m-a   { margin:        auto !important; }
+.u-mt-a  { margin-top:    auto !important; }
+.u-mb-a  { margin-bottom: auto !important; }
+.u-ml-a  { margin-left:   auto !important; }
+.u-mr-a  { margin-right:  auto !important; }
+
+.u-m-0   { margin:        0 !important; }
+.u-mt-0  { margin-top:    0 !important; }
+.u-mb-0  { margin-bottom: 0 !important; }
+.u-ml-0  { margin-left:   0 !important; }
+.u-mr-0  { margin-right:  0 !important; }
+
+.u-p-0   { padding:        0 !important; }
+.u-pt-0  { padding-top:    0 !important; }
+.u-pb-0  { padding-bottom: 0 !important; }
+.u-pl-0  { padding-left:   0 !important; }
+.u-pr-0  { padding-right:  0 !important; }
 
 
 ///-----------------------------------------------------------------------------
