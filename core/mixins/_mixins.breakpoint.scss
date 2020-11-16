@@ -6,6 +6,24 @@
 ///
 
 ///
+///  Sample config.
+///
+///  $breakpoints: (
+///
+///    "bp-name": (
+///      "value": 400px,
+///      "feature": "min-width",
+///      "suffix": "",
+///    ),
+///
+///  );
+
+///
+/// @var {Map} Collection of named breakpoints for the app
+///
+$breakpoints: () !default;
+
+///
 /// @mixin        Mq (Media Query)
 /// @description  Wrap content in a media query.
 ///
@@ -34,9 +52,9 @@
 ///
 @mixin bp( $value, $feature: "min-width", $type: "all" ) {
 
-  // retrieve the value if a key for global breakpoint was passed
-  @if ( map-has-key( ui-config( "breakpoint" ), $value ) ) {
-    $breakpoint: map-get( ui-config( "breakpoint" ), $value );
+  // retrieve the value if a key for global breakpoints
+  @if ( map-has-key( $breakpoints, $value ) ) {
+    $breakpoint: map-get( $breakpoints, $value );
     $value: map-get( $breakpoint, "value" );
 
     @if ( map-has-key( $breakpoint, "feature" ) ) {
